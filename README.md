@@ -9,7 +9,7 @@ Enterprise-grade Model Context Protocol (MCP) server written in TypeScript and o
 
 ---
 
-## ⚡ Quickstart: Deploy in Under 2 Minutes
+## Quickstart: Deploy in Under 2 Minutes
 
 Deploy this server into your Google Cloud environment in under 2 minutes using either the **Local Web Studio** (Recommended) or the **Interactive Terminal Bootstrapper**:
 
@@ -184,7 +184,7 @@ The server dynamically loads configuration from **GCP Secret Manager** in produc
 
 ---
 
-## 🧩 Adding a New SaaS or Cloud Service (Step-by-Step Guide)
+## Adding a New SaaS or Cloud Service (Step-by-Step Guide)
 
 `enterprise-mcp-server` is built with a modular architecture that makes it easy to integrate new SaaS connectors, databases, and cloud services (such as **Google Cloud Storage (GCS)**, Salesforce, HubSpot, Stripe, or PostgreSQL).
 
