@@ -9,6 +9,38 @@ Enterprise-grade Model Context Protocol (MCP) server written in TypeScript and o
 
 ---
 
+## ⚡ Quickstart: Deploy in Under 2 Minutes
+
+Deploy this server into your Google Cloud environment in under 2 minutes using either the **Local Web Studio** (Recommended) or the **Interactive Terminal Bootstrapper**:
+
+### Option 1: Local Web Deployment Studio (`setup:web`) — Recommended
+```bash
+# 1. Clone repository & install dependencies
+git clone https://github.com/Nick-DCA/enterprise-mcp-server.git
+cd enterprise-mcp-server
+npm install
+
+# 2. Start the local deployment studio (auto-opens your browser with token pre-filled)
+npm run setup:web
+```
+*Automatically launches `http://localhost:3000/admin/setup?token=...` in your default browser with your active Google account auto-detected, setup token pre-filled, IAM diagnostics, region selector, and live streaming Cloud Run deployer.*
+
+---
+
+### Option 2: Interactive Terminal Bootstrapper (`setup:cli`)
+```bash
+# 1. Clone repository & install dependencies (if not already done)
+git clone https://github.com/Nick-DCA/enterprise-mcp-server.git
+cd enterprise-mcp-server
+npm install
+
+# 2. Run the interactive cloud bootstrapper in your terminal
+npm run setup:cli
+```
+*Prompts for your GCP Project ID, corporate email domain, region, and database mode (Standard vs. Enterprise). Automatically enables APIs, provisions Secret Manager, deploys to Cloud Run, and prints your Gemini Enterprise configuration blueprint.*
+
+---
+
 ## Architecture Overview
 
 ```
@@ -260,33 +292,6 @@ To manage the new service in the Web UI:
    npm run build
    npm test
    ```
-
----
-
-## Quickstart: Deploy to Your Environment
-
-You can deploy this server into your own Google Cloud environment in under 2 minutes using either the **Interactive Terminal Bootstrapper** or the **Local Web Studio**:
-
-### Option A: Interactive Terminal Bootstrapper (`setup:cli`)
-```bash
-# 1. Clone repository & install dependencies
-git clone https://github.com/Nick-DCA/enterprise-mcp-server.git
-cd enterprise-mcp-server
-npm install
-
-# 2. Run the interactive cloud bootstrapper
-npm run setup:cli
-```
-*Prompts for your GCP Project ID, corporate email domain, region, and database mode (Standard vs. Enterprise). Automatically enables APIs, provisions Secret Manager, deploys to Cloud Run, and prints your Gemini Enterprise configuration blueprint.*
-
----
-
-### Option B: Local Web Deployment Studio (`setup:web`)
-```bash
-# 1. Start the local deployment studio (auto-opens your browser with token pre-filled)
-npm run setup:web
-```
-*Automatically launches `http://localhost:3000/admin/setup?token=...` in your default browser with your active Google account auto-detected, setup token pre-filled, IAM diagnostics, region selector, and live streaming Cloud Run deployer.*
 
 ---
 
