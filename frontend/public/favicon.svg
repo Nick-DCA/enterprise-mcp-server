@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <style>
+    :root {
+      --mcp-bg: #000000;
+      --mcp-border: rgba(255, 255, 255, 0.15);
+      --mcp-stroke: #FFFFFF;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --mcp-bg: #09090B;
+        --mcp-border: #27272A;
+        --mcp-stroke: #FFFFFF;
+      }
+    }
+  </style>
+  
+  <!-- Adaptive Squircle Base -->
+  <rect x="12" y="12" width="488" height="488" rx="112" fill="var(--mcp-bg)" stroke="var(--mcp-border)" stroke-width="8" />
+  
+  <!-- MCP Stylized Diagonal Circuit Ribbon -->
+  <path
+    d="M 96 236 
+       L 266 66 
+       A 48 48 0 0 1 334 134 
+       L 198 270 
+       A 32 32 0 0 0 243 315 
+       L 372 186 
+       A 48 48 0 0 1 440 254 
+       L 282 412 
+       C 260 434 260 460 296 496"
+    fill="none"
+    stroke="var(--mcp-stroke)"
+    stroke-width="44"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

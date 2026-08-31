@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Production & Transpiled Build Artifacts
+dist/
+frontend/dist/
+
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*serviceaccount*.json
+*credential*.json
+
+# Internal Documentation & AI Workflows (Private)
+wiki/
+Docs/
+.agents/
+
+# System & OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs & Diagnostics
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test Coverage
+coverage/
+.nyc_output/

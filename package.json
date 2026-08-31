@@ -1,0 +1,83 @@
+{
+  "name": "enterprise-mcp-server",
+  "version": "1.0.0",
+  "description": "Enterprise-grade Model Context Protocol (MCP) server over StreamableHTTP connecting AI agents (including Google Gemini Enterprise) with SaaS services: Xero Accounting, Google BigQuery, Google Cloud Firestore, and Sage HR.",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nick-DCA/enterprise-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nick-DCA/enterprise-mcp-server/issues"
+  },
+  "homepage": "https://github.com/Nick-DCA/enterprise-mcp-server#readme",
+  "author": "Nick DCA",
+  "license": "MIT",
+  "scripts": {
+    "build:backend": "tsc",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "tsc && cd frontend && npm run build",
+    "gcp-build": "npm run build",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "dev:frontend": "cd frontend && npm run dev",
+    "setup:cli": "tsx scripts/bootstrap.ts",
+    "setup:web": "npm run build && node dist/index.js",
+    "setup": "npm run setup:web",
+    "local:cli": "npm run setup:cli",
+    "local:web": "npm run setup:web",
+    "local": "npm run setup:web",
+    "local:dev": "npm run build:frontend && tsx watch src/index.ts",
+    "test": "npm run build:backend && tsx tests/runner.ts",
+    "test:bigquery-guardrails": "tsx tests/bigquery/test-sql-guardrails.ts",
+    "test:bigquery": "tsx tests/bigquery/test-sql-guardrails.ts",
+    "test:guardrails": "tsx tests/firestore/test-access-guardrails.ts",
+    "test:firestore": "tsx tests/firestore/test-access-guardrails.ts",
+    "logs:10": "gcloud logging read \"resource.type=cloud_run_revision\" --limit=10 --format=json",
+    "logs:20": "gcloud logging read \"resource.type=cloud_run_revision\" --limit=20 --format=json",
+    "secrets": "tsx scripts/print-secrets.ts",
+    "auth": "gcloud auth application-default login",
+    "setup:prod": "tsx scripts/get-setup-link.ts",
+    "setup:reset": "tsx scripts/reset-setup.ts",
+    "predeploy": "npm run build",
+    "deploy": "npm run build && tsx scripts/deploy.ts",
+    "deploy:cloudrun": "npm run build && tsx scripts/deploy.ts"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "streamable-http",
+    "gemini-enterprise",
+    "xero",
+    "bigquery",
+    "firestore",
+    "sage-hr",
+    "cloud-run",
+    "typescript"
+  ],
+  "dependencies": {
+    "@google-cloud/bigquery": "^9.0.2",
+    "@google-cloud/firestore": "^9.0.0",
+    "@google-cloud/secret-manager": "^5.6.0",
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "@types/jsonwebtoken": "^9.0.10",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.21.2",
+    "google-auth-library": "^11.0.2",
+    "jsonwebtoken": "^9.0.3",
+    "pino": "^9.6.0",
+    "xero-node": "^5.1.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.13.4",
+    "pino-pretty": "^13.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
