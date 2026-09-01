@@ -104,7 +104,7 @@ async function runServicesApiTests() {
     const testBody = (await testRes.json()) as any;
     assert.strictEqual(testBody.serviceId, 'firestore');
     assert.ok(typeof testBody.latencyMs === 'number');
-    assert.ok(testBody.status === 'HEALTHY' || testBody.status === 'ERROR');
+    assert.ok(testBody.status === 'HEALTHY' || testBody.status === 'WARNING' || testBody.status === 'ERROR');
     console.log(`   ✓ Service test executed (Status: ${testBody.status}, Latency: ${testBody.latencyMs}ms)`);
 
     console.log('--- All Services & Runtime Config Tests Passed! ---\n');

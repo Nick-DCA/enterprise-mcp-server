@@ -41,12 +41,6 @@ jobs:
         run: npm test
         env:
           NODE_ENV: test
-          MCP_CLIENT_ID: test-mcp-client-id
-          MCP_CLIENT_SECRET: test-mcp-client-secret-12345
-          MCP_JWT_SECRET: test-jwt-secret-key-32-chars-long-min!
-          GCP_PROJECT_ID: test-enterprise-project
-          GOOGLE_CLIENT_ID: test-google-client-id.apps.googleusercontent.com
-          GOOGLE_CLIENT_SECRET: test-google-client-secret
 
       - name: Security Vulnerability Audit
         run: npm audit --audit-level=high
