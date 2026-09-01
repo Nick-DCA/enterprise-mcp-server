@@ -7,7 +7,7 @@ import {
   SecretItem,
 } from '../api/client.js';
 import { ThemeIcon } from '../theme/ThemeContext.js';
-import { TabKey } from '../components/Navbar.js';
+import { TabKey } from '../App.js';
 
 interface OverviewPageProps {
   user: AuthProfile | null;

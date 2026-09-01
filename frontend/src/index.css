@@ -663,167 +663,6 @@ code, .code-font {
 }
 
 /* --------------------------------------------------------------------------
-   6. NAVBAR
-   -------------------------------------------------------------------------- */
-
-.navbar {
-  background: var(--bg-card);
-  backdrop-filter: var(--backdrop-blur);
-  -webkit-backdrop-filter: var(--backdrop-blur);
-  border-bottom: var(--card-border-width) solid var(--border-subtle);
-  position: sticky;
-  top: 0;
-  z-index: 40;
-}
-
-[data-theme="brutalist"] .navbar {
-  border-bottom: 3px solid var(--border-subtle);
-  box-shadow: 0 4px 0px #000;
-}
-
-.navbar-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand-container {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
-  color: inherit;
-}
-
-.brand-logo {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--accent-primary), var(--indigo-primary));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  box-shadow: var(--shadow-glow);
-}
-
-[data-theme="brutalist"] .brand-logo {
-  background: var(--accent-primary);
-  color: var(--accent-contrast);
-  border: 2px solid #FFF;
-  box-shadow: 2px 2px 0px #FFF;
-}
-
-.brand-text h1 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  line-height: 1.2;
-}
-
-[data-theme="brutalist"] .brand-text h1 {
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 900;
-}
-
-.brand-text span {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-}
-
-.nav-tabs {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  background: var(--bg-input);
-  padding: 4px;
-  border-radius: var(--radius-lg);
-  border: var(--card-border-width) solid var(--border-subtle);
-}
-
-[data-theme="brutalist"] .nav-tabs {
-  border: 2px solid #FFF;
-  background: #000;
-  box-shadow: 2px 2px 0px #FFF;
-}
-
-.nav-tab {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: transparent;
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.nav-tab:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.nav-tab.active {
-  color: var(--accent-contrast, #FFFFFF);
-  background: var(--accent-primary);
-  box-shadow: var(--shadow-sm);
-  font-weight: 600;
-}
-
-[data-theme="brutalist"] .nav-tab.active {
-  background: #FFE600;
-  color: #000;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.user-chip {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--bg-input);
-  border: var(--card-border-width) solid var(--border-subtle);
-  padding: 0.35rem 0.75rem 0.35rem 0.45rem;
-  border-radius: var(--radius-full);
-  font-size: 0.85rem;
-  color: var(--text-primary);
-}
-
-[data-theme="brutalist"] .user-chip {
-  border: 2px solid #FFF;
-  border-radius: 0px;
-}
-
-.user-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--accent-primary);
-  color: var(--accent-contrast, #000);
-  font-size: 0.75rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* --------------------------------------------------------------------------
    7. PAGE HEADERS & METRICS STATS
    -------------------------------------------------------------------------- */
 
@@ -2730,7 +2569,7 @@ code, .code-font {
 
 /* Touch Ergonomics & Safe-Area Inset Defaults */
 @supports (padding-top: env(safe-area-inset-top)) {
-  .navbar, .mono-mobile-header {
+  .mono-mobile-header {
     padding-top: env(safe-area-inset-top);
   }
   .app-container {
@@ -2740,7 +2579,7 @@ code, .code-font {
 
 /* Base Mobile Input Zoom Prevention (iOS Safari requires >= 16px to prevent auto-zoom) */
 @media (max-width: 768px) {
-  input, select, textarea, .form-input, .form-textarea, .mono-search-input, .fb-search-input {
+  input, select, textarea, .form-input, .form-textarea, .mono-search-input {
     font-size: 16px !important;
   }
 
@@ -2782,39 +2621,6 @@ code, .code-font {
     width: 36px;
     height: 36px;
     font-size: 1.1rem;
-  }
-
-  /* Topbar Navbar */
-  .navbar-inner {
-    padding: 0.65rem 0.85rem;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-  }
-
-  .nav-tabs {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 3px;
-    gap: 0.25rem;
-  }
-
-  .nav-tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .nav-tab {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .navbar-actions {
-    width: 100%;
-    justify-content: space-between;
-    gap: 0.5rem;
   }
 
   /* Monochrome Sidebar Layout on Mobile */

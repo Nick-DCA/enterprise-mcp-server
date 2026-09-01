@@ -72,6 +72,12 @@ async function main() {
       NODE_ENV: 'test',
       MOCK_SECRET_MANAGER: 'true',
       LOG_LEVEL: 'silent',
+      MCP_CLIENT_ID: process.env.MCP_CLIENT_ID || 'test-mcp-client-id',
+      MCP_CLIENT_SECRET: process.env.MCP_CLIENT_SECRET || 'test-mcp-client-secret-12345',
+      MCP_JWT_SECRET: process.env.MCP_JWT_SECRET || 'test-jwt-secret-key-32-chars-long-min!',
+      GCP_PROJECT_ID: process.env.GCP_PROJECT_ID || 'test-enterprise-project',
+      GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || 'test-google-client-id.apps.googleusercontent.com',
+      GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || 'test-google-client-secret',
     });
 
     const durationMs = Date.now() - suiteStart;

@@ -12,6 +12,7 @@ async function runSetupApiTests() {
   delete process.env.MCP_CLIENT_ID;
   delete process.env.BYPASS_SETUP;
   process.env.NODE_ENV = 'test';
+  process.env.GCP_PROJECT_ID = process.env.GCP_PROJECT_ID || 'test-enterprise-project';
   runtimeConfig.clearCache();
   await runtimeConfig.setInstallationMetadata({
     initializationStatus: 'UNINITIALIZED',

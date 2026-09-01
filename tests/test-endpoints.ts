@@ -82,6 +82,10 @@ async function runTests() {
   console.log('🚀 Xero MCP Server Local Integration Test Suite');
   console.log('====================================================\n');
 
+  process.env.MCP_CLIENT_ID = process.env.MCP_CLIENT_ID || 'test-mcp-client-id';
+  process.env.MCP_CLIENT_SECRET = process.env.MCP_CLIENT_SECRET || 'test-mcp-client-secret-12345';
+  process.env.MCP_JWT_SECRET = process.env.MCP_JWT_SECRET || 'test-jwt-secret-key-32-chars-long-min!';
+
   const authConfig = await getMcpAuthConfig();
   const testMcpClientId = authConfig.clientId;
   const testMcpClientSecret = authConfig.clientSecret;
