@@ -577,7 +577,7 @@ async function runTests() {
       else if (toolName === 'xero-get-aged-payables-by-contact') args = { contactId: sampleContactId };
       else if (toolName === 'bigquery-list-datasets') args = {};
       else if (toolName === 'bigquery-list-tables') args = sampleDatasetId ? { datasetId: sampleDatasetId } : {};
-      else if (toolName === 'bigquery-get-table-schema') args = sampleTableId ? { tableId: sampleTableId, datasetId: sampleDatasetId } : (sampleDatasetId ? { tableId: 'dummy_tbl', datasetId: sampleDatasetId } : {});
+      else if (toolName === 'bigquery-get-table-schema') args = { tableId: sampleTableId || 'sample_table', datasetId: sampleDatasetId || 'sample_dataset' };
       else if (toolName === 'bigquery-dry-run-query') args = { query: 'SELECT 1 as test_val' };
       else if (toolName === 'bigquery-execute-query-readonly') args = { query: 'SELECT 1 as test_val' };
       else if (toolName === 'firestore-list-collections') args = {};

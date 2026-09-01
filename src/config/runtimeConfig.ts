@@ -235,6 +235,12 @@ export class RuntimeConfigManager {
       return this.firestoreClient;
     }
 
+    // In unit/integration test environments, avoid outbound GCP Firestore network calls
+    // unless an emulator is explicitly configured. Use the built-in in-memory store instead.
+    if (process.env.MOCK_FIRESTORE === 'true' || (process.env.NODE_ENV === 'test' && !process.env.FIRESTORE_EMULATOR_HOST)) {
+      return null;
+    }
+
     try {
       const projectId = process.env.GCP_PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT || (await getGcpProjectId());
       if (!projectId) {
