@@ -12,11 +12,18 @@ import { sagehrTools } from '../services/sagehr/tools/index.js';
 import { slackTools } from '../services/slack/tools/index.js';
 import { logger } from '../utils/logger.js';
 
+let hasLoggedStartup = false;
+
 /**
  * Creates and configures the MCP server instance with modular service adapters registered.
  */
 export function createMcpServer(): McpServer {
-  logger.info('Initializing Multi-Service MCP Gateway Server instance...');
+  const isFirstBoot = !hasLoggedStartup;
+  if (isFirstBoot) {
+    logger.info('Initializing Multi-Service MCP Gateway Server instance at boot...');
+  } else {
+    logger.debug('Creating request-scoped McpServer instance...');
+  }
 
   const server = new McpServer({
     name: 'enterprise-mcp-server',
@@ -44,6 +51,13 @@ export function createMcpServer(): McpServer {
   // Register Slack domain tools
   registry.registerDomainTools(server, 'slack', slackTools);
 
-  logger.info(`Registered ${registry.getRegisteredCount()} total MCP tools across enabled domains`);
+  const totalCount = registry.getRegisteredCount();
+  if (isFirstBoot) {
+    logger.info(`Registered ${totalCount} total MCP tools across enabled domains (ready to serve)`);
+    hasLoggedStartup = true;
+  } else {
+    logger.debug(`Registered ${totalCount} MCP tools for request`);
+  }
+
   return server;
 }

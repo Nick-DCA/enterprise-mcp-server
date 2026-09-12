@@ -8,9 +8,10 @@ import { getSecretValue } from '../../../config/secretManager.js';
 export const slackFileContentTool: ToolDefinition = {
   name: 'slack-get-file-content',
   description:
-    'Downloads and extracts readable text, markdown, code, log, or CSV content of a Slack file by ID using the authenticated corporate user\'s delegated credentials. ' +
+    'Downloads and extracts readable text from Slack files (PDF documents with text layers, markdown, code snippets, logs, CSV, JSON, and plain text) by ID using the authenticated corporate user\'s delegated credentials. ' +
     'Requires the file ID (fileId) discovered via "slack-federated-search", "slack-get-thread-replies", or "slack-get-channel-context". ' +
     'Returns file metadata (name, mimetype, size) and decoded content up to 15,000 characters with prompt injection boundary defense. ' +
+    'For non-text binary formats (images, audio, archives), returns file metadata and direct Slack permalinks without bytecode dumps. ' +
     'Use this tool when a search result or conversation thread mentions an attached document, specification, snippet, or data file and you need its contents to formulate a complete answer.',
   schema: {
     fileId: z

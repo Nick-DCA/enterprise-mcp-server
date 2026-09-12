@@ -3,6 +3,11 @@ import { createApp } from '../../src/server/app.js';
 import { OAuthService } from '../../src/auth/oauthService.js';
 import { McpAuthConfig } from '../../src/auth/types.js';
 import { computeCodeChallenge } from '../../src/auth/pkce.js';
+import { verifyJwt } from '../../src/auth/jwt.js';
+import { runtimeConfig } from '../../src/config/runtimeConfig.js';
+
+process.env.NODE_ENV = 'test';
+process.env.MOCK_FIRESTORE = 'true';
 
 interface TestResult {
   name: string;
@@ -193,6 +198,111 @@ async function runTests() {
     );
     assert(badTokenRes.statusCode === 400, 'Invalid code returns HTTP 400 Bad Request');
     assert(badTokenRes.body.error === 'invalid_grant', 'Invalid code error is invalid_grant');
+
+    // 7. Identity Resolution & User Binding on /oauth/authorize
+    console.log('\n--- 6. Identity Resolution & User Binding on /oauth/authorize ---');
+
+    // 6a: login_hint query parameter
+    const loginHintUrl = `/oauth/authorize?response_type=code&client_id=${encodeURIComponent(
+      config.clientId
+    )}&redirect_uri=${encodeURIComponent(
+      'https://vertexaisearch.cloud.google.com/oauth-redirect'
+    )}&code_challenge=${encodeURIComponent(rfcChallenge)}&code_challenge_method=S256&login_hint=candice@digicloud.africa`;
+
+    const hintRes = await sendRequest('GET', loginHintUrl);
+    assert(hintRes.statusCode === 302, 'GET /oauth/authorize with login_hint returns 302');
+    const hintCode = new URL(hintRes.headers.location!).searchParams.get('code')!;
+    assert(typeof hintCode === 'string', 'Authorization code issued with login_hint');
+
+    const hintTokenRes = await sendRequest(
+      'POST',
+      '/oauth/token',
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({
+        grant_type: 'authorization_code',
+        client_id: config.clientId,
+        code: hintCode,
+        code_verifier: rfcVerifier,
+        redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+      })
+    );
+    assert(hintTokenRes.statusCode === 200, 'Token exchange succeeds for login_hint code');
+    const decodedHintToken = verifyJwt(hintTokenRes.body.access_token, config.jwtSecret) as any;
+    assert(decodedHintToken.userEmail === 'candice@digicloud.africa', 'Access token carries userEmail from login_hint');
+    assert(decodedHintToken.sub === 'candice@digicloud.africa', 'Access token sub is bound to corporate email');
+
+    // 6b: x-goog-authenticated-user-email proxy header
+    const iapRes = await sendRequest(
+      'GET',
+      authUrl,
+      { 'x-goog-authenticated-user-email': 'accounts.google.com:nick@digicloud.africa' }
+    );
+    assert(iapRes.statusCode === 302, 'GET /oauth/authorize with IAP header returns 302');
+    const iapCode = new URL(iapRes.headers.location!).searchParams.get('code')!;
+
+    const iapTokenRes = await sendRequest(
+      'POST',
+      '/oauth/token',
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({
+        grant_type: 'authorization_code',
+        client_id: config.clientId,
+        code: iapCode,
+        code_verifier: rfcVerifier,
+        redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+      })
+    );
+    assert(iapTokenRes.statusCode === 200, 'Token exchange succeeds for IAP header code');
+    const decodedIapToken = verifyJwt(iapTokenRes.body.access_token, config.jwtSecret) as any;
+    assert(decodedIapToken.userEmail === 'nick@digicloud.africa', 'Access token carries userEmail stripped of IAP prefix');
+
+    // 6c: Active browser session cookie (__session)
+    const testSession = await runtimeConfig.createSession({
+      sessionId: 'sess_test_123',
+      userEmail: 'sarah@digicloud.africa',
+      fullName: 'Sarah Jenkins',
+      role: 'USER',
+      ipAddress: '127.0.0.1',
+      userAgent: 'test-agent',
+    });
+    const sessionRes = await sendRequest(
+      'GET',
+      authUrl,
+      { 'Cookie': `__session=${testSession.sessionId}` }
+    );
+    assert(sessionRes.statusCode === 302, 'GET /oauth/authorize with active __session cookie returns 302');
+    const sessionCode = new URL(sessionRes.headers.location!).searchParams.get('code')!;
+
+    const sessionTokenRes = await sendRequest(
+      'POST',
+      '/oauth/token',
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({
+        grant_type: 'authorization_code',
+        client_id: config.clientId,
+        code: sessionCode,
+        code_verifier: rfcVerifier,
+        redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+      })
+    );
+    assert(sessionTokenRes.statusCode === 200, 'Token exchange succeeds for session cookie code');
+    const decodedSessionToken = verifyJwt(sessionTokenRes.body.access_token, config.jwtSecret) as any;
+    assert(decodedSessionToken.userEmail === 'sarah@digicloud.africa', 'Access token carries userEmail from __session cookie');
+
+    // 6d: Refresh token preservation across cycles
+    const refreshedUserRes = await sendRequest(
+      'POST',
+      '/oauth/token',
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({
+        grant_type: 'refresh_token',
+        client_id: config.clientId,
+        refresh_token: sessionTokenRes.body.refresh_token,
+      })
+    );
+    assert(refreshedUserRes.statusCode === 200, 'POST /oauth/token with user refresh_token returns 200');
+    const decodedRefreshedToken = verifyJwt(refreshedUserRes.body.access_token, config.jwtSecret) as any;
+    assert(decodedRefreshedToken.userEmail === 'sarah@digicloud.africa', 'Refreshed access token preserves userEmail claim');
 
   } finally {
     server.close();

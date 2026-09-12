@@ -5,6 +5,7 @@ import { logger } from '../../utils/logger.js';
 import { toMcpErrorResponse } from '../../utils/errors.js';
 
 import { RequestContext } from '../context.js';
+import { cleanUserEmail } from '../../utils/identity.js';
 
 /**
  * MCP Request Handler Function (Per-request stateless transport for Cloud Run & Gemini Enterprise)
@@ -22,18 +23,21 @@ export async function handleMcpRequest(req: Request, res: Response) {
       enableJsonResponse: true,      // Direct JSON-RPC response mode
     });
 
-    const userEmail =
+    const rawEmailCandidate =
       (req.auth as any)?.email ||
       (req.auth as any)?.userEmail ||
-      (req.auth as any)?.sub ||
-      req.auth?.clientId;
+      (typeof req.headers['x-goog-authenticated-user-email'] === 'string'
+        ? req.headers['x-goog-authenticated-user-email']
+        : undefined);
+    const userEmail = cleanUserEmail(rawEmailCandidate);
+    const clientId = (req.auth as any)?.clientId || (req.auth as any)?.sub;
 
     await RequestContext.run(
       {
         userEmail,
-        authUserId: (req.auth as any)?.sub || req.auth?.clientId,
+        authUserId: (req.auth as any)?.sub || clientId,
         token: req.auth?.token,
-        clientId: req.auth?.clientId,
+        clientId,
         scopes: req.auth?.scopes,
         ...req.auth,
       },

@@ -11,6 +11,7 @@ import {
   SlackFileAttachment,
   SlackThreadMessage,
 } from './types.js';
+import { PDFParse } from 'pdf-parse';
 
 export class SlackNotConnectedError extends Error {
   public userEmail: string;
@@ -480,6 +481,9 @@ export class SlackService {
     const mimeType = file.mimetype || 'application/octet-stream';
     const sizeBytes = Number(file.size) || 0;
 
+    const permalinkUrl = file.permalink || file.url_private || '';
+    const permalinkNotice = permalinkUrl ? ` Please open directly in Slack: ${permalinkUrl}` : '';
+
     // Safety limit: 2MB file size ceiling
     if (sizeBytes > 2 * 1024 * 1024) {
       return {
@@ -490,19 +494,112 @@ export class SlackService {
         mimetype: mimeType,
         sizeBytes,
         truncated: true,
-        content: `[File size of ${(sizeBytes / 1024 / 1024).toFixed(1)}MB exceeds maximum 2MB preview limit for AI safety. Please open the file directly in Slack.]`,
+        content: `[File size of ${(sizeBytes / 1024 / 1024).toFixed(1)}MB exceeds maximum 2MB preview limit for AI safety.${permalinkNotice}]`,
+        securityNotice: SECURITY_DISCLAIMER,
+      };
+    }
+
+    // Binary file format classification
+    const isPdf =
+      fileType.toLowerCase() === 'pdf' ||
+      mimeType.toLowerCase() === 'application/pdf' ||
+      fileName.toLowerCase().endsWith('.pdf');
+
+    const isImage =
+      mimeType.startsWith('image/') ||
+      ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp', 'ico', 'heic', 'tiff'].includes(fileType.toLowerCase()) ||
+      /\.(png|jpe?g|gif|webp|svg|bmp|ico|heic|tiff)$/i.test(fileName);
+
+    const isAudioVideo =
+      mimeType.startsWith('audio/') ||
+      mimeType.startsWith('video/') ||
+      ['mp3', 'mp4', 'wav', 'mov', 'avi', 'mkv', 'webm', 'ogg', 'm4a', 'flac'].includes(fileType.toLowerCase()) ||
+      /\.(mp3|mp4|wav|mov|avi|mkv|webm|ogg|m4a|flac)$/i.test(fileName);
+
+    const isArchiveOrBinary =
+      ['zip', 'gz', 'tar', 'tgz', 'rar', '7z', 'bz2', 'dmg', 'iso', 'exe', 'bin', 'dll', 'pkg', 'apk', 'deb', 'rpm'].includes(fileType.toLowerCase()) ||
+      mimeType.includes('zip') ||
+      mimeType.includes('tar') ||
+      mimeType.includes('compressed') ||
+      mimeType.includes('archive') ||
+      /\.(zip|gz|tar|tgz|rar|7z|bz2|dmg|iso|exe|bin|dll|pkg|apk|deb|rpm)$/i.test(fileName);
+
+    // Fast-path: non-text binary media and archives are guarded from bytecode dumps
+    if (isImage || isAudioVideo || isArchiveOrBinary) {
+      const category = isImage ? 'Image' : isAudioVideo ? 'Audio/Video' : 'Archive/Binary';
+      const notice = `[${category} File: ${fileName} (${(sizeBytes / 1024).toFixed(1)} KB, type: ${fileType || mimeType}). Binary media and archive files cannot be viewed as plain text.${permalinkNotice}]`;
+
+      await runtimeConfig.recordAuditLog(
+        {
+          logId: `audit_slack_file_${Date.now()}`,
+          timestamp: new Date().toISOString(),
+          actorEmail: cleanEmail,
+          action: 'SLACK_FILE_READ',
+          target: connection.slackWorkspaceName || cleanFileId,
+          details: {
+            fileId: cleanFileId,
+            fileName,
+            sizeBytes,
+            category,
+            status: 'BINARY_GUARD_SKIPPED',
+          },
+        },
+        cleanEmail
+      );
+
+      return {
+        status: 'success',
+        fileId: cleanFileId,
+        name: fileName,
+        filetype: fileType,
+        mimetype: mimeType,
+        sizeBytes,
+        truncated: false,
+        content: notice,
         securityNotice: SECURITY_DISCLAIMER,
       };
     }
 
     let rawContent = '';
+    const downloadUrl = file.url_private_download || file.url_private;
 
-    // Prefer plain_text if Slack already extracted text
+    // 1. Prefer plain_text if Slack already extracted text
     if (typeof file.plain_text === 'string' && file.plain_text.trim().length > 0) {
       rawContent = file.plain_text;
-    } else if (file.url_private_download) {
-      // Download private stream
-      const dlRes = await fetch(file.url_private_download, {
+    } else if (isPdf) {
+      // 2. Native PDF text layer extraction via pdf-parse
+      if (downloadUrl) {
+        const dlRes = await fetch(downloadUrl, {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!dlRes.ok) {
+          throw new Error(`Failed to download PDF file from Slack: HTTP ${dlRes.status}`);
+        }
+
+        const arrayBuffer = await dlRes.arrayBuffer();
+        const parser = new PDFParse({ data: new Uint8Array(arrayBuffer) });
+        try {
+          const pdfResult = await parser.getText();
+          const text = (pdfResult.text || '').trim();
+          if (text.length > 0) {
+            rawContent = text;
+          } else {
+            rawContent = `[PDF Document: ${fileName} (${(sizeBytes / 1024).toFixed(1)} KB, ${pdfResult.total || 1} page${(pdfResult.total || 1) === 1 ? '' : 's'}). No extractable text layer found (scanned image or protected).${permalinkNotice}]`;
+          }
+        } catch (pdfErr) {
+          logger.warn({ err: pdfErr, fileName, fileId: cleanFileId }, '[SlackClient] Failed to parse PDF text layer');
+          rawContent = `[PDF Document: ${fileName} (${(sizeBytes / 1024).toFixed(1)} KB). Could not parse text layer (${pdfErr instanceof Error ? pdfErr.message : 'unsupported structure'}).${permalinkNotice}]`;
+        } finally {
+          await parser.destroy().catch(() => {});
+        }
+      } else {
+        rawContent = `[PDF Document: ${fileName} (${(sizeBytes / 1024).toFixed(1)} KB). No downloadable stream available.${permalinkNotice}]`;
+      }
+    } else if (downloadUrl) {
+      // 3. Text file download with binary byte guard
+      const dlRes = await fetch(downloadUrl, {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -511,9 +608,27 @@ export class SlackService {
         throw new Error(`Failed to download file from Slack: HTTP ${dlRes.status}`);
       }
 
-      rawContent = await dlRes.text();
+      const arrayBuffer = await dlRes.arrayBuffer();
+      const uint8 = new Uint8Array(arrayBuffer);
+
+      // Check for null bytes in first 1024 bytes to detect non-text binaries
+      let hasBinaryBytes = false;
+      const sampleLen = Math.min(uint8.length, 1024);
+      for (let i = 0; i < sampleLen; i++) {
+        if (uint8[i] === 0) {
+          hasBinaryBytes = true;
+          break;
+        }
+      }
+
+      if (hasBinaryBytes) {
+        rawContent = `[Binary File: ${fileName} (${(sizeBytes / 1024).toFixed(1)} KB, type: ${fileType || mimeType}). Non-text binary data detected.${permalinkNotice}]`;
+      } else {
+        const decoder = new TextDecoder('utf-8', { fatal: false });
+        rawContent = decoder.decode(uint8);
+      }
     } else {
-      rawContent = '[This file format cannot be converted to text or does not have a downloadable preview.]';
+      rawContent = `[This file format cannot be converted to text or does not have a downloadable preview.${permalinkNotice}]`;
     }
 
     let truncated = false;

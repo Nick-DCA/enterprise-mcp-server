@@ -1,6 +1,7 @@
 import { runtimeConfig, ServiceId } from '../config/runtimeConfig.js';
 import { DomainName, ToolDefinition } from './types.js';
 import { RequestContext } from '../server/context.js';
+import { isValidUserEmail } from '../utils/identity.js';
 import { logger } from '../utils/logger.js';
 
 export function resolveServiceIdFromDomain(domain: DomainName): ServiceId | null {
@@ -49,27 +50,37 @@ export async function checkToolExecutionAccess(
     }
   }
 
-  // 2. Check user-level permissions
-  const effectiveEmail = userEmail || RequestContext.getUserEmail();
+  // 2. Resolve candidate user email & machine client identity
+  const candidateEmail = userEmail || RequestContext.getUserEmail();
+  const effectiveEmail = isValidUserEmail(candidateEmail) ? candidateEmail.trim().toLowerCase() : undefined;
+  const clientId = RequestContext.getClientId() || 'anonymous';
 
-  if (effectiveEmail) {
-    const userAccess = await runtimeConfig.getUserAccess(effectiveEmail);
+  // 3. Special handling for Slack: Strictly require authenticated human corporate user
+  if (serviceId === 'slack') {
+    // slack-search-guide is an instructional guide tool that does not access Slack API or user tokens
+    if (toolDef.name !== 'slack-search-guide') {
+      if (!effectiveEmail) {
+        return {
+          allowed: false,
+          reason: `Slack federated search requires an authenticated corporate user email. Machine client '${clientId}' cannot execute user-delegated Slack operations without verified user context.`,
+        };
+      }
 
-    // If user account is explicitly disabled in users_access, block immediately
-    if (userAccess && !userAccess.isEnabled) {
-      return {
-        allowed: false,
-        reason: `Platform access for user '${effectiveEmail}' has been disabled by an administrator.`,
-      };
-    }
+      const userAccess = await runtimeConfig.getUserAccess(effectiveEmail);
 
-    // Special handling for Slack: Check the "allowAllUsers" security policy toggle
-    if (serviceId === 'slack') {
+      // If user account is explicitly disabled in users_access, block immediately
+      if (userAccess && !userAccess.isEnabled) {
+        return {
+          allowed: false,
+          reason: `Platform access for user '${effectiveEmail}' has been disabled by an administrator.`,
+        };
+      }
+
       const slackConfig = await runtimeConfig.getServiceConfig('slack');
       const allowAllUsers = slackConfig?.settings?.allowAllUsers !== false; // Default: true
 
       if (allowAllUsers) {
-        // Under open user delegation, any authenticated corporate user can search/init Slack
+        // Under open user delegation, any verified corporate user can search/init Slack
         return { allowed: true };
       } else {
         // Strict IAM Mode: Require user to exist in users_access with 'slack' in allowedServices
@@ -85,7 +96,21 @@ export async function checkToolExecutionAccess(
             reason: `User '${effectiveEmail}' does not have permission to access 'SLACK' tools under current security policy.`,
           };
         }
+        return { allowed: true };
       }
+    }
+  }
+
+  // 4. Non-Slack services: Check user-level restrictions if user context is present
+  if (effectiveEmail) {
+    const userAccess = await runtimeConfig.getUserAccess(effectiveEmail);
+
+    // If user account is explicitly disabled in users_access, block immediately
+    if (userAccess && !userAccess.isEnabled) {
+      return {
+        allowed: false,
+        reason: `Platform access for user '${effectiveEmail}' has been disabled by an administrator.`,
+      };
     }
 
     if (userAccess) {
@@ -114,3 +139,4 @@ export async function checkToolExecutionAccess(
 
   return { allowed: true };
 }
+

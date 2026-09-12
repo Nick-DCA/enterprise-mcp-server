@@ -5,6 +5,7 @@ import { getMcpAuthConfig } from '../../config/authConfig.js';
 import { logger } from '../../utils/logger.js';
 
 import { RequestContext } from '../context.js';
+import { cleanUserEmail } from '../../utils/identity.js';
 
 type JwtSecretResolver = string | McpAuthConfig | (() => Promise<string>) | undefined;
 
@@ -62,13 +63,18 @@ export function createBearerAuthMiddleware(secretResolver?: JwtSecretResolver) {
         expiresAt: decoded.exp,
         ...decoded,
       };
-      const userEmail = (decoded as any).email || (decoded as any).userEmail || decoded.sub;
+      const tokenEmail = (decoded as any).email || (decoded as any).userEmail;
+      const gwsHeader = req.headers['x-goog-authenticated-user-email'];
+      const rawEmailCandidate = tokenEmail || (typeof gwsHeader === 'string' ? gwsHeader : undefined);
+      const userEmail = cleanUserEmail(rawEmailCandidate);
+      const clientId = (decoded as any).clientId || decoded.sub;
+
       RequestContext.run(
         {
           userEmail,
           authUserId: decoded.sub,
           token,
-          clientId: decoded.sub,
+          clientId,
           scopes: (decoded.scope || '').split(' ').filter(Boolean),
           ...decoded,
         },

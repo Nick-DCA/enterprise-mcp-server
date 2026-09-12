@@ -26,6 +26,10 @@ const TEST_SUITES: TestSuite[] = [
   { name: '17. Platform Setup & Initialisation API', file: 'tests/server/test-setup-api.ts' },
   { name: '18. Firestore Guardrails & Access Control', file: 'tests/firestore/test-access-guardrails.ts' },
   { name: '19. BigQuery SQL Guardrails & Keyword Shifting', file: 'tests/bigquery/test-sql-guardrails.ts' },
+  { name: '20. Identity Validator & Domain Security', file: 'tests/auth/test-identity-validator.ts' },
+  { name: '21. Access Guard Machine Identity Lockdown', file: 'tests/server/test-access-guard-security.ts' },
+  { name: '22. Slack Connector Route & State Hardening', file: 'tests/connectors/test-slack-security.ts' },
+  { name: '23. Slack PDF Extraction & Binary Guard', file: 'tests/connectors/test-slack-file-extract.ts' },
 ];
 
 async function runCommand(cmd: string, args: string[], env: Record<string, string>): Promise<{ code: number; stdout: string; stderr: string }> {
@@ -111,7 +115,7 @@ async function main() {
     }
     process.exit(1);
   } else {
-    console.log('🎉 ALL 17 TEST SUITES PASSED CLEANLY WITH ZERO LOG CONFLICTS!\n');
+    console.log(`🎉 ALL ${TEST_SUITES.length} TEST SUITES PASSED CLEANLY WITH ZERO LOG CONFLICTS!\n`);
     process.exit(0);
   }
 }

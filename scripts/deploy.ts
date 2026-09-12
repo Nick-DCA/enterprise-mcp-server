@@ -119,6 +119,7 @@ async function main() {
     `--update-env-vars=${envPairs}`,
     '--memory=512Mi',
     '--cpu=1',
+    '--concurrency=80',
     '--allow-unauthenticated',
     '--clear-base-image',
   ];

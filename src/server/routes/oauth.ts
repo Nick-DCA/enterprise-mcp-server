@@ -4,6 +4,8 @@ import { AuthorizeRequestParams, TokenRequestParams } from '../../auth/types.js'
 import { OAuthErrorCodes } from '../../auth/constants.js';
 import { getMcpAuthConfig } from '../../config/authConfig.js';
 import { logger } from '../../utils/logger.js';
+import { cleanUserEmail } from '../../utils/identity.js';
+import { runtimeConfig } from '../../config/runtimeConfig.js';
 
 type OAuthServiceResolver = OAuthService | (() => Promise<OAuthService>) | undefined;
 
@@ -43,7 +45,40 @@ export function createOAuthRouter(serviceResolver?: OAuthServiceResolver): expre
         code_challenge_method: req.query.code_challenge_method as string,
       };
 
-      const { redirectUrl } = oauthService.processAuthorize(params);
+      let candidateEmail: string | undefined;
+
+      // 1. Google Identity-Aware Proxy (IAP) or forwarded headers
+      const gwsHeader = req.headers['x-goog-authenticated-user-email'] || req.headers['x-forwarded-user-email'];
+      if (typeof gwsHeader === 'string' && gwsHeader.trim()) {
+        candidateEmail = gwsHeader.trim();
+      }
+
+      // 2. Active browser session cookie (__session)
+      if (!candidateEmail) {
+        const sessionId = req.cookies?.__session || req.cookies?.mcp_session;
+        if (typeof sessionId === 'string' && sessionId.trim()) {
+          try {
+            const session = await runtimeConfig.getSession(sessionId.trim());
+            if (session?.userEmail) {
+              candidateEmail = session.userEmail;
+            }
+          } catch {
+            // Ignore session lookup failures
+          }
+        }
+      }
+
+      // 3. OAuth 2.0 / OIDC standard login_hint or userEmail query parameter
+      if (!candidateEmail) {
+        const queryHint = req.query.login_hint || req.query.userEmail;
+        if (typeof queryHint === 'string' && queryHint.trim()) {
+          candidateEmail = queryHint.trim();
+        }
+      }
+
+      const userEmail = cleanUserEmail(candidateEmail);
+
+      const { redirectUrl } = oauthService.processAuthorize(params, userEmail);
       res.redirect(302, redirectUrl);
     } catch (error: any) {
       if (error instanceof OAuthError) {

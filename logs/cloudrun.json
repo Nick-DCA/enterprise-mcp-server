@@ -1,0 +1,4433 @@
+[
+  {
+    "insertId": "6aa532ef00070d8ed17e7f38",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:35.532942793Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:09:35.455Z"
+  },
+  {
+    "insertId": "6aa532ef00070d88fbb2c8ab",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:35.532942793Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:09:35.455Z"
+  },
+  {
+    "insertId": "6aa532ef00070d818ee09951",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:35.532942793Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:09:35.455Z"
+  },
+  {
+    "insertId": "6aa532ef00070d7cb844fe49",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:35.532942793Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:09:35.455Z"
+  },
+  {
+    "insertId": "6aa532ef00070d77ba4142d0",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:35.532942793Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:09:35.455Z"
+  },
+  {
+    "insertId": "6aa532ef0006e47ee02d8636",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "ip": "::ffff:169.254.169.126",
+      "level": 30,
+      "message": "[HTTP Request] POST /mcp",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "url": "/mcp",
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:35.532942793Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:09:35.452Z"
+  },
+  {
+    "insertId": "6aa532ee000cb4680b1b0cb6",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "MCP Auth configuration loaded successfully",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:34.870052263Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:09:34.833Z"
+  },
+  {
+    "insertId": "6aa532ee00086751cff8c0a6",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Attempting to fetch MCP Auth secrets from GCP Secret Manager",
+      "pid": 1,
+      "projectId": "secret-grammar-492006-p6"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:34.870052263Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:09:34.531Z"
+  },
+  {
+    "insertId": "qo60cmd22fw",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.revisions.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Revisions.GetRevision",
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:09:32.105537Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:09:32.172843604Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:09:32.064163Z"
+  },
+  {
+    "insertId": "u96ce0d1o8b",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.revisions.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Revisions.GetRevision",
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:09:00.128905Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:09:00.156619225Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:09:00.068974Z"
+  },
+  {
+    "insertId": "1r0zpn4d2e71",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v1.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v1.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:09:00.060599Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:09:00.508351653Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:09:00.020106Z"
+  },
+  {
+    "insertId": "12w61yhd2v2w",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v2.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:09:00.050377Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:09:00.719046394Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:09:00.014262Z"
+  },
+  {
+    "insertId": "t62l3ad598d",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.revisions.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Revisions.GetRevision",
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:08:28.284275Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:08:28.735794059Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:08:28.237889Z"
+  },
+  {
+    "insertId": "19skqvyd2p12",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v1.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v1.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:08:28.236647Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:08:28.761909628Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:08:28.187131Z"
+  },
+  {
+    "insertId": "kjq593d1mi8",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v2.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:08:28.222403Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:08:29.064797988Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:08:28.175222Z"
+  },
+  {
+    "insertId": "12cn769chl9",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.revisions.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Revisions.GetRevision",
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:07:57.084538Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:07:57.546622425Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:07:57.040212Z"
+  },
+  {
+    "insertId": "170xhg6d230h",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v2.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:07:57.026149Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:07:57.109338762Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:07:56.988056Z"
+  },
+  {
+    "insertId": "hi2f7od1u9r",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v1.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v1.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:07:57.027291Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:07:57.209474246Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:07:56.986367Z"
+  },
+  {
+    "insertId": "6aa5328b000f126e61684811",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.979Z"
+  },
+  {
+    "insertId": "6aa5328b000f12678d60be41",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.979Z"
+  },
+  {
+    "insertId": "6aa5328b000f1260b64fc5a3",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.979Z"
+  },
+  {
+    "insertId": "6aa5328b000f1258745cfcf9",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.978Z"
+  },
+  {
+    "insertId": "6aa5328b000f124f73ad9919",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.978Z"
+  },
+  {
+    "insertId": "6aa5328b000f1248b688519b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 4 tools for domain: 'reports'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.978Z"
+  },
+  {
+    "insertId": "6aa5328b000f12417b90a992",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 0 tools for domain: 'payroll'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.978Z"
+  },
+  {
+    "insertId": "6aa5328b000f1239d3f61717",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 7 tools for domain: 'contacts'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.977Z"
+  },
+  {
+    "insertId": "6aa5328b000f12301ec16711",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 25 tools for domain: 'accounting'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.977Z"
+  },
+  {
+    "insertId": "6aa5328b000f1228f50d4764",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Initializing Multi-Service MCP Gateway Server instance...",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.975Z"
+  },
+  {
+    "insertId": "6aa5328b000f1214f1d9dcf2",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "jsonrpcMethod": "tools/list",
+      "level": 30,
+      "message": "[MCP] Handling POST request for method: tools/list",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "reqId": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.975Z"
+  },
+  {
+    "insertId": "6aa5328b000eddc541c91ff9",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "ip": "::ffff:169.254.169.126",
+      "level": 30,
+      "message": "[HTTP Request] POST /mcp",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "url": "/mcp",
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:56.175490647Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.974Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.015633776s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "173.194.90.139",
+      "requestMethod": "POST",
+      "requestSize": "2192",
+      "requestUrl": "https://enterprise-mcp-server-1058873375196.europe-west1.run.app/mcp",
+      "responseSize": "47915",
+      "serverIp": "34.143.76.2",
+      "status": 200,
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "insertId": "6aa5328b000f127e35c83490",
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-09-12T11:07:56.184119230Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "f9c2347db32ed41b",
+    "timestamp": "2026-09-12T11:07:55.970493Z",
+    "trace": "projects/secret-grammar-492006-p6/traces/d84d86d57a76167bf9b1bb4e1aa77666",
+    "traceSampled": true
+  },
+  {
+    "insertId": "6aa5328b00066e401709057b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.420Z"
+  },
+  {
+    "insertId": "6aa5328b00066e370890e9ca",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.420Z"
+  },
+  {
+    "insertId": "6aa5328b00066e33194f3287",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.420Z"
+  },
+  {
+    "insertId": "6aa5328b00066e2e96ddd406",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.420Z"
+  },
+  {
+    "insertId": "6aa5328b00066e2998af71b5",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.419Z"
+  },
+  {
+    "insertId": "6aa5328b00066e22db638562",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 4 tools for domain: 'reports'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.419Z"
+  },
+  {
+    "insertId": "6aa5328b00066e1c3981d561",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 0 tools for domain: 'payroll'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.419Z"
+  },
+  {
+    "insertId": "6aa5328b00066e154179959b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 7 tools for domain: 'contacts'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.419Z"
+  },
+  {
+    "insertId": "6aa5328b00066e0ebd71620a",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 25 tools for domain: 'accounting'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.419Z"
+  },
+  {
+    "insertId": "6aa5328b00066e08aa19f39c",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Initializing Multi-Service MCP Gateway Server instance...",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.418Z"
+  },
+  {
+    "insertId": "6aa5328b00066dfac7c6679a",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "jsonrpcMethod": "notifications/initialized",
+      "level": 30,
+      "message": "[MCP] Handling POST request for method: notifications/initialized",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.418Z"
+  },
+  {
+    "insertId": "6aa5328b00065f84cb602c00",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "ip": "::ffff:169.254.169.126",
+      "level": 30,
+      "message": "[HTTP Request] POST /mcp",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "url": "/mcp",
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.514842057Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:55.417Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.006657716s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "173.194.90.149",
+      "requestMethod": "POST",
+      "requestSize": "2198",
+      "requestUrl": "https://enterprise-mcp-server-1058873375196.europe-west1.run.app/mcp",
+      "responseSize": "171",
+      "serverIp": "34.143.74.2",
+      "status": 202,
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "insertId": "6aa5328b00066eb2f0b207e1",
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-09-12T11:07:55.517515509Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "2abe2f805d1345cf",
+    "timestamp": "2026-09-12T11:07:55.413044Z",
+    "trace": "projects/secret-grammar-492006-p6/traces/d84d86d57a76167bf9b1bb4e1aa77666",
+    "traceSampled": true
+  },
+  {
+    "insertId": "6aa5328a000cedf09d8c4b9b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.843Z"
+  },
+  {
+    "insertId": "6aa5328a000cedec1091a52d",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.843Z"
+  },
+  {
+    "insertId": "6aa5328a000cede769c944f8",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.843Z"
+  },
+  {
+    "insertId": "6aa5328a000cede3e4523b4a",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.842Z"
+  },
+  {
+    "insertId": "6aa5328a000cedde43a96f6b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.842Z"
+  },
+  {
+    "insertId": "6aa5328a000cedda4d058a54",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 4 tools for domain: 'reports'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.842Z"
+  },
+  {
+    "insertId": "6aa5328a000cedd54e79ef8d",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 0 tools for domain: 'payroll'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.842Z"
+  },
+  {
+    "insertId": "6aa5328a000cedd0af23de51",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 7 tools for domain: 'contacts'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.842Z"
+  },
+  {
+    "insertId": "6aa5328a000cedc76eabdf72",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 25 tools for domain: 'accounting'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.842Z"
+  },
+  {
+    "insertId": "6aa5328a000cedc03f4ad341",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Initializing Multi-Service MCP Gateway Server instance...",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.840Z"
+  },
+  {
+    "insertId": "6aa5328a000cedb12003d9c0",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "jsonrpcMethod": "initialize",
+      "level": 30,
+      "message": "[MCP] Handling POST request for method: initialize",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "reqId": 0
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:55.176340823Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.840Z"
+  },
+  {
+    "insertId": "6aa5328a000ccf0d1a3cd8a9",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "ip": "::ffff:169.254.169.126",
+      "level": 30,
+      "message": "[HTTP Request] POST /mcp",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "url": "/mcp",
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:54.844278622Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:54.839Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.011404401s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "173.194.90.157",
+      "requestMethod": "POST",
+      "requestSize": "2275",
+      "requestUrl": "https://enterprise-mcp-server-1058873375196.europe-west1.run.app/mcp",
+      "responseSize": "449",
+      "serverIp": "34.143.76.2",
+      "status": 200,
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "insertId": "6aa5328a000cee97ad31e735",
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-09-12T11:07:54.852293115Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "f28d75e5c9c1b342",
+    "timestamp": "2026-09-12T11:07:54.829655Z",
+    "trace": "projects/secret-grammar-492006-p6/traces/d84d86d57a76167bf9b1bb4e1aa77666",
+    "traceSampled": true
+  },
+  {
+    "insertId": "6aa53277000b9bdd8f56f4ca",
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-09-12T11:07:35.916725359Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Default STARTUP TCP probe succeeded after 1 attempt for container \"enterprise-mcp-server-1\" on port 8080.",
+    "timestamp": "2026-09-12T11:07:35.760797Z"
+  },
+  {
+    "insertId": "6aa532d800078f15c33a6f7a",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Health Check: http://localhost:8080/healthz",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:12.503334756Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:35.745Z"
+  },
+  {
+    "insertId": "6aa532d800078f0ff3ec72c6",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "MCP Endpoint: http://localhost:8080/mcp",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:12.503334756Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:35.745Z"
+  },
+  {
+    "insertId": "6aa532d800078ef26e612911",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Admin Portal: http://localhost:8080/admin/",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:09:12.503334756Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:35.745Z"
+  },
+  {
+    "insertId": "6aa53277000b9a9bfee1e085",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Xero MCP Server running on http://localhost:8080",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:07:35.764600923Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:07:35.744Z"
+  },
+  {
+    "insertId": "6aa53270000df7e50a36a027",
+    "labels": {
+      "instanceId": "00a41e8c1d503641b81135e3b0f394b8bb14789c9f89eb0ee0301c7e3e85ca52fb5e55fa0550479cc268d4a831a69551c45b1a7662095b4ac62134fa3cc533ab8ecb0ff77cdf368432d04c240b",
+      "scaling_reason": "AUTOSCALING"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+    "receiveTimestamp": "2026-09-12T11:07:28.919316891Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "textPayload": "Starting new instance. Reason: AUTOSCALING - Instance started due to configured scaling factors (e.g. CPU utilization, request throughput, etc.) or no existing capacity for current traffic.",
+    "timestamp": "2026-09-12T11:07:28.915429Z"
+  },
+  {
+    "insertId": "lfcso5d2wdb",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.revisions.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Revisions.GetRevision",
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:07:25.111245Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:07:25.429460298Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:07:25.074030Z"
+  },
+  {
+    "insertId": "4s7ht6d3y9z",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v2.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:07:25.057101Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:07:25.123100601Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:07:25.024005Z"
+  },
+  {
+    "insertId": "153fya0d228c",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v1.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v1.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:07:25.078037Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:07:25.409130565Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:07:25.021148Z"
+  },
+  {
+    "insertId": "1kvv9ztcz5u",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.revisions.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Revisions.GetRevision",
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:06:54.086531Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server/revisions/enterprise-mcp-server-00010-z8c",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:06:54.871343375Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:06:54.041208Z"
+  },
+  {
+    "insertId": "uudptdd1mhr",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v1.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v1.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:06:54.037536Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "namespaces/secret-grammar-492006-p6/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:06:54.528785559Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:06:53.996821Z"
+  },
+  {
+    "insertId": "1uvk9bmd2k93",
+    "logName": "projects/secret-grammar-492006-p6/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "authenticationInfo": {
+        "principalEmail": "nick@digicloud.africa"
+      },
+      "authorizationInfo": [
+        {
+          "granted": true,
+          "permission": "run.services.get",
+          "permissionType": "ADMIN_READ",
+          "resource": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+          "resourceAttributes": {}
+        }
+      ],
+      "methodName": "google.cloud.run.v2.Services.GetService",
+      "request": {
+        "@type": "type.googleapis.com/google.cloud.run.v2.GetServiceRequest",
+        "name": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server"
+      },
+      "requestMetadata": {
+        "callerIp": "165.73.108.93",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "destinationAttributes": {},
+        "requestAttributes": {
+          "auth": {},
+          "time": "2026-09-12T11:06:54.027455Z"
+        }
+      },
+      "resourceLocation": {
+        "currentLocations": [
+          "europe-west1"
+        ]
+      },
+      "resourceName": "projects/secret-grammar-492006-p6/locations/europe-west1/services/enterprise-mcp-server",
+      "serviceName": "run.googleapis.com",
+      "status": {}
+    },
+    "receiveTimestamp": "2026-09-12T11:06:54.640716308Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "timestamp": "2026-09-12T11:06:53.993935Z"
+  },
+  {
+    "insertId": "6aa53247000cf39c75444cf7",
+    "jsonPayload": {
+      "audit": {
+        "action": "SLACK_CHANNEL_CONTEXT",
+        "actorEmail": "nick@digicloud.africa",
+        "details": {
+          "centerMessageTs": "1789195675.169779",
+          "channelId": "C01HLM2LPQR",
+          "messageCount": 5
+        },
+        "logId": "log_1789211207814_fw8fp",
+        "target": "Digicloud Africa",
+        "timestamp": "2026-09-12T11:06:47.814Z"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "[AUDIT] SLACK_CHANNEL_CONTEXT by nick@digicloud.africa on Digicloud Africa",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:48.167472725Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.850Z"
+  },
+  {
+    "insertId": "6aa53247000c89313f2e0397",
+    "jsonPayload": {
+      "audit": {
+        "action": "SLACK_CHANNEL_CONTEXT",
+        "actorEmail": "nick@digicloud.africa",
+        "details": {
+          "centerMessageTs": "1789180330.416039",
+          "channelId": "C01HLM2LPQR",
+          "messageCount": 5
+        },
+        "logId": "log_1789211207756_ugiwz",
+        "target": "Digicloud Africa",
+        "timestamp": "2026-09-12T11:06:47.756Z"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "[AUDIT] SLACK_CHANNEL_CONTEXT by nick@digicloud.africa on Digicloud Africa",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.834268949Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.822Z"
+  },
+  {
+    "insertId": "6aa5324700057007f65fa063",
+    "jsonPayload": {
+      "args": {
+        "after": 2,
+        "before": 2,
+        "channelId": "C01HLM2LPQR",
+        "messageTs": "1789195675.169779"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Executing tool: slack-get-channel-context",
+      "pid": 1,
+      "tool": "slack-get-channel-context"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.356Z"
+  },
+  {
+    "insertId": "6aa5324700056fffbff0665f",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.351Z"
+  },
+  {
+    "insertId": "6aa5324700056ffa73a95cb3",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.351Z"
+  },
+  {
+    "insertId": "6aa5324700056ff616bb4b3e",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.351Z"
+  },
+  {
+    "insertId": "6aa5324700056ff1bbd8458a",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.351Z"
+  },
+  {
+    "insertId": "6aa5324700056fed9b7e631d",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.351Z"
+  },
+  {
+    "insertId": "6aa5324700056fe8954e042b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 4 tools for domain: 'reports'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.351Z"
+  },
+  {
+    "insertId": "6aa5324700056fe4f3fd027e",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 0 tools for domain: 'payroll'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.350Z"
+  },
+  {
+    "insertId": "6aa5324700056fdfbc06b99b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 7 tools for domain: 'contacts'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.350Z"
+  },
+  {
+    "insertId": "6aa5324700056fda31a666d5",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 25 tools for domain: 'accounting'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.350Z"
+  },
+  {
+    "insertId": "6aa5324700056fd4cf76fae8",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Initializing Multi-Service MCP Gateway Server instance...",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.349Z"
+  },
+  {
+    "insertId": "6aa5324700056fc61c5c0496",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "jsonrpcMethod": "tools/call",
+      "level": 30,
+      "message": "[MCP] Handling POST request for method: tools/call",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "reqId": 7
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.349Z"
+  },
+  {
+    "insertId": "6aa53247000551605b0da169",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "ip": "::ffff:169.254.169.126",
+      "level": 30,
+      "message": "[HTTP Request] POST /mcp",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "url": "/mcp",
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.349Z"
+  },
+  {
+    "insertId": "6aa5324700053e6136aaa00f",
+    "jsonPayload": {
+      "args": {
+        "after": 2,
+        "before": 2,
+        "channelId": "C01HLM2LPQR",
+        "messageTs": "1789180330.416039"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Executing tool: slack-get-channel-context",
+      "pid": 1,
+      "tool": "slack-get-channel-context"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.342Z"
+  },
+  {
+    "insertId": "6aa5324700053e5b83ecc09f",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.341Z"
+  },
+  {
+    "insertId": "6aa5324700053e56cc1d41af",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.341Z"
+  },
+  {
+    "insertId": "6aa5324700053e52ccfeaea6",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.341Z"
+  },
+  {
+    "insertId": "6aa5324700053e4d4285bd69",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.341Z"
+  },
+  {
+    "insertId": "6aa5324700053e4935e5df83",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.341Z"
+  },
+  {
+    "insertId": "6aa5324700053e4492736c3b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 4 tools for domain: 'reports'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.341Z"
+  },
+  {
+    "insertId": "6aa5324700053e40f4b21c7e",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 0 tools for domain: 'payroll'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.341Z"
+  },
+  {
+    "insertId": "6aa5324700053e3b2ce7d62c",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 7 tools for domain: 'contacts'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.340Z"
+  },
+  {
+    "insertId": "6aa5324700053e366bff02d2",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 25 tools for domain: 'accounting'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.340Z"
+  },
+  {
+    "insertId": "6aa5324700053e30d6ffb4f4",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Initializing Multi-Service MCP Gateway Server instance...",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.339Z"
+  },
+  {
+    "insertId": "6aa5324700053e2426a2d67e",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "jsonrpcMethod": "tools/call",
+      "level": 30,
+      "message": "[MCP] Handling POST request for method: tools/call",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "reqId": 6
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.339Z"
+  },
+  {
+    "insertId": "6aa53247000529dbe226ba75",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "ip": "::ffff:169.254.169.126",
+      "level": 30,
+      "message": "[HTTP Request] POST /mcp",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "url": "/mcp",
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:47.501684013Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:47.338Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.512078198s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "172.253.196.59",
+      "requestMethod": "POST",
+      "requestSize": "2346",
+      "requestUrl": "https://enterprise-mcp-server-1058873375196.europe-west1.run.app/mcp",
+      "responseSize": "2389",
+      "serverIp": "34.143.79.2",
+      "status": 200,
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "insertId": "6aa53247000cf9bb822bada9",
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-09-12T11:06:48.033662674Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "a23ed77cc92fcc31",
+    "timestamp": "2026-09-12T11:06:47.336777Z",
+    "trace": "projects/secret-grammar-492006-p6/traces/6e270c112139e4ffde11c4e3173970fd"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.487029712s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "74.125.186.166",
+      "requestMethod": "POST",
+      "requestSize": "2346",
+      "requestUrl": "https://enterprise-mcp-server-1058873375196.europe-west1.run.app/mcp",
+      "responseSize": "2400",
+      "serverIp": "34.143.74.2",
+      "status": 200,
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "insertId": "6aa53247000c8ef8589290b8",
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-09-12T11:06:48.033662674Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "175a9146ae5a8d7c",
+    "timestamp": "2026-09-12T11:06:47.334020Z",
+    "trace": "projects/secret-grammar-492006-p6/traces/6e270c112139e4ffde11c4e3173970fd",
+    "traceSampled": true
+  },
+  {
+    "insertId": "6aa532400008076d81589515",
+    "jsonPayload": {
+      "audit": {
+        "action": "SLACK_FILE_READ",
+        "actorEmail": "nick@digicloud.africa",
+        "details": {
+          "fileId": "F0C1B3LL770",
+          "fileName": "5687246816.pdf",
+          "sizeBytes": 89768,
+          "truncated": true
+        },
+        "logId": "log_1789211200499_ldzah",
+        "target": "Digicloud Africa",
+        "timestamp": "2026-09-12T11:06:40.499Z"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "[AUDIT] SLACK_FILE_READ by nick@digicloud.africa on Digicloud Africa",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:40.840133632Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:40.527Z"
+  },
+  {
+    "insertId": "6aa532400002c661ca2e2f9f",
+    "jsonPayload": {
+      "audit": {
+        "action": "SLACK_CHANNEL_CONTEXT",
+        "actorEmail": "nick@digicloud.africa",
+        "details": {
+          "centerMessageTs": "1789205256.008939",
+          "channelId": "GPZHQ9FDH",
+          "messageCount": 3
+        },
+        "logId": "log_1789211200140_52ale",
+        "target": "Digicloud Africa",
+        "timestamp": "2026-09-12T11:06:40.140Z"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "[AUDIT] SLACK_CHANNEL_CONTEXT by nick@digicloud.africa on Digicloud Africa",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:40.507637295Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:40.183Z"
+  },
+  {
+    "insertId": "6aa532400001c6028e61dfdd",
+    "jsonPayload": {
+      "audit": {
+        "action": "SLACK_CHANNEL_CONTEXT",
+        "actorEmail": "nick@digicloud.africa",
+        "details": {
+          "centerMessageTs": "1789202206.881929",
+          "channelId": "GQ8RJ956Y",
+          "messageCount": 4
+        },
+        "logId": "log_1789211200048_aomau",
+        "target": "Digicloud Africa",
+        "timestamp": "2026-09-12T11:06:40.048Z"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "[AUDIT] SLACK_CHANNEL_CONTEXT by nick@digicloud.africa on Digicloud Africa",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:40.174129685Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:40.117Z"
+  },
+  {
+    "insertId": "6aa5324000007728d376c2f2",
+    "jsonPayload": {
+      "audit": {
+        "action": "SLACK_CHANNEL_CONTEXT",
+        "actorEmail": "nick@digicloud.africa",
+        "details": {
+          "centerMessageTs": "1789205387.308709",
+          "channelId": "C01HLM2LPQR",
+          "messageCount": 3
+        },
+        "logId": "log_1789211200001_u9xye",
+        "target": "Digicloud Africa",
+        "timestamp": "2026-09-12T11:06:40.001Z"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "[AUDIT] SLACK_CHANNEL_CONTEXT by nick@digicloud.africa on Digicloud Africa",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:40.174129685Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:40.031Z"
+  },
+  {
+    "insertId": "6aa5323f000983c7c1869782",
+    "jsonPayload": {
+      "args": {
+        "after": 3,
+        "before": 3,
+        "channelId": "GQ8RJ956Y",
+        "messageTs": "1789202206.881929"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Executing tool: slack-get-channel-context",
+      "pid": 1,
+      "tool": "slack-get-channel-context"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.614Z"
+  },
+  {
+    "insertId": "6aa5323f000983c02492b247",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.567Z"
+  },
+  {
+    "insertId": "6aa5323f000983bbcf2f661e",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.567Z"
+  },
+  {
+    "insertId": "6aa5323f000983b63cd3cea0",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.567Z"
+  },
+  {
+    "insertId": "6aa5323f000983b1e8b2a58e",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.567Z"
+  },
+  {
+    "insertId": "6aa5323f000983ac2f434364",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.567Z"
+  },
+  {
+    "insertId": "6aa5323f000983a76d1ca0f9",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 4 tools for domain: 'reports'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.567Z"
+  },
+  {
+    "insertId": "6aa5323f000983a2b477ba47",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 0 tools for domain: 'payroll'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.567Z"
+  },
+  {
+    "insertId": "6aa5323f0009839d30e89258",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 7 tools for domain: 'contacts'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.567Z"
+  },
+  {
+    "insertId": "6aa5323f0009839786824345",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 25 tools for domain: 'accounting'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.567Z"
+  },
+  {
+    "insertId": "6aa5323f000983919b530645",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Initializing Multi-Service MCP Gateway Server instance...",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.566Z"
+  },
+  {
+    "insertId": "6aa5323f0009838bbb1ff497",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "jsonrpcMethod": "tools/call",
+      "level": 30,
+      "message": "[MCP] Handling POST request for method: tools/call",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "reqId": 2
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.566Z"
+  },
+  {
+    "insertId": "6aa5323f0009837add00eb56",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "ip": "::ffff:169.254.169.126",
+      "level": 30,
+      "message": "[HTTP Request] POST /mcp",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "url": "/mcp",
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.565Z"
+  },
+  {
+    "insertId": "6aa5323f000890ad86451467",
+    "jsonPayload": {
+      "args": {
+        "after": 2,
+        "before": 2,
+        "channelId": "C01HLM2LPQR",
+        "messageTs": "1789205387.308709"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Executing tool: slack-get-channel-context",
+      "pid": 1,
+      "tool": "slack-get-channel-context"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.560Z"
+  },
+  {
+    "insertId": "6aa5323f000890a5194739fc",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.557Z"
+  },
+  {
+    "insertId": "6aa5323f000890a00e7ea450",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.557Z"
+  },
+  {
+    "insertId": "6aa5323f0008909ba46da90e",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.557Z"
+  },
+  {
+    "insertId": "6aa5323f000890960223d3b1",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.556Z"
+  },
+  {
+    "insertId": "6aa5323f0008908fd6b56003",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.556Z"
+  },
+  {
+    "insertId": "6aa5323f0008908ad0982c5b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 4 tools for domain: 'reports'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.556Z"
+  },
+  {
+    "insertId": "6aa5323f00089085a4bf6a9e",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 0 tools for domain: 'payroll'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.556Z"
+  },
+  {
+    "insertId": "6aa5323f0008908129c474e6",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 7 tools for domain: 'contacts'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.556Z"
+  },
+  {
+    "insertId": "6aa5323f0008907baa89f924",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 25 tools for domain: 'accounting'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.555Z"
+  },
+  {
+    "insertId": "6aa5323f00089076b86eeb1a",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Initializing Multi-Service MCP Gateway Server instance...",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.552Z"
+  },
+  {
+    "insertId": "6aa5323f0008906fb118ba36",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "jsonrpcMethod": "tools/call",
+      "level": 30,
+      "message": "[MCP] Handling POST request for method: tools/call",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "reqId": 4
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.552Z"
+  },
+  {
+    "insertId": "6aa5323f0008905e946f1227",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "ip": "::ffff:169.254.169.126",
+      "level": 30,
+      "message": "[HTTP Request] POST /mcp",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "url": "/mcp",
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.551Z"
+  },
+  {
+    "insertId": "6aa5323f000858d8d2f44e26",
+    "jsonPayload": {
+      "args": {
+        "fileId": "F0C1B3LL770",
+        "maxChars": 15000
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Executing tool: slack-get-file-content",
+      "pid": 1,
+      "tool": "slack-get-file-content"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.545Z"
+  },
+  {
+    "insertId": "6aa5323f000858d11edb8287",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.541Z"
+  },
+  {
+    "insertId": "6aa5323f000858cb6ae4c709",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.541Z"
+  },
+  {
+    "insertId": "6aa5323f000858c641e40e97",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.541Z"
+  },
+  {
+    "insertId": "6aa5323f000858bfa903897f",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.540Z"
+  },
+  {
+    "insertId": "6aa5323f000858b89ffcbcbb",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.540Z"
+  },
+  {
+    "insertId": "6aa5323f000858b2d7a31f8c",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 4 tools for domain: 'reports'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.539Z"
+  },
+  {
+    "insertId": "6aa5323f000858ac92e989ba",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 0 tools for domain: 'payroll'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.539Z"
+  },
+  {
+    "insertId": "6aa5323f000858a65cd34918",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 7 tools for domain: 'contacts'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.539Z"
+  },
+  {
+    "insertId": "6aa5323f000858a0b409a65c",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 25 tools for domain: 'accounting'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.539Z"
+  },
+  {
+    "insertId": "6aa5323f00085899044fce0d",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Initializing Multi-Service MCP Gateway Server instance...",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.532Z"
+  },
+  {
+    "insertId": "6aa5323f0008588803174ee7",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "jsonrpcMethod": "tools/call",
+      "level": 30,
+      "message": "[MCP] Handling POST request for method: tools/call",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "reqId": 5
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.532Z"
+  },
+  {
+    "insertId": "6aa5323f00080fcf9447327e",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "ip": "::ffff:169.254.169.126",
+      "level": 30,
+      "message": "[HTTP Request] POST /mcp",
+      "method": "POST",
+      "path": "/mcp",
+      "pid": 1,
+      "url": "/mcp",
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.529Z"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.587652750s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "172.253.196.62",
+      "requestMethod": "POST",
+      "requestSize": "2344",
+      "requestUrl": "https://enterprise-mcp-server-1058873375196.europe-west1.run.app/mcp",
+      "responseSize": "1931",
+      "serverIp": "34.143.73.2",
+      "status": 200,
+      "userAgent": "python-httpx/0.27.0"
+    },
+    "insertId": "6aa532400001cc99e62bf49a",
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-09-12T11:06:40.369565994Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "fe5cdca8296d60b1",
+    "timestamp": "2026-09-12T11:06:39.528609Z",
+    "trace": "projects/secret-grammar-492006-p6/traces/6e270c112139e4ffde11c4e3173970fd"
+  },
+  {
+    "insertId": "6aa5323f0007f2c364a0645f",
+    "jsonPayload": {
+      "args": {
+        "after": 2,
+        "before": 2,
+        "channelId": "GPZHQ9FDH",
+        "messageTs": "1789205256.008939"
+      },
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Executing tool: slack-get-channel-context",
+      "pid": 1,
+      "tool": "slack-get-channel-context"
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.518Z"
+  },
+  {
+    "insertId": "6aa5323f0007f2bc73ff7492",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 64 total MCP tools across enabled domains",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.513Z"
+  },
+  {
+    "insertId": "6aa5323f0007f2b8425f514b",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'slack'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.513Z"
+  },
+  {
+    "insertId": "6aa5323f0007f2b3451e44b0",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 12 tools for domain: 'sagehr'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.513Z"
+  },
+  {
+    "insertId": "6aa5323f0007f2afefbb6217",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 6 tools for domain: 'firestore'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.513Z"
+  },
+  {
+    "insertId": "6aa5323f0007f2aa904a33fe",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 5 tools for domain: 'bigquery'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.512Z"
+  },
+  {
+    "insertId": "6aa5323f0007f2a6fcdd1ce3",
+    "jsonPayload": {
+      "hostname": "localhost",
+      "level": 30,
+      "message": "Registered 4 tools for domain: 'reports'",
+      "pid": 1
+    },
+    "labels": {
+      "instanceId": "00a41e8c1dae43c7ff8f69f3d147df6885dd80ddde51800988a6c8f45946c6fd4bb4deb7569e64d358de135232b31651c348f82564e6007a51ca7e03f9f4e67f12271535c590b4e4396d5f44d53aca"
+    },
+    "logName": "projects/secret-grammar-492006-p6/logs/run.googleapis.com%2Fstdout",
+    "receiveTimestamp": "2026-09-12T11:06:39.843763612Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "enterprise-mcp-server",
+        "location": "europe-west1",
+        "project_id": "secret-grammar-492006-p6",
+        "revision_name": "enterprise-mcp-server-00010-z8c",
+        "service_name": "enterprise-mcp-server"
+      },
+      "type": "cloud_run_revision"
+    },
+    "timestamp": "2026-09-12T11:06:39.511Z"
+  }
+]

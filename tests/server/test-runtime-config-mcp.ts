@@ -152,9 +152,12 @@ async function runRuntimeConfigMcpTests() {
 
   // 6. Test Slack Search Guide Tool & Scopes
   console.log('6. Testing slack-search-guide tool & 16 scopes configuration...');
-  assert.strictEqual(slackTools.length, 2, 'Slack tools bundle should export exactly 2 tools');
+  assert.strictEqual(slackTools.length, 5, 'Slack tools bundle should export exactly 5 tools');
   assert.ok(slackTools.some((t) => t.name === 'slack-federated-search'));
   assert.ok(slackTools.some((t) => t.name === 'slack-search-guide'));
+  assert.ok(slackTools.some((t) => t.name === 'slack-get-thread-replies'));
+  assert.ok(slackTools.some((t) => t.name === 'slack-get-channel-context'));
+  assert.ok(slackTools.some((t) => t.name === 'slack-get-file-content'));
 
   const guideResultAll: any = await slackSearchGuideTool.execute({ topic: 'all' });
   assert.strictEqual(guideResultAll.status, 'success');

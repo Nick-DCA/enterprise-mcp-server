@@ -171,6 +171,10 @@ export class FirestoreService {
         return [];
       }
 
+      if (process.env.MOCK_FIRESTORE === 'true' || (process.env.NODE_ENV === 'test' && !process.env.FIRESTORE_EMULATOR_HOST)) {
+        return normalizedAllowed.filter((id) => this.isCollectionAllowed(id, config.allowedCollections, config.blockedCollections));
+      }
+
       const collections = await client.listCollections();
       const collectionIds = collections
         .map((c) => c.id)

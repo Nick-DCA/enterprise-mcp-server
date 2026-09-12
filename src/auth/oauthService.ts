@@ -1,3 +1,4 @@
+import { timingSafeEqual } from 'node:crypto';
 import {
   AuthorizeRequestParams,
   TokenRequestParams,
@@ -12,6 +13,7 @@ import { verifyCodeVerifier } from './pkce.js';
 import { generateAuthCode, verifyAndDecodeAuthCode } from './code.js';
 import { signJwt, verifyJwt } from './jwt.js';
 import { logger } from '../utils/logger.js';
+import { isValidUserEmail, cleanUserEmail } from '../utils/identity.js';
 
 export class OAuthError extends Error {
   public readonly statusCode: number;
@@ -33,7 +35,7 @@ export class OAuthService {
   /**
    * Validates an incoming /oauth/authorize request and generates a redirect URL with a signed code.
    */
-  public processAuthorize(params: AuthorizeRequestParams): { redirectUrl: string } {
+  public processAuthorize(params: AuthorizeRequestParams, userEmail?: string): { redirectUrl: string } {
     const clientId = (params.client_id || '').trim();
     const redirectUri = (params.redirect_uri || '').trim();
     const configClientId = this.config.clientId.trim();
@@ -100,12 +102,14 @@ export class OAuthService {
     }
 
     // 5. Generate signed stateless authorization code
+    const safeUserEmail = userEmail && isValidUserEmail(userEmail) ? userEmail.trim().toLowerCase() : undefined;
     const authCodePayload: AuthCodePayload = {
       clientId,
       redirectUri,
       codeChallenge: params.code_challenge ? params.code_challenge.trim() : undefined,
       codeChallengeMethod: method,
       scope: params.scope ? params.scope.trim() : OAUTH_DEFAULTS.DEFAULT_SCOPE,
+      userEmail: safeUserEmail,
     };
 
     const code = generateAuthCode(authCodePayload, this.config.jwtSecret.trim(), this.config.codeTtlSec);
@@ -206,53 +210,74 @@ export class OAuthService {
     }
 
     // 5. PKCE vs Client Secret verification
-    if (authCode.codeChallenge) {
-      // PKCE was initiated during /oauth/authorize
-      if (!params.code_verifier) {
-        throw new OAuthError(
-          400,
-          OAuthErrorCodes.INVALID_GRANT,
-          'code_verifier is required for PKCE authorization code exchange.'
+    // Google Vertex AI Search / Gemini Enterprise uses a hybrid confidential client flow:
+    // Its web browser initiates /oauth/authorize with a PKCE code_challenge,
+    // but its backend server performs the token exchange as a confidential client,
+    // sending client_id + client_secret, while omitting code_verifier.
+    if (params.code_verifier) {
+      // PKCE was initiated and verifier was supplied
+      if (authCode.codeChallenge) {
+        const isVerifierValid = verifyCodeVerifier(
+          params.code_verifier.trim(),
+          authCode.codeChallenge,
+          authCode.codeChallengeMethod || 'S256'
         );
-      }
 
-      const isVerifierValid = verifyCodeVerifier(
-        params.code_verifier.trim(),
-        authCode.codeChallenge,
-        authCode.codeChallengeMethod || 'S256'
-      );
-
-      if (!isVerifierValid) {
-        logger.warn('PKCE code_verifier failed challenge verification');
-        throw new OAuthError(
-          400,
-          OAuthErrorCodes.INVALID_GRANT,
-          'PKCE verification failed: code_verifier does not match code_challenge.'
-        );
+        if (!isVerifierValid) {
+          logger.warn('PKCE code_verifier failed challenge verification');
+          throw new OAuthError(
+            400,
+            OAuthErrorCodes.INVALID_GRANT,
+            'PKCE verification failed: code_verifier does not match code_challenge.'
+          );
+        }
       }
 
       // If client_secret is also supplied, validate it; if omitted (public PKCE client), allow
-      if (paramClientSecret && paramClientSecret !== configClientSecret) {
+      if (paramClientSecret && !this.isSecretMatch(paramClientSecret, configClientSecret)) {
         logger.warn({ receivedLen: paramClientSecret.length, expectedLen: configClientSecret.length }, 'Client secret mismatch in PKCE exchange');
         throw new OAuthError(401, OAuthErrorCodes.INVALID_CLIENT, 'Invalid client_secret.');
       }
     } else {
-      // PKCE was not used -> enforce client_secret (confidential client)
-      if (!paramClientSecret || paramClientSecret !== configClientSecret) {
-        logger.warn({ receivedLen: paramClientSecret.length, expectedLen: configClientSecret.length }, 'Missing or invalid client_secret in confidential client exchange');
+      // code_verifier was omitted -> client MUST authenticate as a confidential client with client_secret
+      if (!paramClientSecret) {
+        logger.warn('Missing both code_verifier and client_secret in token exchange');
+        if (authCode.codeChallenge) {
+          throw new OAuthError(
+            400,
+            OAuthErrorCodes.INVALID_GRANT,
+            'code_verifier or valid client_secret is required for authorization code exchange.'
+          );
+        } else {
+          throw new OAuthError(
+            401,
+            OAuthErrorCodes.INVALID_CLIENT,
+            'client_secret is required for confidential client authorization code exchange.'
+          );
+        }
+      }
+
+      if (!this.isSecretMatch(paramClientSecret, configClientSecret)) {
+        logger.warn({ receivedLen: paramClientSecret.length, expectedLen: configClientSecret.length }, 'Invalid client_secret in confidential client exchange');
         throw new OAuthError(
           401,
           OAuthErrorCodes.INVALID_CLIENT,
           'Invalid or missing client_secret.'
         );
       }
+
+      logger.info({ clientId: paramClientId }, 'Confidential client exchange authorized via client_secret');
     }
 
     // 6. Issue signed JWT access token and refresh token
     const scope = authCode.scope || OAUTH_DEFAULTS.DEFAULT_SCOPE;
+    const safeUserEmail = authCode.userEmail && isValidUserEmail(authCode.userEmail) ? authCode.userEmail.trim().toLowerCase() : undefined;
     const tokenPayload: AccessTokenPayload = {
       iss: this.config.issuer,
-      sub: configClientId,
+      sub: safeUserEmail || configClientId,
+      clientId: configClientId,
+      email: safeUserEmail,
+      userEmail: safeUserEmail,
       scope,
     };
 
@@ -261,6 +286,9 @@ export class OAuthService {
     const refreshTokenPayload: RefreshTokenPayload = {
       iss: this.config.issuer,
       sub: configClientId,
+      clientId: configClientId,
+      userEmail: safeUserEmail,
+      email: safeUserEmail,
       scope,
       token_purpose: 'refresh_token',
     };
@@ -268,7 +296,7 @@ export class OAuthService {
     const refreshTokenTtl = this.config.refreshTokenTtlSec || OAUTH_DEFAULTS.REFRESH_TOKEN_TTL_SEC;
     const refreshToken = signJwt(refreshTokenPayload, jwtSecret, refreshTokenTtl);
 
-    logger.info({ sub: tokenPayload.sub, scope: tokenPayload.scope }, 'Access token and refresh token generated successfully');
+    logger.info({ sub: tokenPayload.sub, userEmail: safeUserEmail, scope: tokenPayload.scope }, 'Access token and refresh token generated successfully');
 
     return {
       access_token: accessToken,
@@ -296,7 +324,7 @@ export class OAuthService {
     }
 
     // 2. Validate client_secret if provided
-    if (paramClientSecret && paramClientSecret !== configClientSecret) {
+    if (paramClientSecret && !this.isSecretMatch(paramClientSecret, configClientSecret)) {
       throw new OAuthError(401, OAuthErrorCodes.INVALID_CLIENT, 'Invalid client_secret.');
     }
 
@@ -325,7 +353,8 @@ export class OAuthService {
       );
     }
 
-    if (decodedRefresh.sub.trim() !== paramClientId) {
+    const tokenClientId = (decodedRefresh.clientId || decodedRefresh.sub || '').trim();
+    if (tokenClientId !== paramClientId && decodedRefresh.sub.trim() !== paramClientId) {
       throw new OAuthError(
         400,
         OAuthErrorCodes.INVALID_GRANT,
@@ -333,11 +362,17 @@ export class OAuthService {
       );
     }
 
-    // 4. Issue new access token and refresh token
+    // 4. Issue new access token and refresh token preserving userEmail
     const scope = decodedRefresh.scope || OAUTH_DEFAULTS.DEFAULT_SCOPE;
+    const rawUserEmail = decodedRefresh.userEmail || decodedRefresh.email || (isValidUserEmail(decodedRefresh.sub) ? decodedRefresh.sub : undefined);
+    const preservedEmail = cleanUserEmail(rawUserEmail);
+
     const tokenPayload: AccessTokenPayload = {
       iss: this.config.issuer,
-      sub: configClientId,
+      sub: preservedEmail || configClientId,
+      clientId: configClientId,
+      email: preservedEmail,
+      userEmail: preservedEmail,
       scope,
     };
 
@@ -346,6 +381,9 @@ export class OAuthService {
     const refreshTokenPayload: RefreshTokenPayload = {
       iss: this.config.issuer,
       sub: configClientId,
+      clientId: configClientId,
+      userEmail: preservedEmail,
+      email: preservedEmail,
       scope,
       token_purpose: 'refresh_token',
     };
@@ -353,7 +391,7 @@ export class OAuthService {
     const refreshTokenTtl = this.config.refreshTokenTtlSec || OAUTH_DEFAULTS.REFRESH_TOKEN_TTL_SEC;
     const newRefreshToken = signJwt(refreshTokenPayload, jwtSecret, refreshTokenTtl);
 
-    logger.info({ sub: tokenPayload.sub, scope }, 'Tokens refreshed successfully');
+    logger.info({ sub: tokenPayload.sub, userEmail: preservedEmail, scope }, 'Tokens refreshed successfully');
 
     return {
       access_token: accessToken,
@@ -362,5 +400,17 @@ export class OAuthService {
       refresh_token: newRefreshToken,
       scope,
     };
+  }
+
+  /**
+   * Performs constant-time comparison between client-supplied secret and configured secret.
+   */
+  private isSecretMatch(candidate: string, expected: string): boolean {
+    const candidateBuf = Buffer.from(candidate, 'utf8');
+    const expectedBuf = Buffer.from(expected, 'utf8');
+    if (candidateBuf.length !== expectedBuf.length) {
+      return false;
+    }
+    return timingSafeEqual(candidateBuf, expectedBuf);
   }
 }

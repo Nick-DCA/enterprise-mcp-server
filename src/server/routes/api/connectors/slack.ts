@@ -4,6 +4,7 @@ import { getSecretValue, writeSecretValue, deleteSecret } from '../../../../conf
 import { getMcpAuthConfig } from '../../../../config/authConfig.js';
 import { runtimeConfig } from '../../../../config/runtimeConfig.js';
 import { logger } from '../../../../utils/logger.js';
+import { cleanUserEmail, isValidUserEmail } from '../../../../utils/identity.js';
 
 export const slackConnectorRouter = Router();
 
@@ -44,16 +45,17 @@ function verifyState(rawState: string, secret: string): SignedState | null {
  * Initiates user-delegated Slack OAuth v2 flow.
  */
 slackConnectorRouter.get('/connect', async (req: Request, res: Response) => {
-  const userEmail = (req.query.userEmail as string)?.trim().toLowerCase();
+  const rawUserEmail = req.query.userEmail as string;
+  const userEmail = cleanUserEmail(rawUserEmail);
 
-  if (!userEmail) {
+  if (!userEmail || !isValidUserEmail(userEmail)) {
     res.status(400).type('html').send(`
       <!DOCTYPE html>
       <html>
         <head><title>Slack Connection Error</title></head>
         <body style="font-family: system-ui, sans-serif; background: #0B0F17; color: #F87171; padding: 3rem; text-align: center;">
-          <h2>❌ Missing User Email</h2>
-          <p>Please provide a valid <code>userEmail</code> query parameter to link your Slack account.</p>
+          <h2>❌ Invalid User Email</h2>
+          <p>A valid corporate user email is required to link a Slack account. Machine client IDs and invalid formats are strictly prohibited.</p>
         </body>
       </html>
     `);
@@ -158,7 +160,23 @@ slackConnectorRouter.get('/callback', async (req: Request, res: Response) => {
     return;
   }
 
-  const { userEmail } = statePayload;
+  const rawUserEmail = statePayload.userEmail;
+  const userEmail = cleanUserEmail(rawUserEmail);
+
+  if (!userEmail || !isValidUserEmail(userEmail)) {
+    res.status(400).type('html').send(`
+      <!DOCTYPE html>
+      <html>
+        <head><title>Security Violation</title></head>
+        <body style="font-family: system-ui, sans-serif; background: #0B0F17; color: #F87171; padding: 3rem; text-align: center;">
+          <h2>❌ Invalid Identity in State</h2>
+          <p>Machine client identifiers and invalid email addresses cannot be linked to Slack user connections.</p>
+        </body>
+      </html>
+    `);
+    return;
+  }
+
   const clientId = (await getSecretValue('SLACK_CLIENT_ID')) || process.env.SLACK_CLIENT_ID;
   const clientSecret = (await getSecretValue('SLACK_CLIENT_SECRET')) || process.env.SLACK_CLIENT_SECRET;
 
@@ -357,6 +375,10 @@ slackConnectorRouter.get('/callback', async (req: Request, res: Response) => {
       expiresAt,
       updatedAt: new Date().toISOString(),
     });
+
+    if (!isValidUserEmail(userEmail)) {
+      throw new Error(`Refusing to write Slack user connection for non-human identity: ${userEmail}`);
+    }
 
     await writeSecretValue(`slack-user-${slackUserId}`, secretPayload);
 

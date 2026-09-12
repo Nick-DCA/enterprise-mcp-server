@@ -17,6 +17,7 @@ export interface AuthCodePayload {
   codeChallenge?: string;
   codeChallengeMethod?: 'S256' | 'plain';
   scope?: string;
+  userEmail?: string;
   iat?: number;
   exp?: number;
 }
@@ -24,6 +25,9 @@ export interface AuthCodePayload {
 export interface AccessTokenPayload {
   iss: string;
   sub: string;
+  clientId?: string;
+  email?: string;
+  userEmail?: string;
   aud?: string;
   scope: string;
   iat?: number;
@@ -33,6 +37,9 @@ export interface AccessTokenPayload {
 export interface RefreshTokenPayload {
   iss: string;
   sub: string;
+  clientId?: string;
+  userEmail?: string;
+  email?: string;
   scope: string;
   token_purpose: 'refresh_token';
   iat?: number;

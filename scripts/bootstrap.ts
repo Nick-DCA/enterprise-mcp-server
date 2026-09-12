@@ -259,6 +259,7 @@ async function main() {
     `--project=${projectId}`,
     `--set-env-vars=GCP_PROJECT_ID=${projectId},FIRESTORE_DATABASE_ID=${selectedDatabase},GCP_REGION=${selectedRegion},NODE_ENV=production`,
     `--set-secrets=MCP_CLIENT_ID=MCP_CLIENT_ID:latest,MCP_CLIENT_SECRET=MCP_CLIENT_SECRET:latest,MCP_JWT_SECRET=MCP_JWT_SECRET:latest,ALLOWED_EMAIL_DOMAINS=ALLOWED_EMAIL_DOMAINS:latest`,
+    '--concurrency=80',
     '--allow-unauthenticated',
     '--clear-base-image',
   ];

@@ -61,7 +61,7 @@ export class ToolRegistry {
    */
   public registerDomainTools(server: McpServer, domain: DomainName, tools: ToolDefinition[]): void {
     if (!this.isDomainEnabled(domain)) {
-      logger.info(`Domain '${domain}' is disabled via ENABLED_DOMAINS env setting. Skipping ${tools.length} tools.`);
+      logger.debug(`Domain '${domain}' is disabled via ENABLED_DOMAINS env setting. Skipping ${tools.length} tools.`);
       return;
     }
 
@@ -118,7 +118,7 @@ export class ToolRegistry {
       this.registeredCount++;
     }
 
-    logger.info(`Registered ${tools.length} tools for domain: '${domain}'`);
+    logger.debug(`Registered ${tools.length} tools for domain: '${domain}'`);
   }
 
   public getRegisteredCount(): number {

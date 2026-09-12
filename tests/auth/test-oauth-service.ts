@@ -177,6 +177,76 @@ async function runTests() {
     assert(err instanceof OAuthError && err.errorCode === 'invalid_client', 'Rejects invalid client_secret with invalid_client');
   }
 
+  // 2d. Exchange with PKCE challenge + code_verifier omitted + valid client_secret (Google Vertex AI Search / Gemini Enterprise flow)
+  try {
+    const authResHybrid = oauthService.processAuthorize({
+      response_type: 'code',
+      client_id: config.clientId,
+      redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+      code_challenge: rfcChallenge,
+      code_challenge_method: 'S256',
+    });
+    const hybridCode = new URL(authResHybrid.redirectUrl).searchParams.get('code')!;
+
+    const tokenRes = oauthService.processTokenExchange({
+      grant_type: 'authorization_code',
+      client_id: config.clientId,
+      client_secret: config.clientSecret,
+      code: hybridCode,
+      redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+    });
+
+    assert(typeof tokenRes.access_token === 'string', 'Hybrid confidential client exchange succeeds with valid client_secret when code_verifier is omitted');
+    assert(tokenRes.token_type === 'Bearer', 'Hybrid token response has Bearer type');
+  } catch (err: any) {
+    assert(false, 'Hybrid confidential client exchange should succeed', err.message);
+  }
+
+  // 2e. Exchange with PKCE challenge + code_verifier omitted + invalid client_secret
+  try {
+    const authResHybridFail = oauthService.processAuthorize({
+      response_type: 'code',
+      client_id: config.clientId,
+      redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+      code_challenge: rfcChallenge,
+      code_challenge_method: 'S256',
+    });
+    const hybridFailCode = new URL(authResHybridFail.redirectUrl).searchParams.get('code')!;
+
+    oauthService.processTokenExchange({
+      grant_type: 'authorization_code',
+      client_id: config.clientId,
+      client_secret: 'wrong-secret-12345',
+      code: hybridFailCode,
+      redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+    });
+    assert(false, 'Should reject hybrid exchange with invalid client_secret');
+  } catch (err: any) {
+    assert(err instanceof OAuthError && err.errorCode === 'invalid_client', 'Rejects hybrid exchange with invalid client_secret');
+  }
+
+  // 2f. Exchange with PKCE challenge + code_verifier omitted + client_secret omitted
+  try {
+    const authResHybridNoSecret = oauthService.processAuthorize({
+      response_type: 'code',
+      client_id: config.clientId,
+      redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+      code_challenge: rfcChallenge,
+      code_challenge_method: 'S256',
+    });
+    const hybridNoSecretCode = new URL(authResHybridNoSecret.redirectUrl).searchParams.get('code')!;
+
+    oauthService.processTokenExchange({
+      grant_type: 'authorization_code',
+      client_id: config.clientId,
+      code: hybridNoSecretCode,
+      redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+    });
+    assert(false, 'Should reject hybrid exchange with missing client_secret and missing code_verifier');
+  } catch (err: any) {
+    assert(err instanceof OAuthError && err.errorCode === 'invalid_grant', 'Rejects exchange when both code_verifier and client_secret are omitted');
+  }
+
   // 3. Token Exchange Tests (Non-PKCE Flow / Confidential Client)
   console.log('\n--- 3. Token Exchange Tests (Confidential Client Flow) ---');
 
@@ -240,6 +310,79 @@ async function runTests() {
     assert(false, 'Should reject tampered code');
   } catch (err: any) {
     assert(err instanceof OAuthError && err.errorCode === 'invalid_grant', 'Rejects tampered code with invalid_grant');
+  }
+
+  // 5. User-Bound Tokens and Refresh Token Identity Preservation
+  console.log('\n--- 5. User-Bound Tokens and Refresh Token Identity Preservation ---');
+  try {
+    const userAuthorizeRes = oauthService.processAuthorize(
+      {
+        response_type: 'code',
+        client_id: config.clientId,
+        redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+        code_challenge: rfcChallenge,
+        code_challenge_method: 'S256',
+      },
+      'nick@digicloud.africa'
+    );
+
+    const userCode = new URL(userAuthorizeRes.redirectUrl).searchParams.get('code')!;
+    const userTokenRes = oauthService.processTokenExchange({
+      grant_type: 'authorization_code',
+      client_id: config.clientId,
+      code_verifier: rfcVerifier,
+      code: userCode,
+      redirect_uri: 'https://vertexaisearch.cloud.google.com/oauth-redirect',
+    });
+
+    const decodedUserAccess = verifyJwt<any>(userTokenRes.access_token, config.jwtSecret);
+    assert(decodedUserAccess.email === 'nick@digicloud.africa', 'User-bound code issues access token with verified email claim');
+    assert(decodedUserAccess.userEmail === 'nick@digicloud.africa', 'User-bound code issues access token with userEmail claim');
+    assert(decodedUserAccess.sub === 'nick@digicloud.africa', 'User-bound code sets sub to user email');
+    assert(decodedUserAccess.clientId === config.clientId, 'User-bound code preserves clientId');
+
+    // Now test refresh token exchange:
+    assert(typeof userTokenRes.refresh_token === 'string', 'Refresh token is returned for user-bound grant');
+    const refreshRes = oauthService.processTokenExchange({
+      grant_type: 'refresh_token',
+      client_id: config.clientId,
+      client_secret: config.clientSecret,
+      refresh_token: userTokenRes.refresh_token,
+    });
+
+    const decodedRefreshedAccess = verifyJwt<any>(refreshRes.access_token, config.jwtSecret);
+    assert(
+      decodedRefreshedAccess.email === 'nick@digicloud.africa',
+      'Refreshed access token preserves verified user email claim'
+    );
+    assert(
+      decodedRefreshedAccess.userEmail === 'nick@digicloud.africa',
+      'Refreshed access token preserves userEmail claim'
+    );
+    assert(
+      decodedRefreshedAccess.sub === 'nick@digicloud.africa',
+      'Refreshed access token preserves user sub'
+    );
+    assert(
+      decodedRefreshedAccess.clientId === config.clientId,
+      'Refreshed access token preserves clientId'
+    );
+
+    // Verify the newly issued rolling refresh token also retains userEmail
+    assert(typeof refreshRes.refresh_token === 'string', 'Rolling refresh token is issued');
+    const secondRefreshRes = oauthService.processTokenExchange({
+      grant_type: 'refresh_token',
+      client_id: config.clientId,
+      client_secret: config.clientSecret,
+      refresh_token: refreshRes.refresh_token,
+    });
+    const decodedSecondAccess = verifyJwt<any>(secondRefreshRes.access_token, config.jwtSecret);
+    assert(
+      decodedSecondAccess.userEmail === 'nick@digicloud.africa',
+      'Second rolling refresh token preserves userEmail claim across multiple refresh cycles'
+    );
+  } catch (err: any) {
+    assert(false, 'User-bound token exchange and refresh should succeed', err.message);
   }
 
   console.log('\n====================================================');
