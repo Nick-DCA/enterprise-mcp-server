@@ -6,7 +6,7 @@ import { bigqueryService } from '../../../services/bigquery/client.js';
 import { firestoreService } from '../../../services/firestore/client.js';
 import { sageHrService } from '../../../services/sagehr/client.js';
 import { GcpSetupService } from '../../../services/gcp/setupService.js';
-import { getGcpProjectId } from '../../../config/secretManager.js';
+import { getGcpProjectId, getSecretValue } from '../../../config/secretManager.js';
 import { logger } from '../../../utils/logger.js';
 
 export const servicesApiRouter = Router();
@@ -39,7 +39,7 @@ servicesApiRouter.get('/', async (_req: Request, res: Response) => {
  */
 servicesApiRouter.post('/', async (req: Request, res: Response) => {
   const { serviceId, customerName, name, description, settings, requiredSecrets } = req.body || {};
-  const validServices: ServiceId[] = ['xero', 'bigquery', 'firestore', 'sagehr'];
+  const validServices: ServiceId[] = ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'];
 
   if (!serviceId || !validServices.includes(serviceId)) {
     return res.status(400).json({
@@ -99,7 +99,7 @@ servicesApiRouter.get('/:instanceId', async (req: Request, res: Response) => {
  */
 servicesApiRouter.delete('/:instanceId', async (req: Request, res: Response) => {
   const instanceId = req.params.instanceId;
-  const defaultInstances = ['xero', 'bigquery', 'firestore', 'sagehr'];
+  const defaultInstances = ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'];
 
   if (defaultInstances.includes(instanceId)) {
     return res.status(400).json({
@@ -718,6 +718,103 @@ servicesApiRouter.post('/:instanceId/test', async (req: Request, res: Response) 
           employeesSampleCount: result.employees.length,
           totalEmployeesReported: result.totalCount,
           subdomain: config.settings?.subdomain || 'acme',
+        };
+        break;
+      }
+
+      case 'slack': {
+        const clientId = (await getSecretValue('SLACK_CLIENT_ID')) || process.env.SLACK_CLIENT_ID;
+        const clientSecret = (await getSecretValue('SLACK_CLIENT_SECRET')) || process.env.SLACK_CLIENT_SECRET;
+
+        if (!clientId || !clientSecret) {
+          permissions.push({
+            id: 'slack_credentials',
+            name: 'Slack App Credentials',
+            role: 'OAuth Client ID & Secret',
+            status: 'FAIL',
+            description: 'Missing SLACK_CLIENT_ID or SLACK_CLIENT_SECRET in Google Secret Manager.',
+            fixCommand: 'Go to https://api.slack.com/apps -> Basic Information -> App Credentials and configure SLACK_CLIENT_ID & SLACK_CLIENT_SECRET in the Secrets tab.',
+          });
+          overallStatus = 'ERROR';
+          primaryErrorMessage = 'Slack App credentials are not configured in Secret Manager.';
+        } else {
+          permissions.push({
+            id: 'slack_credentials',
+            name: 'Slack App Credentials',
+            role: 'OAuth Client ID & Secret',
+            status: 'PASS',
+            description: 'Slack OAuth Client ID and Secret present in Secret Manager.',
+          });
+
+          // Test upstream Slack network connectivity
+          try {
+            const testRes = await fetch('https://slack.com/api/api.test');
+            const testData: any = await testRes.json();
+            if (testData.ok) {
+              permissions.push({
+                id: 'slack_api_connectivity',
+                name: 'Slack Web API Endpoint Reachability',
+                role: 'HTTPS Network Connectivity',
+                status: 'PASS',
+                description: 'Successfully reached upstream Slack API endpoint (https://slack.com/api/api.test)',
+              });
+            } else {
+              permissions.push({
+                id: 'slack_api_connectivity',
+                name: 'Slack Web API Endpoint Reachability',
+                role: 'HTTPS Network Connectivity',
+                status: 'WARNING',
+                description: `Slack api.test returned non-ok status: ${testData.error || 'unknown'}`,
+              });
+              overallStatus = 'WARNING';
+            }
+          } catch (netErr: any) {
+            permissions.push({
+              id: 'slack_api_connectivity',
+              name: 'Slack Web API Endpoint Reachability',
+              role: 'HTTPS Network Connectivity',
+              status: 'FAIL',
+              description: `Failed to connect to Slack API: ${netErr.message}`,
+              fixCommand: 'Check outbound internet routing or proxy settings from Cloud Run to slack.com.',
+            });
+            overallStatus = 'ERROR';
+          }
+        }
+
+        // Count connected users
+        let connectedUsersCount = 0;
+        try {
+          const firestore = await runtimeConfig.getFirestore();
+          if (firestore) {
+            const snapshot = await firestore
+              .collection('user_connections')
+              .where('serviceId', '==', 'slack')
+              .where('status', '==', 'ACTIVE')
+              .get();
+            connectedUsersCount = snapshot.size;
+          }
+        } catch (_err) {
+          // non-fatal
+        }
+
+        permissions.push({
+          id: 'slack_user_delegation',
+          name: 'Federated User Connections',
+          role: 'Zero-Trust User Token Delegation',
+          status: connectedUsersCount > 0 ? 'PASS' : 'WARNING',
+          description:
+            connectedUsersCount > 0
+              ? `${connectedUsersCount} active user connection(s) established with Token Rotation.`
+              : 'Zero active users connected yet. Users will be prompted with a 1-click authorization link upon first search in Gemini.',
+        });
+
+        diagnosticDetails = {
+          service: 'Slack Federated Search',
+          tokenRotationEnabled: true,
+          activeConnectedUsers: connectedUsersCount,
+          supportedScopes: ['search:read', 'im:read', 'mpim:read'],
+          maxResultsCap: config.settings?.maxResults || 10,
+          rateLimitPerMin: config.settings?.rateLimitPerMinute || 10,
         };
         break;
       }

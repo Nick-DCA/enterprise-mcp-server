@@ -1,6 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { ToolDefinition, DomainName } from './types.js';
 import { checkToolExecutionAccess } from './accessGuard.js';
+import { RequestContext } from '../server/context.js';
 import { logger } from '../utils/logger.js';
 import { formatXeroValidationError } from '../services/xero/errors.js';
 import { formatBigQueryError } from '../services/bigquery/errors.js';
@@ -75,7 +76,8 @@ export class ToolRegistry {
             logger.info({ tool: toolDef.name, args }, `Executing tool: ${toolDef.name}`);
 
             // Dynamic runtime access check (service toggles & user permissions)
-            const accessCheck = await checkToolExecutionAccess(toolDef, domain);
+            const userEmail = RequestContext.getUserEmail();
+            const accessCheck = await checkToolExecutionAccess(toolDef, domain, userEmail);
             if (!accessCheck.allowed) {
               logger.warn({ tool: toolDef.name, reason: accessCheck.reason }, 'Tool execution blocked by access guard');
               return {

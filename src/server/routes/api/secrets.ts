@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { checkSecretStatus, writeSecretValue } from '../../../config/secretManager.js';
+import { checkSecretStatus, getSecretValue, writeSecretValue } from '../../../config/secretManager.js';
 import { clearAuthConfigCache, getMcpAuthConfig } from '../../../config/authConfig.js';
 import { clearSecretsCache } from '../../../services/xero/config.js';
 import { clearSageHrConfigCache } from '../../../services/sagehr/config.js';
@@ -142,6 +142,12 @@ const MANAGED_SECRETS_INVENTORY: SecretMetadata[] = [
     description: 'OAuth Client Secret for Slack App OAuth v2 user token exchanges.',
     required: false,
   },
+  {
+    key: 'SLACK_REDIRECT_URI',
+    category: 'Slack',
+    description: 'OAuth 2.0 Redirect URI registered with Slack App (defaults to /api/connectors/slack/callback on host domain).',
+    required: false,
+  },
 ];
 
 /**
@@ -276,19 +282,22 @@ secretsApiRouter.post('/update', async (req: Request, res: Response) => {
  */
 secretsApiRouter.get('/gemini-blueprint', async (req: Request, res: Response) => {
   try {
-    let clientId = 'gemini-enterprise-mcp';
-    let clientSecret = '';
-    let isClientSecretSet = false;
+    let clientId = (await getSecretValue('MCP_CLIENT_ID')) || process.env.MCP_CLIENT_ID || 'gemini-enterprise-mcp';
+    let clientSecret = (await getSecretValue('MCP_CLIENT_SECRET')) || process.env.MCP_CLIENT_SECRET || '';
+
+    // Directly verify if secret exists in GSM (matching Secrets Vault status checklist)
+    const secretStatus = await checkSecretStatus('MCP_CLIENT_SECRET');
+    let isClientSecretSet = secretStatus.configured || Boolean(clientSecret);
 
     try {
       const authConfig = await getMcpAuthConfig();
-      clientId = authConfig.clientId;
-      clientSecret = authConfig.clientSecret;
-      isClientSecretSet = Boolean(clientSecret);
+      if (authConfig.clientId) clientId = authConfig.clientId;
+      if (authConfig.clientSecret) {
+        clientSecret = authConfig.clientSecret;
+        isClientSecretSet = true;
+      }
     } catch {
-      clientId = process.env.MCP_CLIENT_ID || 'gemini-enterprise-mcp';
-      clientSecret = process.env.MCP_CLIENT_SECRET || '';
-      isClientSecretSet = Boolean(clientSecret);
+      // Ignored: fallback resolved directly from GSM / process.env above
     }
 
     const host = req.get('host') || 'localhost:3000';

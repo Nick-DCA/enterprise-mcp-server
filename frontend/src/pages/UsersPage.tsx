@@ -35,6 +35,7 @@ const ALL_SERVICES: { id: ServiceId; label: string; icon: any }[] = [
   { id: 'bigquery', label: 'BigQuery', icon: 'bigquery' },
   { id: 'firestore', label: 'Firestore', icon: 'firestore' },
   { id: 'sagehr', label: 'Sage HR', icon: 'sagehr' },
+  { id: 'slack', label: 'Slack', icon: 'slack' },
 ];
 
 export const UsersPage: React.FC<UsersPageProps> = ({

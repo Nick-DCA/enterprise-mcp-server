@@ -223,6 +223,7 @@ export type IconName =
   | 'bigquery'
   | 'firestore'
   | 'sagehr'
+  | 'slack'
   | 'lightning'
   | 'shield'
   | 'check'
@@ -278,6 +279,7 @@ export const ThemeIcon: React.FC<{
       bigquery: '[B-Q]',
       firestore: '[F-S]',
       sagehr: '[SHR]',
+      slack: '[SLK]',
       lightning: '[⚡]',
       shield: '[GRD]',
       check: '[OK]',
@@ -394,6 +396,12 @@ export const ThemeIcon: React.FC<{
         return (
           <svg {...solidProps}>
             <path d="M12 2.25a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM3.75 19.5a8.25 8.25 0 0 1 16.5 0v.75H3.75v-.75Z" />
+          </svg>
+        );
+      case 'slack':
+        return (
+          <svg {...solidProps}>
+            <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 4.225 12.016l4.754 4.755a.75.75 0 0 0 1.06-1.06l-4.754-4.755A6.75 6.75 0 0 0 10.5 3.75Zm-5.25 6.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Z" clipRule="evenodd" />
           </svg>
         );
       case 'lightning':
@@ -546,6 +554,13 @@ export const ThemeIcon: React.FC<{
         <svg {...svgProps}>
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
+        </svg>
+      );
+    case 'slack':
+      return (
+        <svg {...svgProps}>
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
       );
     case 'lightning':

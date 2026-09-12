@@ -23,6 +23,7 @@ import { AddUserModal } from './components/AddUserModal.js';
 import { AddServiceInstanceModal } from './components/AddServiceInstanceModal.js';
 import { EditPermissionsModal } from './components/EditPermissionsModal.js';
 import { TestConnectionModal } from './components/TestConnectionModal.js';
+import { SlackOnboardingModal } from './components/SlackOnboardingModal.js';
 import { Toast, ToastMessage } from './components/Toast.js';
 import { useTheme, ThemeIcon } from './theme/ThemeContext.js';
 
@@ -62,6 +63,8 @@ export const App: React.FC = () => {
   const [users, setUsers] = useState<UserAccessItem[]>([]);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [secretsCategoryFilter, setSecretsCategoryFilter] = useState<string | undefined>();
+  const [isGlobalSlackGuideOpen, setIsGlobalSlackGuideOpen] = useState(false);
 
   // Modals
   const [activeSecretModal, setActiveSecretModal] = useState<SecretItem | null>(null);
@@ -512,13 +515,19 @@ export const App: React.FC = () => {
             onOpenAddInstanceModal={(srvId) =>
               setAddInstanceModal({ isOpen: true, initialServiceId: srvId || 'bigquery' })
             }
+            onNavigateToSecrets={(cat) => {
+              setSecretsCategoryFilter(cat);
+              setActiveTab('secrets');
+            }}
           />
         );
       case 'secrets':
         return (
           <SecretsPage
             secretsData={secretsData}
+            initialCategory={secretsCategoryFilter}
             onOpenUpdateModal={(secret) => setActiveSecretModal(secret)}
+            onOpenSlackGuide={() => setIsGlobalSlackGuideOpen(true)}
             onShowToast={(msg, type) => addToast(type, msg)}
             onRefresh={async () => {
               const res = await api.getSecretsStatus();
@@ -624,7 +633,7 @@ export const App: React.FC = () => {
                   >
                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <ThemeIcon name="services" size={14} />
-                      <span>Services & Mesh</span>
+                      <span>Services Config</span>
                     </span>
                   </button>
 
@@ -706,23 +715,10 @@ export const App: React.FC = () => {
             <div className="mono-sidebar-footer">
               <div className="mono-user-profile">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <div
-                    style={{
-                      width: '24px',
-                      height: '24px',
-                      borderRadius: '50%',
-                      background: '#FFFFFF',
-                      color: '#000000',
-                      fontWeight: 800,
-                      fontSize: '0.75rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
+                  <div className="mono-user-avatar">
                     {user.fullName ? user.fullName.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase()}
                   </div>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#FFFFFF', maxWidth: '110px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <span className="mono-user-name">
                     {user.fullName || user.email}
                   </span>
                 </div>
@@ -742,18 +738,7 @@ export const App: React.FC = () => {
             {/* Mobile Header Bar (< 768px) */}
             <div className="mono-mobile-header">
               <button
-                style={{
-                  background: '#18181B',
-                  border: '1px solid #27272A',
-                  color: '#FAFAFA',
-                  borderRadius: '6px',
-                  padding: '6px 12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  cursor: 'pointer',
-                  fontSize: '0.8rem',
-                }}
+                className="mono-mobile-menu-btn"
                 onClick={() => setIsMobileSidebarOpen(true)}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -765,7 +750,7 @@ export const App: React.FC = () => {
               </button>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#FAFAFA', letterSpacing: '0.04em' }}>
+                <span className="mono-mobile-brand-title">
                   MCP GATEWAY
                 </span>
               </div>
@@ -837,6 +822,21 @@ export const App: React.FC = () => {
         result={testModal.result}
         loading={testModal.loading}
         serviceName={testModal.serviceName}
+      />
+
+      {/* Global Slack Onboarding Modal Triggered from Secrets Vault */}
+      <SlackOnboardingModal
+        isOpen={isGlobalSlackGuideOpen}
+        onClose={() => setIsGlobalSlackGuideOpen(false)}
+        onNavigateToSecrets={(cat) => {
+          setIsGlobalSlackGuideOpen(false);
+          setSecretsCategoryFilter(cat);
+          setActiveTab('secrets');
+        }}
+        onRunTest={(srvId) => {
+          setIsGlobalSlackGuideOpen(false);
+          handleTestConnection(srvId);
+        }}
       />
     </div>
   );

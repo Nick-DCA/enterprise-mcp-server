@@ -529,6 +529,223 @@
   color: #0F172A;
 }
 
+/* --- Light Mode Overrides for Monochrome Portal Shell --- */
+[data-mode="light"] .mono-portal-layout {
+  background: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08) !important;
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-sidebar {
+  background: #FFFFFF !important;
+  border-right-color: #E2E8F0 !important;
+}
+
+[data-mode="light"] .mono-ws-header {
+  background: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+}
+
+[data-mode="light"] .mono-ws-title {
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-ws-sub {
+  color: #64748B !important;
+}
+
+[data-mode="light"] .mono-group-label {
+  color: #64748B !important;
+}
+
+[data-mode="light"] .mono-nav-link {
+  color: #475569 !important;
+}
+
+[data-mode="light"] .mono-nav-link:hover {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-nav-link.active {
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+[data-mode="light"] .mono-sidebar-footer {
+  border-top-color: #E2E8F0 !important;
+}
+
+[data-mode="light"] .mono-status-pill {
+  background: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+  color: #475569 !important;
+}
+
+[data-mode="light"] .mono-status-dot {
+  background: #10B981 !important;
+  box-shadow: 0 0 6px #10B981 !important;
+}
+
+[data-mode="light"] .mono-user-profile {
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-user-avatar {
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+}
+
+[data-mode="light"] .mono-user-name {
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-main-content {
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-topbar {
+  background: #FFFFFF !important;
+  border-bottom-color: #E2E8F0 !important;
+}
+
+[data-mode="light"] .mono-search-box {
+  background: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+}
+
+[data-mode="light"] .mono-search-input {
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-search-input::placeholder {
+  color: #94A3B8 !important;
+}
+
+[data-mode="light"] .mono-kbd {
+  background: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+  color: #64748B !important;
+}
+
+[data-mode="light"] .mono-btn-primary {
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+}
+
+[data-mode="light"] .mono-btn-primary:hover {
+  background: #1E293B !important;
+}
+
+[data-mode="light"] .mono-btn-secondary {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #E2E8F0 !important;
+}
+
+[data-mode="light"] .mono-btn-secondary:hover {
+  background: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+}
+
+[data-mode="light"] .mono-kpi-card {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-mode="light"] .mono-kpi-header {
+  color: #64748B !important;
+}
+
+[data-mode="light"] .mono-kpi-value {
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-kpi-trend {
+  color: #475569 !important;
+}
+
+[data-mode="light"] .mono-card {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-mode="light"] .mono-card-header {
+  border-bottom-color: #E2E8F0 !important;
+}
+
+[data-mode="light"] .mono-card-header h3 {
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-table th {
+  background: #F8FAFC !important;
+  border-bottom-color: #E2E8F0 !important;
+  color: #64748B !important;
+}
+
+[data-mode="light"] .mono-table td {
+  border-bottom-color: #F1F5F9 !important;
+  color: #334155 !important;
+}
+
+[data-mode="light"] .mono-table tr:hover td {
+  background: #F8FAFC !important;
+}
+
+[data-mode="light"] .mono-badge-active {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+[data-mode="light"] .mono-telemetry {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #475569 !important;
+}
+
+[data-mode="light"] .mono-log-line {
+  border-bottom-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-mode="light"] .mono-log-time {
+  color: #64748B !important;
+}
+
+[data-mode="light"] .mono-log-tag {
+  color: #FFFFFF !important;
+  background: #0F172A !important;
+}
+
+[data-mode="light"] .mono-log-msg {
+  color: #334155 !important;
+}
+
+[data-mode="light"] .mono-mobile-header {
+  background: #FFFFFF !important;
+  border-bottom-color: #E2E8F0 !important;
+}
+
+[data-mode="light"] .mono-mobile-menu-btn {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-mobile-brand-title {
+  color: #0F172A !important;
+}
+
+[data-mode="light"] .mono-sidebar-nav::-webkit-scrollbar-thumb {
+  background: #E2E8F0 !important;
+}
+
 
 /* --- Theme Preset: Merchant Emerald --- */
 [data-theme="merchant-emerald"] {
@@ -1802,6 +2019,50 @@ code, .code-font {
   color: #D4D4D8;
 }
 
+.mono-user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: #000000;
+  font-weight: 800;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mono-user-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mono-mobile-menu-btn {
+  background: #18181B;
+  border: 1px solid #27272A;
+  color: #FAFAFA;
+  border-radius: 6px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.mono-mobile-brand-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FAFAFA;
+  letter-spacing: 0.04em;
+}
+
 /* Main Content Area - Handles All Vertical Page Scrolling */
 .mono-main-content {
   flex: 1;
@@ -2505,6 +2766,18 @@ code, .code-font {
 @media (max-width: 900px) {
   .config-sections-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.guardrails-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 860px) {
+  .guardrails-dual-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 

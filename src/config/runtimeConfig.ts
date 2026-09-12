@@ -4,7 +4,7 @@ import { getGcpProjectId } from './secretManager.js';
 import { cleanObject } from '../utils/clean.js';
 import { logger } from '../utils/logger.js';
 
-export type ServiceId = 'xero' | 'bigquery' | 'firestore' | 'sagehr';
+export type ServiceId = 'xero' | 'bigquery' | 'firestore' | 'sagehr' | 'slack';
 
 export interface InstallationMetadataDocument {
   version: string;
@@ -63,7 +63,21 @@ export interface AuditLogDocument {
   logId: string;
   timestamp: string; // ISO string
   actorEmail: string;
-  action: 'CONFIG_CHANGE' | 'SECRET_UPDATE' | 'USER_TOGGLE' | 'SERVICE_TOGGLE' | 'USER_CREATE' | 'USER_DELETE' | 'PERMISSIONS_UPDATE' | 'SESSION_REVOKE' | 'INITIALIZATION_STEP' | 'ADMIN_LOGIN';
+  action:
+    | 'CONFIG_CHANGE'
+    | 'SECRET_UPDATE'
+    | 'USER_TOGGLE'
+    | 'SERVICE_TOGGLE'
+    | 'USER_CREATE'
+    | 'USER_DELETE'
+    | 'PERMISSIONS_UPDATE'
+    | 'SESSION_REVOKE'
+    | 'INITIALIZATION_STEP'
+    | 'ADMIN_LOGIN'
+    | 'SLACK_CONNECT'
+    | 'SLACK_DISCONNECT'
+    | 'SLACK_SEARCH'
+    | (string & {});
   target: string;
   details: Record<string, any>;
 }
@@ -140,6 +154,20 @@ const DEFAULT_SERVICE_CONFIGS: Record<ServiceId, { name: string; description: st
       maxResults: 50,
     },
   },
+  slack: {
+    name: 'Slack Federated Search',
+    description: 'User-delegated message search across Slack channels and direct messages with Token Rotation and zero shared bot privilege.',
+    toolCount: 5,
+    settings: {
+      scopes: 'search:read.public,search:read.private,search:read.im,search:read.mpim,search:read.files,search:read.users,users:read,channels:read,groups:read,im:read,mpim:read,channels:history,groups:history,im:history,mpim:history,files:read',
+      maxResults: 10,
+      defaultResults: 5,
+      rateLimitPerMinute: 10,
+      includeDMs: true,
+      maxSnippetLength: 500,
+      allowAllUsers: true,
+    },
+  },
 };
 
 export class RuntimeConfigManager {
@@ -180,7 +208,7 @@ export class RuntimeConfigManager {
         enabled: false, // Default to disabled until explicitly configured
         toolCount: def.toolCount,
         settings: { ...def.settings },
-        requiredSecrets: id === 'xero' ? ['XERO_CLIENT_ID', 'XERO_CLIENT_SECRET'] : [],
+        requiredSecrets: id === 'xero' ? ['XERO_CLIENT_ID', 'XERO_CLIENT_SECRET'] : id === 'slack' ? ['SLACK_CLIENT_ID', 'SLACK_CLIENT_SECRET', 'SLACK_REDIRECT_URI'] : [],
         updatedBy: 'system',
         updatedAt: now,
       });
@@ -192,7 +220,7 @@ export class RuntimeConfigManager {
       fullName: 'System Administrator',
       isAdmin: true,
       isEnabled: true,
-      allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr'],
+      allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
       readOnlyOnly: false,
       customDeniedTools: [],
       createdAt: now,
@@ -207,7 +235,7 @@ export class RuntimeConfigManager {
       action: 'INITIALIZATION_STEP',
       target: 'system/gateway',
       details: {
-        message: 'MCP Gateway initialized. Multi-SaaS services (Xero, BigQuery, Firestore, Sage HR) ready.',
+        message: 'MCP Gateway initialized. Multi-SaaS services (Xero, BigQuery, Firestore, Sage HR, Slack) ready.',
         environment: process.env.NODE_ENV || 'development',
       },
     });
@@ -823,6 +851,15 @@ export class RuntimeConfigManager {
     return updated;
   }
 
+  public async updateServiceConfig(
+    instanceOrServiceId: string,
+    settings: Record<string, any>,
+    actorEmail: string,
+    meta?: { name?: string; description?: string; customerName?: string; requiredSecrets?: string[] }
+  ): Promise<ServiceConfigDocument> {
+    return this.updateServiceSettings(instanceOrServiceId, settings, actorEmail, meta);
+  }
+
   public async getAllCustomRegisteredSecrets(): Promise<{ key: string; category: any; description: string; required: boolean; instanceId: string; customerName?: string }[]> {
     const allServices = await this.getAllServiceConfigs();
     const customSecrets: { key: string; category: any; description: string; required: boolean; instanceId: string; customerName?: string }[] = [];
@@ -830,7 +867,7 @@ export class RuntimeConfigManager {
     for (const s of allServices) {
       if (s.requiredSecrets && s.requiredSecrets.length > 0) {
         for (const secKey of s.requiredSecrets) {
-          const cat = s.serviceId === 'xero' ? 'Xero' : s.serviceId === 'bigquery' ? 'BigQuery' : s.serviceId === 'firestore' ? 'Firestore' : 'Sage HR';
+          const cat = s.serviceId === 'xero' ? 'Xero' : s.serviceId === 'bigquery' ? 'BigQuery' : s.serviceId === 'firestore' ? 'Firestore' : s.serviceId === 'sagehr' ? 'Sage HR' : 'Slack';
           customSecrets.push({
             key: secKey,
             category: cat,
@@ -875,7 +912,7 @@ export class RuntimeConfigManager {
             fullName: data.fullName || email,
             isAdmin: Boolean(data.isAdmin),
             isEnabled: typeof data.isEnabled === 'boolean' ? data.isEnabled : true,
-            allowedServices: Array.isArray(data.allowedServices) ? data.allowedServices : ['xero', 'bigquery', 'firestore', 'sagehr'],
+            allowedServices: Array.isArray(data.allowedServices) ? data.allowedServices : ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
             readOnlyOnly: Boolean(data.readOnlyOnly),
             customDeniedTools: Array.isArray(data.customDeniedTools) ? data.customDeniedTools : [],
             createdAt: data.createdAt?.toDate ? data.createdAt.toDate().toISOString() : (data.createdAt || new Date().toISOString()),
@@ -916,7 +953,7 @@ export class RuntimeConfigManager {
       fullName: userData.fullName || email.split('@')[0],
       isAdmin: Boolean(userData.isAdmin),
       isEnabled: userData.isEnabled ?? true,
-      allowedServices: userData.allowedServices || ['xero', 'bigquery', 'firestore', 'sagehr'],
+      allowedServices: userData.allowedServices || ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
       readOnlyOnly: Boolean(userData.readOnlyOnly),
       customDeniedTools: userData.customDeniedTools || [],
       createdAt: nowIso,
@@ -1344,6 +1381,20 @@ export class RuntimeConfigManager {
     logger.info({ audit: logEntry }, `[AUDIT] ${action} by ${actorEmail} on ${target}`);
   }
 
+  public async recordAuditLog(
+    entry: {
+      logId?: string;
+      timestamp?: string;
+      actorEmail: string;
+      action: any;
+      target: string;
+      details?: Record<string, any>;
+    },
+    _actorEmail?: string
+  ): Promise<void> {
+    await this.logAudit(entry.action, entry.actorEmail, entry.target, entry.details || {});
+  }
+
   public async getAuditLogs(limitCount = 50): Promise<AuditLogDocument[]> {
     const combinedLogs = new Map<string, AuditLogDocument>();
 
@@ -1354,44 +1405,78 @@ export class RuntimeConfigManager {
 
     const firestore = await this.getFirestore();
     if (firestore) {
-      try {
-        const snapshot = await firestore
-          .collection('audit_logs')
-          .orderBy('timestamp', 'desc')
-          .limit(limitCount)
-          .get();
-
-        if (!snapshot.empty) {
-          for (const d of snapshot.docs) {
-            const data = d.data();
-            let timestampStr = new Date().toISOString();
-            if (data.timestamp?.toDate) {
-              timestampStr = data.timestamp.toDate().toISOString();
-            } else if (typeof data.timestamp === 'string') {
-              timestampStr = data.timestamp;
-            } else if (data.timestamp instanceof Date) {
-              timestampStr = data.timestamp.toISOString();
-            }
-
-            const logId = data.logId || d.id;
-            combinedLogs.set(logId, {
-              logId,
-              timestamp: timestampStr,
-              actorEmail: data.actorEmail || 'unknown',
-              action: data.action,
-              target: data.target || '',
-              details: data.details || {},
-            });
+      const fetchLogsFromDb = async (db: Firestore) => {
+        try {
+          let snapshot;
+          try {
+            snapshot = await db
+              .collection('audit_logs')
+              .orderBy('timestamp', 'desc')
+              .limit(limitCount)
+              .get();
+          } catch (orderErr: any) {
+            logger.debug({ error: orderErr?.message || orderErr }, 'orderBy timestamp query failed on audit_logs, falling back to unordered fetch');
+            snapshot = await db.collection('audit_logs').limit(limitCount).get();
           }
+
+          if (!snapshot.empty) {
+            for (const d of snapshot.docs) {
+              const data = d.data();
+              let timestampStr = new Date().toISOString();
+              if (data.timestamp?.toDate) {
+                timestampStr = data.timestamp.toDate().toISOString();
+              } else if (typeof data.timestamp === 'string') {
+                timestampStr = data.timestamp;
+              } else if (data.timestamp instanceof Date) {
+                timestampStr = data.timestamp.toISOString();
+              } else if (typeof data.timestamp === 'number') {
+                timestampStr = new Date(data.timestamp).toISOString();
+              } else if (data.createdAt) {
+                if (data.createdAt?.toDate) {
+                  timestampStr = data.createdAt.toDate().toISOString();
+                } else if (typeof data.createdAt === 'string') {
+                  timestampStr = data.createdAt;
+                } else if (typeof data.createdAt === 'number') {
+                  timestampStr = new Date(data.createdAt).toISOString();
+                }
+              }
+
+              const logId = data.logId || d.id;
+              combinedLogs.set(logId, {
+                logId,
+                timestamp: timestampStr,
+                actorEmail: data.actorEmail || 'unknown',
+                action: data.action || 'SYSTEM_EVENT',
+                target: data.target || '',
+                details: data.details || {},
+              });
+            }
+          }
+        } catch (err) {
+          logger.warn({ error: err }, 'Failed to fetch audit logs from Firestore, using in-memory');
         }
-      } catch (err) {
-        logger.warn({ error: err }, 'Failed to fetch audit logs from Firestore, using in-memory');
+      };
+
+      await fetchLogsFromDb(firestore);
+
+      // If custom database had no logs and is not '(default)', also check '(default)' database
+      if (combinedLogs.size <= this.inMemoryStore.auditLogs.length && this.activeDatabaseId !== '(default)') {
+        try {
+          const defaultDb = await this.getFirestore('(default)');
+          if (defaultDb) {
+            await fetchLogsFromDb(defaultDb);
+          }
+        } catch {
+          // Ignored
+        }
       }
     }
 
     // Convert map to array, sort by timestamp descending, and slice to limit
     const sorted = Array.from(combinedLogs.values()).sort((a, b) => {
-      return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+      const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+      const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+      return (isNaN(timeB) ? 0 : timeB) - (isNaN(timeA) ? 0 : timeA);
     });
 
     return sorted.slice(0, limitCount);

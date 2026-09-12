@@ -21,7 +21,7 @@ async function runServicesApiTests() {
       fullName: 'Admin User',
       isAdmin: true,
       isEnabled: true,
-      allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr'],
+      allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
       readOnlyOnly: false,
     }, 'test-init');
 
@@ -43,12 +43,13 @@ async function runServicesApiTests() {
     assert.strictEqual(listRes.status, 200);
     const listBody = (await listRes.json()) as any;
     assert.strictEqual(listBody.success, true);
-    assert.ok(listBody.totalServices >= 4, `Expected at least 4 services, received: ${listBody.totalServices}`);
+    assert.ok(listBody.totalServices >= 5, `Expected at least 5 services, received: ${listBody.totalServices}`);
     assert.ok(listBody.services.some((s: any) => s.serviceId === 'xero'));
     assert.ok(listBody.services.some((s: any) => s.serviceId === 'bigquery'));
     assert.ok(listBody.services.some((s: any) => s.serviceId === 'firestore'));
     assert.ok(listBody.services.some((s: any) => s.serviceId === 'sagehr'));
-    console.log('   ✓ Successfully listed services with tool counts');
+    assert.ok(listBody.services.some((s: any) => s.serviceId === 'slack'));
+    console.log('   ✓ Successfully listed all 5 services with tool counts');
 
     // 3. PATCH /api/services/bigquery/toggle -> Disable BigQuery
     console.log('2. Testing PATCH /api/services/bigquery/toggle (Disable)...');
@@ -105,7 +106,20 @@ async function runServicesApiTests() {
     assert.strictEqual(testBody.serviceId, 'firestore');
     assert.ok(typeof testBody.latencyMs === 'number');
     assert.ok(testBody.status === 'HEALTHY' || testBody.status === 'WARNING' || testBody.status === 'ERROR');
-    console.log(`   ✓ Service test executed (Status: ${testBody.status}, Latency: ${testBody.latencyMs}ms)`);
+    console.log(`   ✓ Firestore service test executed (Status: ${testBody.status}, Latency: ${testBody.latencyMs}ms)`);
+
+    // 6. POST /api/services/slack/test -> Connectivity Diagnostic Probe for Slack
+    console.log('5. Testing POST /api/services/slack/test...');
+    const slackTestRes = await fetch(`${baseUrl}/api/services/slack/test`, {
+      method: 'POST',
+      headers: authHeaders,
+    });
+    assert.strictEqual(slackTestRes.status, 200);
+    const slackTestBody = (await slackTestRes.json()) as any;
+    assert.strictEqual(slackTestBody.serviceId, 'slack');
+    assert.ok(typeof slackTestBody.latencyMs === 'number');
+    assert.ok(slackTestBody.status === 'HEALTHY' || slackTestBody.status === 'WARNING' || slackTestBody.status === 'ERROR');
+    console.log(`   ✓ Slack service diagnostic probe executed (Status: ${slackTestBody.status}, Latency: ${slackTestBody.latencyMs}ms)`);
 
     console.log('--- All Services & Runtime Config Tests Passed! ---\n');
   } finally {

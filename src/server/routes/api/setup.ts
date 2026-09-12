@@ -260,7 +260,7 @@ setupApiRouter.post('/configure-gws-oauth', requireSetupAuth, async (req: Reques
         fullName: cleanAdminName,
         isAdmin: true,
         isEnabled: true,
-        allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr'],
+        allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
         readOnlyOnly: false,
       },
       'setup-wizard'
@@ -441,7 +441,7 @@ setupApiRouter.post('/complete', requireSetupAuth, async (req: Request, res: Res
       setupMode: setupMode as any,
       gcpProjectId: projectId,
       configuredServices: ['gws_auth', 'platform'],
-      pendingServices: ['bigquery', 'xero', 'sagehr'],
+      pendingServices: ['bigquery', 'xero', 'sagehr', 'slack'],
     });
 
     // Ensure admin user access exists
@@ -453,7 +453,7 @@ setupApiRouter.post('/complete', requireSetupAuth, async (req: Request, res: Res
           fullName: String(adminName).trim() || cleanEmail.split('@')[0],
           isAdmin: true,
           isEnabled: true,
-          allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr'],
+          allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
           readOnlyOnly: false,
         },
         'setup-completion'

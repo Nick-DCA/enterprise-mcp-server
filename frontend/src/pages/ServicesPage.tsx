@@ -13,6 +13,7 @@ interface ServicesPageProps {
   onDeleteInstance?: (instanceId: string) => Promise<void>;
   onTestConnection: (instanceId: string) => Promise<DiagnosticTestResult>;
   onOpenAddInstanceModal?: (serviceId?: ServiceId) => void;
+  onNavigateToSecrets?: (category?: string) => void;
 }
 
 const SERVICE_GROUPS: {
@@ -25,14 +26,14 @@ const SERVICE_GROUPS: {
   {
     id: 'bigquery',
     title: 'Google BigQuery Connectors',
-    subtitle: 'Multi-customer GoogleSQL analytics, table URLs, dataset boundaries & query scan quotas.',
+    subtitle: 'GoogleSQL analytics, table URLs, dataset boundaries & query scan quotas.',
     icon: 'bigquery',
     colorBadge: 'badge-cyan',
   },
   {
     id: 'xero',
     title: 'Xero Accounting Connectors',
-    subtitle: 'Multi-tenant organization instances, custom OAuth 2.0 credentials & financial sync.',
+    subtitle: 'Organization instances, custom OAuth 2.0 credentials & financial sync.',
     icon: 'xero',
     colorBadge: 'badge-emerald',
   },
@@ -49,6 +50,13 @@ const SERVICE_GROUPS: {
     subtitle: 'Regional company subdomains, employee directory sync & privacy attribute masking.',
     icon: 'sagehr',
     colorBadge: 'badge-muted',
+  },
+  {
+    id: 'slack',
+    title: 'Slack Federated Search Connectors',
+    subtitle: 'User-delegated conversational search across channels & DMs with Token Rotation.',
+    icon: 'search',
+    colorBadge: 'badge-purple',
   },
 ];
 
@@ -306,6 +314,79 @@ export function resolveSqlClauses(
   return { allowed: finalAllowed, blocked: finalBlocked };
 }
 
+export interface SlackScopeItem {
+  scope: string;
+  category: 'SEARCH' | 'METADATA' | 'HISTORY' | 'FILES';
+  description: string;
+  recommended: boolean;
+}
+
+export const ALL_SLACK_SCOPES: SlackScopeItem[] = [
+  // Search scopes
+  { scope: 'search:read.public', category: 'SEARCH', description: 'Searches messages & content in public Slack channels', recommended: true },
+  { scope: 'search:read.private', category: 'SEARCH', description: 'Searches messages in accessible private channels', recommended: true },
+  { scope: 'search:read.im', category: 'SEARCH', description: 'Searches direct messages accessible to authorized user', recommended: true },
+  { scope: 'search:read.mpim', category: 'SEARCH', description: 'Searches multi-person direct messages accessible to user', recommended: true },
+  { scope: 'search:read.files', category: 'SEARCH', description: 'Searches for files & documents shared in Slack', recommended: true },
+  { scope: 'search:read.users', category: 'SEARCH', description: 'Searches for & identifies users in the workspace', recommended: true },
+
+  // Metadata scopes
+  { scope: 'users:read', category: 'METADATA', description: 'Retrieves user names & profile info to resolve user IDs', recommended: true },
+  { scope: 'channels:read', category: 'METADATA', description: 'Retrieves public channel names & metadata', recommended: true },
+  { scope: 'groups:read', category: 'METADATA', description: 'Retrieves private channel metadata for accessible channels', recommended: true },
+  { scope: 'im:read', category: 'METADATA', description: 'Retrieves direct message conversation metadata', recommended: true },
+  { scope: 'mpim:read', category: 'METADATA', description: 'Retrieves multi-person direct message conversation metadata', recommended: true },
+
+  // History scopes
+  { scope: 'channels:history', category: 'HISTORY', description: 'Retrieves messages & context from public channels', recommended: true },
+  { scope: 'groups:history', category: 'HISTORY', description: 'Retrieves messages & context from accessible private channels', recommended: true },
+  { scope: 'im:history', category: 'HISTORY', description: 'Retrieves messages & context from direct messages', recommended: true },
+  { scope: 'mpim:history', category: 'HISTORY', description: 'Retrieves messages & context from multi-person direct messages', recommended: true },
+
+  // Files scope
+  { scope: 'files:read', category: 'FILES', description: 'Retrieves file metadata & accesses contents of shared files', recommended: true },
+];
+
+export const DEFAULT_ALLOWED_SLACK_SCOPES = ALL_SLACK_SCOPES.map((s) => s.scope);
+
+export function resolveSlackScopes(rawScopes: string[] | string | undefined): { allowed: string[]; blocked: string[] } {
+  let parsedAllowed: string[] = [];
+  if (rawScopes !== undefined && rawScopes !== null && rawScopes !== '') {
+    parsedAllowed = Array.isArray(rawScopes)
+      ? rawScopes.map(String).map((s) => s.trim().toLowerCase()).filter(Boolean)
+      : String(rawScopes).split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+  } else {
+    return {
+      allowed: ALL_SLACK_SCOPES.map((s) => s.scope),
+      blocked: [],
+    };
+  }
+
+  const allKnownScopes = ALL_SLACK_SCOPES.map((s) => s.scope.toLowerCase());
+  const hasKnownAllowed = parsedAllowed.some((s) => allKnownScopes.includes(s));
+
+  if (!hasKnownAllowed) {
+    return {
+      allowed: ALL_SLACK_SCOPES.map((s) => s.scope),
+      blocked: [],
+    };
+  }
+
+  const allowedLower = new Set(parsedAllowed);
+  const finalAllowed: string[] = [];
+  const finalBlocked: string[] = [];
+
+  for (const item of ALL_SLACK_SCOPES) {
+    if (allowedLower.has(item.scope.toLowerCase())) {
+      finalAllowed.push(item.scope);
+    } else {
+      finalBlocked.push(item.scope);
+    }
+  }
+
+  return { allowed: finalAllowed, blocked: finalBlocked };
+}
+
 export const ServicesPage: React.FC<ServicesPageProps> = ({
   services,
   onToggle,
@@ -313,7 +394,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
   onDeleteInstance,
   onTestConnection,
   onOpenAddInstanceModal,
-  }) => {
+  onNavigateToSecrets,
+}) => {
   // Currently configuring instance in focused overlay mode
   const [activeConfigInstanceId, setActiveConfigInstanceId] = useState<string | null>(null);
 
@@ -627,6 +709,39 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     );
   };
 
+  // Slack OAuth Scopes Handlers
+  const handleShiftSlackScopeToBlocked = (instanceId: string, scopeToBlock: string) => {
+    const nextAllowed = activeSlackAllowedScopes.filter((s) => s.toLowerCase() !== scopeToBlock.toLowerCase());
+    handleSettingChange(instanceId, 'scopes', nextAllowed.join(','));
+  };
+
+  const handleShiftSlackScopeToAllowed = (instanceId: string, scopeToAllow: string) => {
+    const nextAllowed = activeSlackAllowedScopes.map((s) => s.toLowerCase()).includes(scopeToAllow.toLowerCase())
+      ? activeSlackAllowedScopes
+      : [...activeSlackAllowedScopes, scopeToAllow];
+    handleSettingChange(instanceId, 'scopes', nextAllowed.join(','));
+  };
+
+  const handleSelectAllSlackScopes = (instanceId: string) => {
+    handleSettingChange(instanceId, 'scopes', ALL_SLACK_SCOPES.map((s) => s.scope).join(','));
+  };
+
+  const handleResetDefaultSlackScopes = (instanceId: string) => {
+    handleSettingChange(instanceId, 'scopes', DEFAULT_ALLOWED_SLACK_SCOPES.join(','));
+  };
+
+  const handleSelectPublicSlackScopesOnly = (instanceId: string) => {
+    const publicOnly = ALL_SLACK_SCOPES
+      .filter((s) => !s.scope.includes('.private') && !s.scope.includes('.im') && !s.scope.includes('.mpim') && !s.scope.includes('im:') && !s.scope.includes('mpim:') && !s.scope.includes('groups:'))
+      .map((s) => s.scope);
+    handleSettingChange(instanceId, 'scopes', publicOnly.join(','));
+  };
+
+  const handleSelectSearchSlackScopesOnly = (instanceId: string) => {
+    const searchOnly = ALL_SLACK_SCOPES.filter((s) => s.category === 'SEARCH').map((s) => s.scope);
+    handleSettingChange(instanceId, 'scopes', searchOnly.join(','));
+  };
+
   // Save changes & Close focused modal
   const handleSave = async (instanceId: string) => {
     try {
@@ -713,6 +828,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
   const activeFirestoreGuardrailMode: 'STRICT_READ_ONLY' | 'GRANULAR_CUSTOM' =
     activeSettings.firestoreGuardrailMode || 'STRICT_READ_ONLY';
 
+  const { allowed: activeSlackAllowedScopes, blocked: activeSlackBlockedScopes } =
+    resolveSlackScopes(activeSettings.scopes);
+
   return (
     <div>
       {/* Page Header */}
@@ -720,10 +838,10 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         <div className="page-title">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <ThemeIcon name="services" size={24} />
-            <h2>SaaS Mesh Connectors & Multi-Instance Engine</h2>
+            <h2>Services Config</h2>
           </div>
           <p>
-            Service categories with horizontally expanding instance tracks. Click <strong>Configure & Edit ⚙️</strong> on any card to enter focused configuration mode with field requirement badges.
+            Service categories with horizontally expanding instance tracks. Click <strong>Configure & Edit</strong> on any card to enter focused configuration mode with field requirement badges.
           </p>
         </div>
 
@@ -738,7 +856,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
       </div>
 
       {/* Summary KPI Stats */}
-      <div className="stats-grid">
+      <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
         <div className="stat-card">
           <div className="stat-icon emerald">
             <ThemeIcon name="check" size={20} />
@@ -758,26 +876,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             <div className="stat-label">BOUND MCP RPC METHODS</div>
           </div>
         </div>
-
-        <div className="stat-card">
-          <div className="stat-icon indigo">
-            <ThemeIcon name="shield" size={20} />
-          </div>
-          <div className="stat-info">
-            <div className="stat-value">Multi-Customer</div>
-            <div className="stat-label">TENANT PARTITIONING</div>
-          </div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-icon amber">
-            <ThemeIcon name="secrets" size={20} />
-          </div>
-          <div className="stat-info">
-            <div className="stat-value">GCP Secret Sync</div>
-            <div className="stat-label">AUTO VAULT PROVISIONING</div>
-          </div>
-        </div>
       </div>
 
       {/* Search Bar */}
@@ -793,7 +891,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         </div>
 
         <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-          Showing {services.length} instances across 4 SaaS connector categories
+          Showing {services.length} instances across {SERVICE_GROUPS.length} connector categories
         </div>
       </div>
 
@@ -825,7 +923,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                     ▾
                   </div>
                   <div className="service-icon-box" style={{ width: '34px', height: '34px' }}>
-                    <ThemeIcon name={group.id} size={18} />
+                    <ThemeIcon name={group.icon || group.id} size={18} />
                   </div>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -896,7 +994,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                       style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
                     >
                       <ThemeIcon name="plus" size={12} />
-                      <span>Add {group.id === 'bigquery' ? 'BigQuery' : group.id === 'xero' ? 'Xero' : group.id === 'firestore' ? 'Firestore' : 'Sage HR'} Instance</span>
+                      <span>Add {group.id === 'bigquery' ? 'BigQuery' : group.id === 'xero' ? 'Xero' : group.id === 'firestore' ? 'Firestore' : group.id === 'slack' ? 'Slack' : 'Sage HR'} Instance</span>
                     </button>
                   )}
                 </div>
@@ -913,7 +1011,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                   {groupServices.map((service) => {
                     const settings = localSettings[service.instanceId] || service.settings || {};
                     const isTesting = testingInstance === service.instanceId;
-                    const isDefault = ['xero', 'bigquery', 'firestore', 'sagehr'].includes(service.instanceId);
+                    const isDefault = ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'].includes(service.instanceId);
 
                     const getTags = (fieldKey: 'excludedFields' | 'maskedFields') => {
                       const val = settings[fieldKey];
@@ -1076,6 +1174,25 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                               </div>
                             </div>
                           )}
+
+                          {service.serviceId === 'slack' && (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', fontSize: '0.775rem' }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ color: 'var(--text-muted)' }}>Max Results:</span>
+                                <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{settings.maxResults || 10} msgs/query</span>
+                              </div>
+                              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ color: 'var(--text-muted)' }}>Search Inclusions:</span>
+                                <span style={{ fontWeight: 600, color: 'var(--accent-bright)' }}>{settings.includeDMs !== false ? 'Channels & DMs' : 'Channels Only'}</span>
+                              </div>
+                              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ color: 'var(--text-muted)' }}>User Access Policy:</span>
+                                <span style={{ fontWeight: 600, color: settings.allowAllUsers !== false ? 'var(--emerald-bright)' : 'var(--amber-bright)' }}>
+                                  {settings.allowAllUsers !== false ? 'All Connected Users' : 'Strict IAM Allowlist'}
+                                </span>
+                              </div>
+                            </div>
+                          )}
                         </div>
 
                         {/* Actions */}
@@ -1148,9 +1265,16 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 </button>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <ThemeIcon name={activeService.serviceId as any} size={22} />
-                  <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                    {activeMeta.name}
-                  </h3>
+                  <div>
+                    <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                      {activeMeta.name}
+                    </h3>
+                    {activeService.serviceId === 'slack' && (
+                      <p style={{ margin: 0, marginTop: '3px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                        Federated user-delegated search across authorized Slack channels and DMs with automated Token Rotation.
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -2955,6 +3079,349 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                         ))}
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            ) : activeService.serviceId === 'slack' ? (
+              /* Dedicated Slack Federated Search Studio */
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {/* ROW 1: DUAL COLUMN (LEFT: IDENTITY & ROUTING; RIGHT: QUOTAS, RATE LIMITS & SECRETS) */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+                  {/* BOX 1: CUSTOMER IDENTITY & ROUTING */}
+                  <div className="config-section-box">
+                    <div className="config-section-header">
+                      <ThemeIcon name="users" size={15} />
+                      <span>1. Customer Identity &amp; Routing</span>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">
+                        Customer / Org Name
+                        <span className="badge badge-amber" style={{ fontSize: '0.65rem', padding: '1px 5px', marginLeft: '6px' }}>REQUIRED</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-input"
+                        value={activeMeta.customerName}
+                        onChange={(e) => handleMetaChange(activeService.instanceId, 'customerName', e.target.value)}
+                        required
+                      />
+                      <div className="form-hint">Partitions configuration, rate quotas, and secret vault keys.</div>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">
+                        Display Title
+                        <span className="badge badge-amber" style={{ fontSize: '0.65rem', padding: '1px 5px', marginLeft: '6px' }}>REQUIRED</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-input"
+                        value={activeMeta.name}
+                        onChange={(e) => handleMetaChange(activeService.instanceId, 'name', e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label">
+                        Instance Description
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginLeft: '6px' }}>(Optional)</span>
+                      </label>
+                      <textarea
+                        className="form-textarea"
+                        rows={2}
+                        value={activeMeta.description}
+                        onChange={(e) => handleMetaChange(activeService.instanceId, 'description', e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  {/* BOX 2: QUOTAS, RATE LIMITS & VAULT BINDINGS */}
+                  <div className="config-section-box">
+                    <div className="config-section-header">
+                      <ThemeIcon name="shield" size={15} />
+                      <span>2. Quotas, Rate Limits &amp; Secrets Vault</span>
+                    </div>
+
+                    <div className="form-group">
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                        <label className="form-label" style={{ margin: 0 }}>
+                          Max Results Per Search
+                        </label>
+                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--emerald-bright)' }}>
+                          {activeSettings.maxResults || 10} messages
+                        </span>
+                      </div>
+                      <input
+                        type="range"
+                        min="1"
+                        max="10"
+                        step="1"
+                        value={activeSettings.maxResults || 10}
+                        onChange={(e) => handleSettingChange(activeService.instanceId, 'maxResults', parseInt(e.target.value, 10))}
+                        style={{ width: '100%', accentColor: 'var(--accent-primary)' }}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                        <label className="form-label" style={{ margin: 0 }}>
+                          Rate Limit (Req / Min / User)
+                        </label>
+                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent-bright)' }}>
+                          {activeSettings.rateLimitPerMinute || 10} req/min
+                        </span>
+                      </div>
+                      <input
+                        type="range"
+                        min="5"
+                        max="60"
+                        step="5"
+                        value={activeSettings.rateLimitPerMinute || 10}
+                        onChange={(e) => handleSettingChange(activeService.instanceId, 'rateLimitPerMinute', parseInt(e.target.value, 10))}
+                        style={{ width: '100%', accentColor: 'var(--accent-primary)' }}
+                      />
+                    </div>
+
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                        <label className="form-label" style={{ margin: 0 }}>Secrets Vault Staging</label>
+                        {onNavigateToSecrets && (
+                          <button
+                            type="button"
+                            className="btn btn-secondary btn-sm"
+                            style={{ fontSize: '0.7rem', padding: '2px 7px', color: '#C084FC', borderColor: 'rgba(168, 85, 247, 0.4)' }}
+                            onClick={() => {
+                              setActiveConfigInstanceId(null);
+                              onNavigateToSecrets('Slack');
+                            }}
+                          >
+                            Open Secrets Vault &rarr;
+                          </button>
+                        )}
+                      </div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--accent-bright)', fontFamily: 'var(--font-mono)' }}>
+                        {(activeService.requiredSecrets || ['SLACK_CLIENT_ID', 'SLACK_CLIENT_SECRET', 'SLACK_REDIRECT_URI']).join(', ')}
+                      </div>
+                      <div className="form-hint">App credentials staged in Google Secret Manager.</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ROW 2: FULL-WIDTH OAUTH SCOPES & ACCESS BOUNDARIES STUDIO */}
+                <div className="config-section-box">
+                  <div className="config-section-header">
+                    <ThemeIcon name="lightning" size={15} />
+                    <span>3. OAuth 2.0 User Scopes &amp; Access Boundaries</span>
+                  </div>
+
+                  {/* Scopes Controls & Presets */}
+                  <div className="form-group" style={{ marginBottom: '1.25rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+                      <div>
+                        <div style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--text-primary)' }}>
+                          Granular OAuth 2.0 User Scopes Matrix
+                          <span className="badge badge-amber" style={{ fontSize: '0.65rem', padding: '1px 5px', marginLeft: '6px' }}>REQUIRED</span>
+                        </div>
+                        <div className="form-hint" style={{ marginTop: '2px' }}>
+                          Click any scope pill to permit or exclude it. Both columns are displayed side-by-side with full visibility across the modal width.
+                        </div>
+                      </div>
+
+                      {/* Quick Action Presets */}
+                      <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                        <button
+                          type="button"
+                          className="btn btn-secondary btn-sm"
+                          style={{ padding: '3px 8px', fontSize: '0.7rem' }}
+                          onClick={() => handleSelectAllSlackScopes(activeService.instanceId)}
+                          title="Permit all 16 Slack user scopes"
+                        >
+                          Select All (16)
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-secondary btn-sm"
+                          style={{ padding: '3px 8px', fontSize: '0.7rem' }}
+                          onClick={() => handleResetDefaultSlackScopes(activeService.instanceId)}
+                          title="Reset to recommended default 16 scopes"
+                        >
+                          Recommended
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-secondary btn-sm"
+                          style={{ padding: '3px 8px', fontSize: '0.7rem' }}
+                          onClick={() => handleSelectPublicSlackScopesOnly(activeService.instanceId)}
+                          title="Permit public channel search only (blocks DMs & private groups)"
+                        >
+                          Public Only
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-secondary btn-sm"
+                          style={{ padding: '3px 8px', fontSize: '0.7rem' }}
+                          onClick={() => handleSelectSearchSlackScopesOnly(activeService.instanceId)}
+                          title="Permit search scopes only"
+                        >
+                          Search Only
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* DUAL COLUMN GRID: FULL MODAL WIDTH - NO HORIZONTAL OVERFLOW */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.25rem' }} className="guardrails-dual-grid">
+                      {/* PERMITTED SCOPES */}
+                      <div style={{ padding: '0.85rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', minHeight: '140px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--emerald-bright)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                            <ThemeIcon name="check" size={13} />
+                            <span>Permitted Scopes ({activeSlackAllowedScopes.length})</span>
+                          </span>
+                          <span style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>Click to block &rarr;</span>
+                        </div>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                          {activeSlackAllowedScopes.map((sc) => {
+                            const item = ALL_SLACK_SCOPES.find((s) => s.scope.toLowerCase() === sc.toLowerCase());
+                            return (
+                              <button
+                                key={sc}
+                                type="button"
+                                className="badge badge-emerald"
+                                style={{
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                  fontSize: '0.725rem',
+                                  padding: '4px 8px',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '0.35rem',
+                                  fontFamily: 'var(--font-mono)',
+                                  fontWeight: 700,
+                                }}
+                                onClick={() => handleShiftSlackScopeToBlocked(activeService.instanceId, sc)}
+                                title={item?.description ? `${sc}: ${item.description} - Click to shift to Blocked list` : `Click to shift '${sc}' to Blocked list`}
+                              >
+                                <ThemeIcon name="check" size={10} />
+                                <span>{sc}</span>
+                                {item?.category && (
+                                  <span style={{ fontSize: '0.575rem', opacity: 0.85, fontWeight: 700, fontFamily: 'var(--font-sans)', padding: '1px 4px', background: 'rgba(0,0,0,0.2)', borderRadius: '3px' }}>
+                                    {item.category}
+                                  </span>
+                                )}
+                                <span style={{ opacity: 0.6 }}>&rarr;</span>
+                              </button>
+                            );
+                          })}
+                          {activeSlackAllowedScopes.length === 0 && (
+                            <div style={{ fontSize: '0.75rem', color: 'var(--accent-rose)', padding: '0.5rem 0' }}>
+                              No scopes permitted. AI agent will not be able to search Slack.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* EXCLUDED SCOPES */}
+                      <div style={{ padding: '0.85rem', background: 'var(--bg-input)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', minHeight: '140px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--rose-bright)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                            <ThemeIcon name="xmark" size={13} />
+                            <span>Excluded Scopes ({activeSlackBlockedScopes.length})</span>
+                          </span>
+                          <span style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>&larr; Click to permit</span>
+                        </div>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                          {activeSlackBlockedScopes.map((sc) => {
+                            const item = ALL_SLACK_SCOPES.find((s) => s.scope.toLowerCase() === sc.toLowerCase());
+                            return (
+                              <button
+                                key={sc}
+                                type="button"
+                                className="badge badge-rose"
+                                style={{
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                  fontSize: '0.725rem',
+                                  padding: '4px 8px',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '0.35rem',
+                                  fontFamily: 'var(--font-mono)',
+                                  fontWeight: 700,
+                                }}
+                                onClick={() => handleShiftSlackScopeToAllowed(activeService.instanceId, sc)}
+                                title={item?.description ? `${sc}: ${item.description} - Click to shift to Permitted list` : `Click to shift '${sc}' to Permitted list`}
+                              >
+                                <span style={{ opacity: 0.6 }}>&larr;</span>
+                                <span>&times;</span>
+                                <span>{sc}</span>
+                                {item?.category && (
+                                  <span style={{ fontSize: '0.575rem', opacity: 0.85, fontWeight: 700, fontFamily: 'var(--font-sans)', padding: '1px 4px', background: 'rgba(0,0,0,0.2)', borderRadius: '3px' }}>
+                                    {item.category}
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
+                          {activeSlackBlockedScopes.length === 0 && (
+                            <div style={{ fontSize: '0.725rem', color: 'var(--emerald-bright)', padding: '0.5rem 0' }}>
+                              All 16 available Slack scopes are permitted.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Search Inclusions & User Policy */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-subtle)' }}>
+                    {/* Search Inclusions */}
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <label className="form-label">Search Inclusions</label>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.825rem', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={activeSettings.includeDMs !== false}
+                          onChange={(e) => handleSettingChange(activeService.instanceId, 'includeDMs', e.target.checked)}
+                        />
+                        <span>Include Direct Messages &amp; Group DMs (honoring user ACLs)</span>
+                      </label>
+                    </div>
+
+                    {/* User Access Security Policy */}
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <label className="form-label">User Access Security Policy</label>
+                      <label style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.825rem', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={activeSettings.allowAllUsers !== false}
+                          onChange={(e) => handleSettingChange(activeService.instanceId, 'allowAllUsers', e.target.checked)}
+                          style={{ marginTop: '3px' }}
+                        />
+                        <div>
+                          <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                            Allow Any Connected User to Init / Search Slack
+                          </span>
+                          <div className="form-hint" style={{ marginTop: '2px', lineHeight: 1.4 }}>
+                            When enabled (recommended for federated delegation), any user connecting via Gemini Enterprise can search Slack using their own credentials and receive self-service connection prompts. When disabled, only users explicitly granted Slack access in Users &amp; Access (IAM) are permitted.
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* AI Search Discovery & Agent Playbook Reference Box */}
+                  <div style={{ marginTop: '0.75rem', padding: '0.85rem 1rem', background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.35rem' }}>
+                      <ThemeIcon name="sparkles" size={15} />
+                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                        AI Agent Discovery &amp; Sequential Search Playbook Active
+                      </span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                      AI agents can invoke the <code style={{ fontFamily: 'var(--font-mono)', background: 'var(--bg-input)', padding: '1px 5px', borderRadius: '3px', color: 'var(--accent-primary)' }}>slack-search-guide</code> tool to dynamically discover Slack query operators (<code style={{ fontFamily: 'var(--font-mono)' }}>from:@user</code>, <code style={{ fontFamily: 'var(--font-mono)' }}>in:#channel</code>, <code style={{ fontFamily: 'var(--font-mono)' }}>after:YYYY-MM-DD</code>, <code style={{ fontFamily: 'var(--font-mono)' }}>has:link</code>) and multi-step sequential search strategies.
+                    </p>
                   </div>
                 </div>
               </div>

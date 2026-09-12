@@ -84,7 +84,7 @@ export const GeminiConfigPage: React.FC<GeminiConfigPageProps> = ({ onShowToast,
   const tokenUrl = `${cleanBase}/oauth/token`;
   const clientId = blueprint?.clientId || 'gemini-enterprise-mcp';
   const clientSecret = blueprint?.clientSecret || '';
-  const isClientSecretSet = Boolean(clientSecret);
+  const isClientSecretSet = blueprint?.isClientSecretSet ?? Boolean(clientSecret);
   const scopes = blueprint?.scopes || 'all';
 
   return (

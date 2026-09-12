@@ -4,6 +4,8 @@ import { createMcpServer } from '../../mcp/server.js';
 import { logger } from '../../utils/logger.js';
 import { toMcpErrorResponse } from '../../utils/errors.js';
 
+import { RequestContext } from '../context.js';
+
 /**
  * MCP Request Handler Function (Per-request stateless transport for Cloud Run & Gemini Enterprise)
  */
@@ -20,8 +22,26 @@ export async function handleMcpRequest(req: Request, res: Response) {
       enableJsonResponse: true,      // Direct JSON-RPC response mode
     });
 
-    await server.connect(transport);
-    await transport.handleRequest(req, res, req.body);
+    const userEmail =
+      (req.auth as any)?.email ||
+      (req.auth as any)?.userEmail ||
+      (req.auth as any)?.sub ||
+      req.auth?.clientId;
+
+    await RequestContext.run(
+      {
+        userEmail,
+        authUserId: (req.auth as any)?.sub || req.auth?.clientId,
+        token: req.auth?.token,
+        clientId: req.auth?.clientId,
+        scopes: req.auth?.scopes,
+        ...req.auth,
+      },
+      async () => {
+        await server.connect(transport);
+        await transport.handleRequest(req, res, req.body);
+      }
+    );
   } catch (error: any) {
     logger.error(
       { error: error.message || error, stack: error.stack, path: req.path, body: req.body },

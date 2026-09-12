@@ -592,6 +592,11 @@ async function runTests() {
       else if (toolName === 'sagehr-cancel-time-off-request') args = { requestId: '1' };
       else if (toolName === 'sagehr-get-expense') args = { expenseId: '1' };
       else if (toolName === 'sagehr-create-expense') args = { employeeId: '1', categoryId: '1', amount: 25.5, date: '2026-08-20', title: 'Client Lunch' };
+      else if (toolName === 'slack-federated-search') args = { query: 'announcement' };
+      else if (toolName === 'slack-get-thread-replies') args = { channelId: 'C1234567', threadTs: '1704220700.000100' };
+      else if (toolName === 'slack-get-channel-context') args = { channelId: 'C1234567', messageTs: '1704220740.012345' };
+      else if (toolName === 'slack-get-file-content') args = { fileId: 'F1234567' };
+      else if (toolName === 'slack-search-guide') args = { topic: 'all' };
 
       const callRes = await executeToolCall(toolName, args);
 
@@ -605,6 +610,7 @@ async function runTests() {
       const isExpectedFsWriteBlocked = toolName === 'firestore-set-document' && isError && errText.includes('Mutation Blocked');
       const isExpectedFsDocNotFound = toolName.startsWith('firestore-') && !sampleCollectionId && isError && (errText.includes('Not Found') || errText.includes('access policy'));
       const isExpectedSageHrNotConfigured = toolName.startsWith('sagehr-') && isError && (errText.includes('Sage HR') || errText.includes('SAGEHR') || errText.includes('API key') || errText.includes('disabled'));
+      const isExpectedSlackNotConfigured = toolName.startsWith('slack-') && isError && (errText.includes('Slack') || errText.includes('SLACK') || errText.includes('credentials') || errText.includes('disabled') || errText.includes('unlinked') || errText.includes('workspace') || errText.includes('unauthenticated'));
       const toolPassed = callRes.statusCode === 200 && (
         !isError ||
         isExpectedDisabledService ||
@@ -613,7 +619,8 @@ async function runTests() {
         isExpectedEmptyTable404 ||
         isExpectedFsWriteBlocked ||
         isExpectedFsDocNotFound ||
-        isExpectedSageHrNotConfigured
+        isExpectedSageHrNotConfigured ||
+        isExpectedSlackNotConfigured
       );
 
       let toolDetails = '';

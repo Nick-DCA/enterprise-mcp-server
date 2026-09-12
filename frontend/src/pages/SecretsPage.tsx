@@ -7,6 +7,8 @@ interface SecretsPageProps {
   onOpenUpdateModal: (secret: SecretItem) => void;
   onRefresh: () => Promise<void>;
   onShowToast?: (message: string, type: 'success' | 'error' | 'info') => void;
+  initialCategory?: string;
+  onOpenSlackGuide?: () => void;
 }
 
 type ViewMode = 'cards' | 'table';
@@ -20,6 +22,8 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
   onOpenUpdateModal,
   onRefresh,
   onShowToast,
+  initialCategory,
+  onOpenSlackGuide,
 }) => {
   // View & Structure states with persistence
   const [viewMode, setViewMode] = useState<ViewMode>(() => {
@@ -34,7 +38,7 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
   const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
 
   // Filter states
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory || 'ALL');
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('ALL');
   const [sourceFilter, setSourceFilter] = useState<SourceFilter>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
@@ -51,6 +55,13 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
       localStorage.setItem('mcp_secrets_view_mode', viewMode);
     } catch {}
   }, [viewMode]);
+
+  // Sync initialCategory when navigated from onboarding guides
+  useEffect(() => {
+    if (initialCategory) {
+      setSelectedCategory(initialCategory);
+    }
+  }, [initialCategory]);
 
   const categories = [
     'ALL',
@@ -142,7 +153,13 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
     return secrets
       .filter((s) => {
         // Category filter
-        const matchesCategory = selectedCategory === 'ALL' || s.category === selectedCategory;
+        const isCoreCategory = (cat?: string) => cat === 'Platform' || cat === 'Google Workspace Auth';
+        const matchesCategory =
+          selectedCategory === 'ALL'
+            ? true
+            : selectedCategory === 'CORE'
+            ? isCoreCategory(s.category)
+            : s.category === selectedCategory;
 
         // Status filter
         let matchesStatus = true;
@@ -210,13 +227,33 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
           title: groupKey,
           secrets: [],
           icon: groupBy === 'category' ? getCategoryIcon(groupKey) : 'shield',
-          subtitle: groupBy === 'customer' && sec.customerName ? `Customer-partitioned credentials for ${sec.customerName}` : undefined,
+          subtitle:
+            groupBy === 'category' && groupKey === 'Slack'
+              ? 'Federated user-delegated search across authorized Slack channels and DMs with automated Token Rotation.'
+              : (groupBy === 'customer' && sec.customerName ? `Customer-partitioned credentials for ${sec.customerName}` : undefined),
         });
       }
       map.get(groupKey)!.secrets.push(sec);
     });
 
-    return Array.from(map.values());
+    const list = Array.from(map.values());
+
+    if (groupBy === 'category') {
+      // Platform always first, Google Workspace Auth always second, then remaining categories
+      list.sort((a, b) => {
+        const getPriority = (key: string) => {
+          if (key === 'Platform') return 1;
+          if (key === 'Google Workspace Auth') return 2;
+          return 10;
+        };
+        const pA = getPriority(a.key);
+        const pB = getPriority(b.key);
+        if (pA !== pB) return pA - pB;
+        return a.title.localeCompare(b.title);
+      });
+    }
+
+    return list;
   }, [filteredSecrets, groupBy]);
 
   return (
@@ -266,9 +303,12 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
         {/* Card 1: Core Platform Setup */}
         <div
           className="stat-card"
-          style={{ cursor: 'pointer' }}
-          onClick={() => setSelectedCategory(selectedCategory === 'Platform' ? 'ALL' : 'Platform')}
-          title="Click to filter Core Platform secrets"
+          style={{
+            cursor: 'pointer',
+            borderColor: selectedCategory === 'CORE' ? 'var(--accent-primary)' : undefined,
+          }}
+          onClick={() => setSelectedCategory(selectedCategory === 'CORE' ? 'ALL' : 'CORE')}
+          title="Click to filter Core Platform setup (Platform & Google Workspace Auth)"
         >
           <div className="stat-icon cyan">
             <ThemeIcon name="shield" size={20} />
@@ -520,7 +560,7 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
                 >
                   {countInfo.total}
                 </span>
-                {countInfo.missing > 0 && (
+                {countInfo.missing > 0 ? (
                   <span
                     style={{
                       fontSize: '0.625rem',
@@ -536,12 +576,90 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
                   >
                     {countInfo.missing} missing
                   </span>
-                )}
+                ) : countInfo.total > 0 && cat !== 'ALL' ? (
+                  <span
+                    style={{
+                      fontSize: '0.625rem',
+                      padding: '1px 5px',
+                      borderRadius: '8px',
+                      backgroundColor: isSelected ? 'rgba(16, 185, 129, 0.35)' : 'rgba(16, 185, 129, 0.15)',
+                      color: isSelected ? '#FFFFFF' : 'var(--emerald-bright)',
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 700,
+                      border: '1px solid rgba(16, 185, 129, 0.3)',
+                    }}
+                    title="All secrets configured"
+                  >
+                    Configured
+                  </span>
+                ) : null}
               </button>
             );
           })}
         </div>
       </div>
+
+      {/* Slack Onboarding Staging Banner */}
+      {selectedCategory === 'Slack' && (
+        <div
+          style={{
+            background: 'rgba(168, 85, 247, 0.1)',
+            border: '1px solid rgba(168, 85, 247, 0.3)',
+            borderRadius: 'var(--radius-md)',
+            padding: '1rem 1.25rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1rem',
+            flexWrap: 'wrap',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '8px',
+                background: 'rgba(168, 85, 247, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#C084FC',
+                flexShrink: 0,
+              }}
+            >
+              <ThemeIcon name="sparkles" size={20} />
+            </div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '0.925rem', color: '#E9D5FF' }}>
+                Slack Federated Search &bull; Secrets Vault Staging
+              </div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                Stage your <code>SLACK_CLIENT_ID</code> and <code>SLACK_CLIENT_SECRET</code> from your Slack App Console. The redirect URI is auto-configured to your gateway domain.
+              </div>
+            </div>
+          </div>
+          {onOpenSlackGuide && (
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              style={{
+                borderColor: 'rgba(168, 85, 247, 0.5)',
+                color: '#C084FC',
+                background: 'rgba(168, 85, 247, 0.15)',
+                fontWeight: 600,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+              }}
+              onClick={onOpenSlackGuide}
+            >
+              <ThemeIcon name="sparkles" size={13} />
+              <span>Admin Setup Guide</span>
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Active Filter Indicators & Result Summary */}
       {(selectedCategory !== 'ALL' || statusFilter !== 'ALL' || sourceFilter !== 'ALL' || searchQuery) && (
@@ -559,7 +677,7 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
         >
           <div>
             Showing <strong>{filteredSecrets.length}</strong> of {secrets.length} secrets
-            {selectedCategory !== 'ALL' && <span> in <strong>{selectedCategory}</strong></span>}
+            {selectedCategory !== 'ALL' && <span> in <strong>{selectedCategory === 'CORE' ? 'Core Platform Setup (Platform & Google Workspace Auth)' : selectedCategory}</strong></span>}
             {statusFilter !== 'ALL' && <span> with status <strong>{statusFilter}</strong></span>}
             {searchQuery && <span> matching <strong>"{searchQuery}"</strong></span>}
           </div>
@@ -681,7 +799,7 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
                           {groupConfiguredCount}/{groupTotalCount} configured
                         </span>
 
-                        {groupMissingCount > 0 && (
+                        {groupMissingCount > 0 ? (
                           <span
                             className="badge badge-rose"
                             style={{
@@ -696,7 +814,22 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
                             <span className="pulse-dot" />
                             {groupMissingCount} missing
                           </span>
-                        )}
+                        ) : groupTotalCount > 0 ? (
+                          <span
+                            className="badge badge-emerald"
+                            style={{
+                              fontSize: '0.675rem',
+                              padding: '2px 7px',
+                              whiteSpace: 'nowrap',
+                              flexShrink: 0,
+                              textTransform: 'none',
+                              letterSpacing: '0.02em',
+                            }}
+                          >
+                            <span className="pulse-dot" />
+                            Configured
+                          </span>
+                        ) : null}
                       </div>
                     </div>
 
@@ -741,6 +874,54 @@ export const SecretsPage: React.FC<SecretsPageProps> = ({
             {/* Group Body */}
             {!isCollapsed && (
               <div className="secrets-section-body">
+                {/* Slack Staging Quick Banner inside the group */}
+                {group.key === 'Slack' && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.85rem 1.15rem',
+                      marginBottom: '1rem',
+                      borderRadius: '8px',
+                      background: 'rgba(168, 85, 247, 0.1)',
+                      border: '1px solid rgba(168, 85, 247, 0.35)',
+                      flexWrap: 'wrap',
+                      gap: '0.75rem',
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#E9D5FF' }}>
+                        Slack Federated Search
+                      </div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                        Federated user-delegated search across authorized Slack channels and DMs with automated Token Rotation.
+                      </div>
+                    </div>
+                    {onOpenSlackGuide && (
+                      <button
+                        type="button"
+                        className="btn btn-secondary btn-sm"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.4rem',
+                          borderColor: 'rgba(168, 85, 247, 0.5)',
+                          color: '#C084FC',
+                          background: 'rgba(168, 85, 247, 0.18)',
+                          fontWeight: 600,
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onOpenSlackGuide();
+                        }}
+                      >
+                        <ThemeIcon name="sparkles" size={13} />
+                        <span>Admin Setup Guide</span>
+                      </button>
+                    )}
+                  </div>
+                )}
                 {/* -----------------------------------------------------------------
                     VIEW MODE 1: STRUCTURED CARDS GRID (DEFAULT & MOBILE READY)
                     ----------------------------------------------------------------- */}

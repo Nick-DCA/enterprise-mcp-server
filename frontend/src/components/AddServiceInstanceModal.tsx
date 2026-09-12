@@ -61,7 +61,9 @@ export const AddServiceInstanceModal: React.FC<AddServiceInstanceModalProps> = (
           ? `Xero Accounting (${cleanCustomer})`
           : serviceId === 'firestore'
           ? `Cloud Firestore (${cleanCustomer})`
-          : `Sage HR (${cleanCustomer})`;
+          : serviceId === 'sagehr'
+          ? `Sage HR (${cleanCustomer})`
+          : `Slack Federated Search (${cleanCustomer})`;
 
       let initialSettings: Record<string, any> = {};
       let requiredSecrets: string[] = [];
@@ -104,6 +106,19 @@ export const AddServiceInstanceModal: React.FC<AddServiceInstanceModalProps> = (
           allowWrites: true,
         };
         requiredSecrets = [`SAGE_HR_API_KEY_${secSuffix}`];
+      } else if (serviceId === 'slack') {
+        const secSuffix = (customSecretPrefix || cleanCustomer).toUpperCase().replace(/[^A-Z0-9]/g, '_');
+        initialSettings = {
+          maxResults: 10,
+          defaultResults: 5,
+          rateLimitPerMinute: 10,
+          includeDMs: true,
+          maxSnippetLength: 500,
+        };
+        requiredSecrets = [
+          `SLACK_CLIENT_ID_${secSuffix}`,
+          `SLACK_CLIENT_SECRET_${secSuffix}`,
+        ];
       }
 
       await onCreate({
@@ -179,6 +194,16 @@ export const AddServiceInstanceModal: React.FC<AddServiceInstanceModalProps> = (
               >
                 <ThemeIcon name="sagehr" size={16} />
                 <span>Sage HR</span>
+              </button>
+
+              <button
+                type="button"
+                className={`btn btn-sm ${serviceId === 'slack' ? 'btn-primary' : 'btn-secondary'}`}
+                onClick={() => setServiceId('slack')}
+                style={{ justifyContent: 'flex-start', padding: '0.6rem 0.85rem' }}
+              >
+                <ThemeIcon name="search" size={16} />
+                <span>Slack Federated</span>
               </button>
             </div>
           </div>

@@ -19,6 +19,7 @@ export type DomainName =
   | 'bigquery'
   | 'firestore'
   | 'sagehr'
+  | 'slack'
   | 'accounting'
   | 'contacts'
   | 'payroll'

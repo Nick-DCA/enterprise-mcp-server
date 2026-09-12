@@ -71,8 +71,9 @@ export function createApp(options?: CreateAppOptions): express.Application {
   const hasFrontendDist = fs.existsSync(frontendDistPath);
 
   if (hasFrontendDist) {
-    // Serve static frontend assets under /admin
+    // Serve static frontend assets under /admin and /assets
     app.use('/admin', express.static(frontendDistPath));
+    app.use('/assets', express.static(path.join(frontendDistPath, 'assets')));
 
     // Handle React Router SPA client-side routes under /admin/*
     app.get(['/admin', '/admin/*'], (_req, res) => {
@@ -96,148 +97,291 @@ export function createApp(options?: CreateAppOptions): express.Application {
     });
   }
 
+  // Dynamic portal theme stylesheet endpoint (serves the active CSS tokens and styles)
+  app.get(['/theme.css', '/assets/theme.css'], (_req, res) => {
+    // 1. Check compiled frontend dist assets
+    if (fs.existsSync(frontendDistPath)) {
+      const assetsDir = path.join(frontendDistPath, 'assets');
+      if (fs.existsSync(assetsDir)) {
+        try {
+          const cssFiles = fs.readdirSync(assetsDir).filter((f) => f.endsWith('.css'));
+          if (cssFiles.length > 0) {
+            res.type('text/css').sendFile(path.join(assetsDir, cssFiles[0]));
+            return;
+          }
+        } catch {}
+      }
+    }
+    // 2. Fallback to source index.css
+    const srcCssPath = path.resolve(process.cwd(), 'frontend', 'src', 'index.css');
+    if (fs.existsSync(srcCssPath)) {
+      res.type('text/css').sendFile(srcCssPath);
+      return;
+    }
+    res.status(404).type('text/plain').send('/* Theme stylesheet not found */');
+  });
+
   // Public Root landing page
   app.get('/', (_req, res) => {
     res.type('html').send(`
       <!DOCTYPE html>
-      <html lang="en">
+      <html
+        lang="en"
+        data-theme="minimal-dark"
+        data-mode="dark"
+        data-icons="feather"
+        data-accent="mono"
+        data-palette="monochrome-titanium"
+        data-radius="compact"
+        data-layout="sidebar"
+      >
         <head>
           <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
           <title>Enterprise Multi-SaaS MCP Gateway</title>
+          <link rel="icon" type="image/png" href="/favicon.png" />
+          <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+          <link rel="stylesheet" href="/theme.css" />
+          <script>
+            (function() {
+              function applyPortalTheme() {
+                try {
+                  var saved = localStorage.getItem('mcp_portal_theme_config');
+                  if (saved) {
+                    var cfg = JSON.parse(saved);
+                    var root = document.documentElement;
+                    if (cfg.preset) root.setAttribute('data-theme', cfg.preset);
+                    if (cfg.mode) root.setAttribute('data-mode', cfg.mode);
+                    if (cfg.accent) root.setAttribute('data-accent', cfg.accent);
+                    if (cfg.palette) root.setAttribute('data-palette', cfg.palette);
+                    if (cfg.radius) root.setAttribute('data-radius', cfg.radius);
+                    if (cfg.iconStyle) root.setAttribute('data-icons', cfg.iconStyle);
+                    if (cfg.layoutMode) root.setAttribute('data-layout', cfg.layoutMode);
+                    
+                    var indicator = document.getElementById('theme-indicator');
+                    if (indicator) {
+                      var presetName = cfg.preset ? cfg.preset.replace('-', ' ') : 'minimal dark';
+                      var accentName = cfg.accent || 'mono';
+                      indicator.textContent = 'Theme: ' + presetName.toUpperCase() + ' (' + accentName + ')';
+                    }
+                  }
+                } catch (e) {}
+              }
+              applyPortalTheme();
+              window.addEventListener('storage', applyPortalTheme);
+              document.addEventListener('DOMContentLoaded', applyPortalTheme);
+            })();
+          </script>
           <style>
             * { box-sizing: border-box; margin: 0; padding: 0; }
             body {
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-              background: radial-gradient(circle at 50% 0%, #1E293B 0%, #0B0F17 75%);
-              color: #F1F5F9;
+              font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+              background-color: var(--bg-main, #09090B);
+              color: var(--text-primary, #FAFAFA);
               min-height: 100vh;
               display: flex;
               align-items: center;
               justify-content: center;
               padding: 1.5rem;
+              line-height: 1.5;
+              -webkit-font-smoothing: antialiased;
             }
-            .card {
-              background: rgba(30, 41, 59, 0.7);
-              backdrop-filter: blur(16px);
-              border: 1px solid rgba(255, 255, 255, 0.1);
-              border-radius: 16px;
+            .landing-card {
+              background: var(--bg-card, #18181B);
+              border: var(--card-border-width, 1px) solid var(--border-subtle, #27272A);
+              backdrop-filter: var(--backdrop-blur, none);
+              border-radius: var(--radius-lg, 12px);
               max-width: 680px;
               width: 100%;
-              padding: 2.5rem;
-              box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.15);
+              padding: 2.75rem 2.5rem;
+              box-shadow: var(--shadow-lg, 0 10px 30px rgba(0, 0, 0, 0.4));
+              transition: border-color 0.2s ease, box-shadow 0.2s ease;
             }
-            .badge {
+            .landing-card:hover {
+              border-color: var(--border-active, #3F3F46);
+            }
+            .brand-badge-row {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 1.25rem;
+              flex-wrap: wrap;
+              gap: 0.5rem;
+            }
+            .badge-pulse {
               display: inline-flex;
               align-items: center;
               gap: 6px;
-              background: rgba(16, 185, 129, 0.15);
-              color: #34D399;
+              background: rgba(16, 185, 129, 0.12);
+              color: var(--emerald-bright, #34D399);
               border: 1px solid rgba(16, 185, 129, 0.3);
               padding: 4px 12px;
-              border-radius: 9999px;
-              font-size: 0.825rem;
-              font-weight: 600;
-              margin-bottom: 1.25rem;
+              border-radius: var(--radius-full, 9999px);
+              font-size: 0.725rem;
+              font-weight: 700;
+              letter-spacing: 0.05em;
+              text-transform: uppercase;
             }
-            .pulse {
-              width: 8px;
-              height: 8px;
+            .pulse-dot {
+              width: 7px;
+              height: 7px;
               border-radius: 50%;
-              background: #10B981;
-              box-shadow: 0 0 8px #10B981;
+              background: var(--emerald-primary, #10B981);
+              box-shadow: 0 0 8px var(--emerald-primary, #10B981);
+            }
+            .theme-tag {
+              font-size: 0.725rem;
+              font-family: var(--font-mono, monospace);
+              color: var(--text-muted, #71717A);
+              letter-spacing: 0.03em;
             }
             h1 {
-              font-size: 1.75rem;
-              font-weight: 700;
-              letter-spacing: -0.025em;
+              font-size: 1.85rem;
+              font-weight: 800;
+              letter-spacing: -0.03em;
+              color: var(--text-primary, #FAFAFA);
               margin-bottom: 0.75rem;
-              background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
+              line-height: 1.2;
             }
-            p {
-              color: #94A3B8;
-              font-size: 0.975rem;
+            p.lead {
+              color: var(--text-secondary, #A1A1AA);
+              font-size: 0.95rem;
               line-height: 1.6;
               margin-bottom: 1.75rem;
             }
+            .connectors-strip {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 0.5rem;
+              margin-bottom: 2rem;
+              padding: 0.75rem 1rem;
+              background: var(--bg-input, #121215);
+              border: 1px solid var(--border-subtle, #27272A);
+              border-radius: var(--radius-md, 6px);
+            }
+            .connector-chip {
+              font-size: 0.75rem;
+              font-family: var(--font-mono, monospace);
+              color: var(--text-secondary, #A1A1AA);
+              display: inline-flex;
+              align-items: center;
+              gap: 4px;
+            }
+            .connector-chip strong {
+              color: var(--text-primary, #FAFAFA);
+            }
+            .connector-chip::after {
+              content: "•";
+              margin-left: 6px;
+              color: var(--border-active, #3F3F46);
+            }
+            .connector-chip:last-child::after {
+              content: "";
+            }
             .grid {
               display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+              grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
               gap: 1rem;
               margin-bottom: 2rem;
             }
-            .btn-primary {
+            .action-card {
               display: flex;
               flex-direction: column;
-              background: linear-gradient(135deg, #0284C7 0%, #2563EB 100%);
-              color: #FFFFFF;
+              padding: 1.25rem 1.35rem;
+              border-radius: var(--radius-md, 6px);
               text-decoration: none;
-              padding: 1.2rem;
-              border-radius: 12px;
-              font-weight: 600;
-              font-size: 1rem;
-              transition: transform 0.2s, box-shadow 0.2s;
-              border: 1px solid rgba(255, 255, 255, 0.2);
+              transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
             }
-            .btn-primary:hover {
+            .action-primary {
+              background: var(--accent-primary, #FAFAFA);
+              color: var(--accent-contrast, #09090B);
+              border: 1px solid transparent;
+            }
+            .action-primary:hover {
               transform: translateY(-2px);
-              box-shadow: 0 10px 20px -5px rgba(2, 132, 199, 0.5);
+              background: var(--accent-bright, #FFFFFF);
+              box-shadow: 0 10px 20px -5px var(--accent-glow, rgba(250, 250, 250, 0.25));
             }
-            .btn-secondary {
+            .action-secondary {
+              background: var(--bg-card-hover, #27272A);
+              color: var(--text-primary, #FAFAFA);
+              border: 1px solid var(--border-subtle, #27272A);
+            }
+            .action-secondary:hover {
+              transform: translateY(-2px);
+              background: var(--bg-elevated, #3F3F46);
+              border-color: var(--border-active, #52525B);
+            }
+            .action-title {
+              font-weight: 700;
+              font-size: 1.05rem;
               display: flex;
-              flex-direction: column;
-              background: rgba(15, 23, 42, 0.8);
-              color: #E2E8F0;
-              text-decoration: none;
-              padding: 1.2rem;
-              border-radius: 12px;
-              font-weight: 600;
-              font-size: 1rem;
-              transition: transform 0.2s, border-color 0.2s;
-              border: 1px solid rgba(255, 255, 255, 0.1);
+              align-items: center;
+              gap: 0.5rem;
             }
-            .btn-secondary:hover {
-              transform: translateY(-2px);
-              border-color: rgba(56, 189, 248, 0.4);
-            }
-            .btn-desc {
+            .action-desc {
               font-size: 0.8rem;
               font-weight: 400;
-              opacity: 0.8;
-              margin-top: 4px;
+              opacity: 0.85;
+              margin-top: 0.35rem;
+              line-height: 1.4;
             }
             .footer-info {
               display: flex;
               justify-content: space-between;
-              font-size: 0.8rem;
-              color: #64748B;
-              border-top: 1px solid rgba(255, 255, 255, 0.08);
+              font-size: 0.775rem;
+              color: var(--text-muted, #71717A);
+              border-top: 1px solid var(--border-subtle, #27272A);
               padding-top: 1.25rem;
+              flex-wrap: wrap;
+              gap: 0.5rem;
+            }
+            .footer-info code {
+              font-family: var(--font-mono, monospace);
+              color: var(--text-secondary, #A1A1AA);
+              background: var(--bg-input, #121215);
+              padding: 2px 6px;
+              border-radius: var(--radius-sm, 3px);
+              border: 1px solid var(--border-subtle, #27272A);
             }
           </style>
         </head>
         <body>
-          <div class="card">
-            <div class="badge"><span class="pulse"></span> System Operational</div>
+          <div class="landing-card">
+            <div class="brand-badge-row">
+              <div class="badge-pulse"><span class="pulse-dot"></span> System Operational</div>
+              <span id="theme-indicator" class="theme-tag">Theme: Minimal Dark</span>
+            </div>
+
             <h1>Enterprise Multi-SaaS MCP Gateway</h1>
-            <p>Unified Model Context Protocol gateway hosting 59 tools across Xero Accounting, Google BigQuery, Cloud Firestore, and Sage HR for Google Gemini Enterprise.</p>
+            <p class="lead">Unified Model Context Protocol gateway hosting 61 tools across Xero Accounting, Google BigQuery, Cloud Firestore, Sage HR, and Slack Federated Search for Google Gemini Enterprise.</p>
             
+            <div class="connectors-strip">
+              <span class="connector-chip"><strong>BigQuery</strong> (5)</span>
+              <span class="connector-chip"><strong>Xero</strong> (36)</span>
+              <span class="connector-chip"><strong>Firestore</strong> (6)</span>
+              <span class="connector-chip"><strong>Sage HR</strong> (12)</span>
+              <span class="connector-chip"><strong>Slack</strong> (2)</span>
+            </div>
+
             <div class="grid">
-              <a href="/admin" class="btn-primary">
-                <span>⚙️ Administration Portal</span>
-                <span class="btn-desc">Manage SaaS toggles, secrets, & permissions</span>
+              <a href="/admin" class="action-card action-primary">
+                <span class="action-title">Administration Portal</span>
+                <span class="action-desc">Configure multi-instance SaaS cards, secret vaults, &amp; IAM permissions</span>
               </a>
-              <a href="/healthz" class="btn-secondary">
-                <span>🩺 System Health Status</span>
-                <span class="btn-desc">Check runtime health & GCP Secret status</span>
+              <a href="/healthz" class="action-card action-secondary">
+                <span class="action-title">System Health Status</span>
+                <span class="action-desc">Check runtime diagnostic health &amp; GCP Secret Manager status</span>
               </a>
             </div>
 
             <div class="footer-info">
               <span>StreamableHTTP: <code>/mcp</code></span>
               <span>OAuth PKCE: <code>/oauth/*</code></span>
+              <span>REST API: <code>/api/*</code></span>
             </div>
           </div>
         </body>

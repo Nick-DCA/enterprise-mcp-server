@@ -198,7 +198,7 @@ authApiRouter.get('/callback', async (req: Request, res: Response) => {
           fullName: profile.name || email.split('@')[0],
           isAdmin: isFirst,
           isEnabled: true,
-          allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr'],
+          allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
           readOnlyOnly: false,
         },
         'google-oauth'
@@ -268,7 +268,7 @@ authApiRouter.post('/dev-login', async (req: Request, res: Response) => {
         fullName: fullName || cleanEmail.split('@')[0],
         isAdmin: true,
         isEnabled: true,
-        allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr'],
+        allowedServices: ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
         readOnlyOnly: false,
       },
       'dev-login'

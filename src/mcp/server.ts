@@ -9,6 +9,7 @@ import {
 import { bigqueryTools } from '../services/bigquery/tools/index.js';
 import { firestoreTools } from '../services/firestore/tools/index.js';
 import { sagehrTools } from '../services/sagehr/tools/index.js';
+import { slackTools } from '../services/slack/tools/index.js';
 import { logger } from '../utils/logger.js';
 
 /**
@@ -39,6 +40,9 @@ export function createMcpServer(): McpServer {
 
   // Register Sage HR domain tools
   registry.registerDomainTools(server, 'sagehr', sagehrTools);
+
+  // Register Slack domain tools
+  registry.registerDomainTools(server, 'slack', slackTools);
 
   logger.info(`Registered ${registry.getRegisteredCount()} total MCP tools across enabled domains`);
   return server;

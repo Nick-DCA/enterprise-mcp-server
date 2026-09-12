@@ -1,5 +1,6 @@
 import { runtimeConfig, ServiceId } from '../config/runtimeConfig.js';
 import { DomainName, ToolDefinition } from './types.js';
+import { RequestContext } from '../server/context.js';
 import { logger } from '../utils/logger.js';
 
 export function resolveServiceIdFromDomain(domain: DomainName): ServiceId | null {
@@ -15,6 +16,9 @@ export function resolveServiceIdFromDomain(domain: DomainName): ServiceId | null
   }
   if (['sagehr'].includes(lower)) {
     return 'sagehr';
+  }
+  if (['slack'].includes(lower)) {
+    return 'slack';
   }
   return null;
 }
@@ -45,35 +49,64 @@ export async function checkToolExecutionAccess(
     }
   }
 
-  // 2. Check user-level permissions if a specific user context was passed
-  if (userEmail) {
-    const userAccess = await runtimeConfig.getUserAccess(userEmail);
-    if (userAccess) {
-      if (!userAccess.isEnabled) {
-        return {
-          allowed: false,
-          reason: `Platform access for user '${userEmail}' has been disabled by an administrator.`,
-        };
-      }
+  // 2. Check user-level permissions
+  const effectiveEmail = userEmail || RequestContext.getUserEmail();
 
+  if (effectiveEmail) {
+    const userAccess = await runtimeConfig.getUserAccess(effectiveEmail);
+
+    // If user account is explicitly disabled in users_access, block immediately
+    if (userAccess && !userAccess.isEnabled) {
+      return {
+        allowed: false,
+        reason: `Platform access for user '${effectiveEmail}' has been disabled by an administrator.`,
+      };
+    }
+
+    // Special handling for Slack: Check the "allowAllUsers" security policy toggle
+    if (serviceId === 'slack') {
+      const slackConfig = await runtimeConfig.getServiceConfig('slack');
+      const allowAllUsers = slackConfig?.settings?.allowAllUsers !== false; // Default: true
+
+      if (allowAllUsers) {
+        // Under open user delegation, any authenticated corporate user can search/init Slack
+        return { allowed: true };
+      } else {
+        // Strict IAM Mode: Require user to exist in users_access with 'slack' in allowedServices
+        if (!userAccess) {
+          return {
+            allowed: false,
+            reason: `User '${effectiveEmail}' requires an explicit administrator grant in Users & Access to use Slack tools.`,
+          };
+        }
+        if (!userAccess.allowedServices.includes('slack')) {
+          return {
+            allowed: false,
+            reason: `User '${effectiveEmail}' does not have permission to access 'SLACK' tools under current security policy.`,
+          };
+        }
+      }
+    }
+
+    if (userAccess) {
       if (serviceId && !userAccess.allowedServices.includes(serviceId)) {
         return {
           allowed: false,
-          reason: `User '${userEmail}' does not have permission to access '${serviceId.toUpperCase()}' tools.`,
+          reason: `User '${effectiveEmail}' does not have permission to access '${serviceId.toUpperCase()}' tools.`,
         };
       }
 
       if (userAccess.readOnlyOnly && !toolDef.annotations.readOnlyHint) {
         return {
           allowed: false,
-          reason: `User '${userEmail}' has read-only restrictions. The requested tool '${toolDef.name}' performs mutating or destructive operations.`,
+          reason: `User '${effectiveEmail}' has read-only restrictions. The requested tool '${toolDef.name}' performs mutating or destructive operations.`,
         };
       }
 
       if (userAccess.customDeniedTools.includes(toolDef.name)) {
         return {
           allowed: false,
-          reason: `Tool '${toolDef.name}' is explicitly blocked for user '${userEmail}'.`,
+          reason: `Tool '${toolDef.name}' is explicitly blocked for user '${effectiveEmail}'.`,
         };
       }
     }

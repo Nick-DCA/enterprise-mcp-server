@@ -2,15 +2,16 @@ import { xeroTools } from '../src/services/xero/tools/index.js';
 import { bigqueryTools } from '../src/services/bigquery/tools/index.js';
 import { firestoreTools } from '../src/services/firestore/tools/index.js';
 import { sagehrTools } from '../src/services/sagehr/tools/index.js';
+import { slackTools } from '../src/services/slack/tools/index.js';
 
 function testSchemas() {
   console.log('====================================================');
   console.log('🧪 Running Tool Schemas Validation Test Suite');
   console.log('====================================================\n');
 
-  const allTools = [...xeroTools, ...bigqueryTools, ...firestoreTools, ...sagehrTools];
+  const allTools = [...xeroTools, ...bigqueryTools, ...firestoreTools, ...sagehrTools, ...slackTools];
 
-  console.log(`Total tools loaded across all services (Xero + BigQuery + Firestore + Sage HR): ${allTools.length}`);
+  console.log(`Total tools loaded across all services (Xero + BigQuery + Firestore + Sage HR + Slack): ${allTools.length}`);
 
   let passed = true;
 
@@ -25,10 +26,11 @@ function testSchemas() {
       tool.name.startsWith('xero-') ||
       tool.name.startsWith('bigquery-') ||
       tool.name.startsWith('firestore-') ||
-      tool.name.startsWith('sagehr-');
+      tool.name.startsWith('sagehr-') ||
+      tool.name.startsWith('slack-');
 
     if (!hasValidPrefix) {
-      console.error(`❌ Tool '${tool.name}' does not follow standardized product prefix (xero-, bigquery-, firestore-, sagehr-)`);
+      console.error(`❌ Tool '${tool.name}' does not follow standardized product prefix (xero-, bigquery-, firestore-, sagehr-, slack-)`);
       passed = false;
     }
 
@@ -54,7 +56,7 @@ function testSchemas() {
   }
 
   if (passed) {
-    console.log(`✅ All ${allTools.length} tool definitions validated successfully across all 4 services!`);
+    console.log(`✅ All ${allTools.length} tool definitions validated successfully across all 5 services!`);
   } else {
     console.error('❌ Schema validation failed!');
     process.exit(1);

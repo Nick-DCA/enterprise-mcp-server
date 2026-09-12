@@ -95,7 +95,7 @@ export async function requireAdminAuth(req: Request, res: Response, next: NextFu
       fullName: session.fullName,
       isAdmin: true,
       isEnabled: userAccess?.isEnabled ?? true,
-      allowedServices: userAccess?.allowedServices || ['xero', 'bigquery', 'firestore', 'sagehr'],
+      allowedServices: userAccess?.allowedServices || ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
       readOnlyOnly: userAccess?.readOnlyOnly ?? false,
       session,
       userAccess: userAccess || undefined,

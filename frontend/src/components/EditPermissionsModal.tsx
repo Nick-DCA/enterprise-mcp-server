@@ -144,7 +144,7 @@ export const EditPermissionsModal: React.FC<EditPermissionsModalProps> = ({
               ALLOWED SAAS CONNECTORS
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
-              {(['xero', 'bigquery', 'firestore', 'sagehr'] as ServiceId[]).map((id) => {
+              {(['xero', 'bigquery', 'firestore', 'sagehr', 'slack'] as ServiceId[]).map((id) => {
                 const isSelected = allowedServices.includes(id);
                 return (
                   <label
@@ -170,7 +170,7 @@ export const EditPermissionsModal: React.FC<EditPermissionsModalProps> = ({
                     />
                     <ThemeIcon name={id as any} size={14} />
                     <span style={{ textTransform: 'capitalize' }}>
-                      {id === 'sagehr' ? 'Sage HR' : id === 'bigquery' ? 'BigQuery' : id}
+                      {id === 'sagehr' ? 'Sage HR' : id === 'bigquery' ? 'BigQuery' : id === 'slack' ? 'Slack' : id}
                     </span>
                   </label>
                 );

@@ -1,4 +1,4 @@
-export type ServiceId = 'xero' | 'bigquery' | 'firestore' | 'sagehr';
+export type ServiceId = 'xero' | 'bigquery' | 'firestore' | 'sagehr' | 'slack';
 
 export interface ServiceConfig {
   instanceId: string;
@@ -16,7 +16,7 @@ export interface ServiceConfig {
 
 export interface SecretItem {
   key: string;
-  category: 'Platform' | 'Xero' | 'BigQuery' | 'Firestore' | 'Sage HR' | 'Google Workspace Auth';
+  category: 'Platform' | 'Xero' | 'BigQuery' | 'Firestore' | 'Sage HR' | 'Slack' | 'Google Workspace Auth';
   description: string;
   required: boolean;
   isConfigured: boolean;

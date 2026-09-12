@@ -37,7 +37,7 @@ usersApiRouter.post('/', async (req: Request, res: Response) => {
     fullName,
     isAdmin = false,
     isEnabled = true,
-    allowedServices = ['xero', 'bigquery', 'firestore', 'sagehr'],
+    allowedServices = ['xero', 'bigquery', 'firestore', 'sagehr', 'slack'],
     readOnlyOnly = false,
     customDeniedTools = [],
   } = req.body || {};

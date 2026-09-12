@@ -24,6 +24,7 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose, onA
     'bigquery',
     'firestore',
     'sagehr',
+    'slack',
   ]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -142,7 +143,7 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose, onA
               PERMITTED SAAS SERVICES
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
-              {(['xero', 'bigquery', 'firestore', 'sagehr'] as ServiceId[]).map((id) => {
+              {(['xero', 'bigquery', 'firestore', 'sagehr', 'slack'] as ServiceId[]).map((id) => {
                 const isSelected = allowedServices.includes(id);
                 return (
                   <label
@@ -168,7 +169,7 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose, onA
                     />
                     <ThemeIcon name={id as any} size={14} />
                     <span style={{ textTransform: 'capitalize' }}>
-                      {id === 'sagehr' ? 'Sage HR' : id === 'bigquery' ? 'BigQuery' : id}
+                      {id === 'sagehr' ? 'Sage HR' : id === 'bigquery' ? 'BigQuery' : id === 'slack' ? 'Slack' : id}
                     </span>
                   </label>
                 );

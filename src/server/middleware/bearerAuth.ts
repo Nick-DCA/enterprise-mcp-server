@@ -4,6 +4,8 @@ import { AccessTokenPayload, McpAuthConfig } from '../../auth/types.js';
 import { getMcpAuthConfig } from '../../config/authConfig.js';
 import { logger } from '../../utils/logger.js';
 
+import { RequestContext } from '../context.js';
+
 type JwtSecretResolver = string | McpAuthConfig | (() => Promise<string>) | undefined;
 
 let cachedJwtSecret: string | null = null;
@@ -60,8 +62,20 @@ export function createBearerAuthMiddleware(secretResolver?: JwtSecretResolver) {
         expiresAt: decoded.exp,
         ...decoded,
       };
-      logger.debug({ sub: decoded.sub, path: req.path }, 'Bearer token authenticated successfully');
-      next();
+      const userEmail = (decoded as any).email || (decoded as any).userEmail || decoded.sub;
+      RequestContext.run(
+        {
+          userEmail,
+          authUserId: decoded.sub,
+          token,
+          clientId: decoded.sub,
+          scopes: (decoded.scope || '').split(' ').filter(Boolean),
+          ...decoded,
+        },
+        () => {
+          next();
+        }
+      );
     } catch (err: any) {
       logger.warn(
         { path: req.path, method: req.method, error: err.message, ip: req.ip },

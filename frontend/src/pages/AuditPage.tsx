@@ -196,14 +196,14 @@ export const AuditPage: React.FC<AuditPageProps> = ({ onShowToast }) => {
         };
       default:
         return {
-          title: log.action.replace(/_/g, ' '),
+          title: (log.action || 'SYSTEM_EVENT').replace(/_/g, ' '),
           badgeClass: 'badge-muted',
           badgeBg: 'rgba(255, 255, 255, 0.08)',
           badgeColor: '#E4E4E7',
           badgeBorder: 'rgba(255, 255, 255, 0.15)',
           icon: 'info' as const,
           category: 'system' as FilterCategory,
-          summary: `Executed ${log.action} on target [${log.target}]`,
+          summary: `Executed ${log.action || 'action'} on target [${log.target || 'system'}]`,
         };
     }
   };
@@ -250,10 +250,10 @@ export const AuditPage: React.FC<AuditPageProps> = ({ onShowToast }) => {
       // 5. Search Query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
-        const actorMatch = log.actorEmail.toLowerCase().includes(q);
-        const actionMatch = log.action.toLowerCase().includes(q);
-        const targetMatch = log.target.toLowerCase().includes(q);
-        const summaryMatch = pres.summary.toLowerCase().includes(q);
+        const actorMatch = (log.actorEmail || '').toLowerCase().includes(q);
+        const actionMatch = (log.action || '').toLowerCase().includes(q);
+        const targetMatch = (log.target || '').toLowerCase().includes(q);
+        const summaryMatch = (pres.summary || '').toLowerCase().includes(q);
         const detailsMatch = JSON.stringify(log.details || {}).toLowerCase().includes(q);
         if (!actorMatch && !actionMatch && !targetMatch && !summaryMatch && !detailsMatch) {
           return false;
@@ -327,7 +327,7 @@ export const AuditPage: React.FC<AuditPageProps> = ({ onShowToast }) => {
   const totalCount = logs.length;
   const filteredCount = filteredLogs.length;
   const criticalActionsCount = logs.filter(
-    (l) => l.action.includes('SECRET') || l.action.includes('REVOKE') || l.action.includes('DELETE')
+    (l) => ((l.action || '').includes('SECRET') || (l.action || '').includes('REVOKE') || (l.action || '').includes('DELETE'))
   ).length;
 
   return (
