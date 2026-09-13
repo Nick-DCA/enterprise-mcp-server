@@ -122,7 +122,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
             style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
           >
             <ThemeIcon name="audit" size={13} />
-            <span>Audit Trail</span>
+            <span>Admin Audit Logs</span>
           </button>
           <button
             className="btn btn-secondary btn-sm"

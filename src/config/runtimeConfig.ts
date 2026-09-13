@@ -130,7 +130,7 @@ const DEFAULT_SERVICE_CONFIGS: Record<ServiceId, { name: string; description: st
     settings: {
       databaseId: process.env.FIRESTORE_DATABASE_ID || '(default)',
       allowedCollections: '', // Default empty: Zero-trust default-deny (query nothing until explicitly allowed)
-      blockedCollections: 'system_metadata,services_config,users_access,user_sessions,sessions,audit_logs',
+      blockedCollections: 'system_metadata,services_config,users_access,user_sessions,sessions,audit_logs,user_logs',
       firestoreGuardrailMode: 'STRICT_READ_ONLY',
       allowedOperations: 'get,list,query,where,orderBy,limit,offset,count,collectionGroup,get document,get documents,list documents,query collection,query collection group,startAt,startAfter,endAt,endBefore,count aggregation',
       blockedOperations: 'create,set,update,delete,batchWrite,transaction,increment,arrayUnion,arrayRemove,deleteField,create document,set document,update document,delete document,batch write',

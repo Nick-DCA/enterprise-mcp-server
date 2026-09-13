@@ -56,6 +56,73 @@ export interface AuditLogItem {
   details: Record<string, any>;
 }
 
+export type McpExecutionStatus = 'SUCCESS' | 'ERROR' | 'RATE_LIMITED' | 'BLOCKED';
+
+export interface UpstreamSpanItem {
+  spanId: string;
+  serviceId: 'xero' | 'bigquery' | 'firestore' | 'sagehr' | 'slack' | 'platform';
+  endpoint: string;
+  httpMethod?: string;
+  httpStatus?: number;
+  durationMs: number;
+  rateLimitRemaining?: number;
+  quotaInfo?: string;
+  errorMessage?: string;
+  timestamp: string;
+}
+
+export interface UserLogTraceItem {
+  traceId: string;
+  timestamp: string;
+  timestampEpochMs: number;
+  userEmail?: string;
+  clientId?: string;
+  isHumanUser: boolean;
+  ipAddress?: string;
+  userAgent?: string;
+  jsonrpcMethod: string;
+  toolName?: string;
+  domain?: string;
+  arguments?: Record<string, any>;
+  status: McpExecutionStatus;
+  durationMs: number;
+  responsePreview?: string;
+  responsePayload?: string;
+  responseChars: number;
+  errorMessage?: string;
+  upstreamSpans: UpstreamSpanItem[];
+  upstreamCallsCount: number;
+}
+
+export interface UserLogStats {
+  totalInvocations: number;
+  successRatePercent: number;
+  averageLatencyMs: number;
+  activeUsersCount: number;
+  activeAgentsCount: number;
+  upstreamCallsCount: number;
+  errorCount: number;
+  blockedCount: number;
+  rateLimitedCount: number;
+}
+
+export interface UserLogFilterParams {
+  userEmail?: string;
+  clientId?: string;
+  service?: string;
+  toolName?: string;
+  status?: McpExecutionStatus | 'ALL';
+  search?: string;
+  preset?: 'all' | '15m' | '1h' | '24h' | '7d' | '30d' | 'custom';
+  startTime?: string;
+  endTime?: string;
+  hasUpstream?: 'all' | 'with' | 'without';
+  hasPayload?: 'all' | 'with' | 'without';
+  argsSearch?: string;
+  limit?: number;
+  offset?: number;
+}
+
 export interface AuthProfile {
   email: string;
   fullName: string;
@@ -541,5 +608,29 @@ export const api = {
   // Audit
   async getAuditLogs(limit = 50): Promise<{ success: boolean; logs: AuditLogItem[]; count: number }> {
     return fetchJson(`/api/audit/logs?limit=${limit}`);
+  },
+
+  // User Logs Telemetry
+  async getUserLogs(
+    params?: UserLogFilterParams
+  ): Promise<{ success: boolean; traces: UserLogTraceItem[]; total: number; limit: number; offset: number }> {
+    const qs = new URLSearchParams();
+    if (params) {
+      for (const [key, value] of Object.entries(params)) {
+        if (value !== undefined && value !== null && value !== '') {
+          qs.append(key, String(value));
+        }
+      }
+    }
+    const queryStr = qs.toString();
+    return fetchJson(`/api/logs/user${queryStr ? `?${queryStr}` : ''}`);
+  },
+
+  async getUserLogTrace(traceId: string): Promise<{ success: boolean; trace: UserLogTraceItem }> {
+    return fetchJson(`/api/logs/user/${encodeURIComponent(traceId)}`);
+  },
+
+  async getUserLogStats(timeRangeMs?: number): Promise<{ success: boolean; stats: UserLogStats }> {
+    return fetchJson(`/api/logs/user/stats${timeRangeMs ? `?timeRangeMs=${timeRangeMs}` : ''}`);
   },
 };

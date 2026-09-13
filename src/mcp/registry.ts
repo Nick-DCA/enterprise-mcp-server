@@ -7,6 +7,7 @@ import { formatXeroValidationError } from '../services/xero/errors.js';
 import { formatBigQueryError } from '../services/bigquery/errors.js';
 import { formatFirestoreError } from '../services/firestore/errors.js';
 import { formatSageHrError } from '../services/sagehr/errors.js';
+import type { McpExecutionStatus } from '../server/types/logs.js';
 
 export class ToolRegistry {
   private registeredCount = 0;
@@ -72,6 +73,7 @@ export class ToolRegistry {
         toolDef.schema,
         toolDef.annotations,
         async (args: any) => {
+          const toolStartTime = Date.now();
           try {
             logger.info({ tool: toolDef.name, args }, `Executing tool: ${toolDef.name}`);
 
@@ -79,36 +81,87 @@ export class ToolRegistry {
             const userEmail = RequestContext.getUserEmail();
             const accessCheck = await checkToolExecutionAccess(toolDef, domain, userEmail);
             if (!accessCheck.allowed) {
+              const durationMs = Date.now() - toolStartTime;
+              const errorText = `Access Denied: ${accessCheck.reason}`;
               logger.warn({ tool: toolDef.name, reason: accessCheck.reason }, 'Tool execution blocked by access guard');
+
+              RequestContext.setToolExecution({
+                toolName: toolDef.name,
+                domain,
+                arguments: args,
+                status: 'BLOCKED',
+                durationMs,
+                responsePreview: errorText.slice(0, 500),
+                responsePayload: errorText,
+                responseChars: errorText.length,
+                errorMessage: accessCheck.reason,
+              });
+
               return {
                 isError: true,
                 content: [
                   {
                     type: 'text' as const,
-                    text: `Access Denied: ${accessCheck.reason}`,
+                    text: errorText,
                   },
                 ],
               };
             }
 
             const result = await toolDef.execute(args);
+            const durationMs = Date.now() - toolStartTime;
+            const resultText = typeof result === 'string' ? result : JSON.stringify(result, null, 2);
+
+            RequestContext.setToolExecution({
+              toolName: toolDef.name,
+              domain,
+              arguments: args,
+              status: 'SUCCESS',
+              durationMs,
+              responsePreview: resultText.slice(0, 500),
+              responsePayload: resultText,
+              responseChars: resultText.length,
+            });
+
             return {
               content: [
                 {
                   type: 'text' as const,
-                  text: typeof result === 'string' ? result : JSON.stringify(result, null, 2),
+                  text: resultText,
                 },
               ],
             };
           } catch (error: any) {
+            const durationMs = Date.now() - toolStartTime;
             const formattedError = this.formatErrorMessage(error);
             logger.error({ tool: toolDef.name, error: error.message || error }, `Error executing tool ${toolDef.name}`);
+
+            const isRateLimited =
+              error?.name === 'XeroRateLimitError' ||
+              error?.status === 429 ||
+              error?.statusCode === 429 ||
+              error?.code === 429;
+            const errorStatus: McpExecutionStatus = isRateLimited ? 'RATE_LIMITED' : 'ERROR';
+            const errorText = `Tool '${toolDef.name}' execution failed: ${formattedError}`;
+
+            RequestContext.setToolExecution({
+              toolName: toolDef.name,
+              domain,
+              arguments: args,
+              status: errorStatus,
+              durationMs,
+              responsePreview: errorText.slice(0, 500),
+              responsePayload: errorText,
+              responseChars: errorText.length,
+              errorMessage: formattedError,
+            });
+
             return {
               isError: true,
               content: [
                 {
                   type: 'text' as const,
-                  text: `Tool '${toolDef.name}' execution failed: ${formattedError}`,
+                  text: errorText,
                 },
               ],
             };

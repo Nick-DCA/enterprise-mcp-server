@@ -1,5 +1,6 @@
 import { logger } from '../../utils/logger.js';
 import { XeroRateLimitError, extractCorrelationId } from './errors.js';
+import { RequestContext } from '../../server/context.js';
 
 export interface RateLimiterOptions {
   maxRetries?: number;
@@ -16,15 +17,18 @@ export async function executeWithRateLimit<T>(
 ): Promise<T> {
   const maxRetries = options.maxRetries ?? 3;
   let delay = options.initialDelayMs ?? 1000;
+  const startTime = Date.now();
 
   for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
     try {
       const result: any = await fn();
+      const durationMs = Date.now() - startTime;
 
       // Check remaining rate limit headers if available
       const responseHeaders = result?.response?.headers || result?.headers;
+      let remainingCalls: string | undefined;
       if (responseHeaders) {
-        const remainingCalls = responseHeaders['x-minlimit-remaining'];
+        remainingCalls = responseHeaders['x-minlimit-remaining'];
         if (remainingCalls !== undefined && parseInt(remainingCalls, 10) < 5) {
           logger.warn(
             { operationName, remainingCalls },
@@ -32,6 +36,18 @@ export async function executeWithRateLimit<T>(
           );
         }
       }
+
+      const rateLimitNum = remainingCalls ? parseInt(remainingCalls, 10) : undefined;
+      RequestContext.recordSpan({
+        spanId: `span_xero_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+        serviceId: 'xero',
+        endpoint: operationName,
+        httpStatus: result?.response?.status || 200,
+        durationMs,
+        rateLimitRemaining: rateLimitNum,
+        quotaInfo: rateLimitNum !== undefined ? `Quota: ${rateLimitNum}/60` : undefined,
+        timestamp: new Date().toISOString(),
+      });
 
       return result;
     } catch (error: any) {

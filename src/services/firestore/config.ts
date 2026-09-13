@@ -8,6 +8,7 @@ export const DEFAULT_BLOCKED_COLLECTIONS: readonly string[] = [
   'user_sessions',
   'sessions',
   'audit_logs',
+  'user_logs',
 ];
 
 export interface FirestoreConfig {

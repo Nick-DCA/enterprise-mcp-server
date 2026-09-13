@@ -351,7 +351,7 @@ export const AuditPage: React.FC<AuditPageProps> = ({ onShowToast }) => {
               <ThemeIcon name="audit" size={18} />
             </div>
             <h1 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
-              System Audit Trail & Governance
+              Admin Audit Logs & Governance
             </h1>
           </div>
           <p style={{ fontSize: '0.825rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
@@ -475,7 +475,7 @@ export const AuditPage: React.FC<AuditPageProps> = ({ onShowToast }) => {
             </span>
             <input
               type="text"
-              placeholder="Search audit trail by actor, action, target resource, or metadata JSON..."
+              placeholder="Search admin audit logs by actor, action, target resource, or metadata JSON..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{

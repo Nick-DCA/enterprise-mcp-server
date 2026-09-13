@@ -1,7 +1,26 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { isValidUserEmail } from '../utils/identity.js';
+import type { UpstreamApiCallSpan, McpExecutionStatus } from './types/logs.js';
+
+export interface ToolExecutionData {
+  toolName: string;
+  domain?: string;
+  arguments?: Record<string, any>;
+  status: McpExecutionStatus;
+  durationMs: number;
+  responsePreview?: string;
+  responsePayload?: string;
+  responseChars: number;
+  errorMessage?: string;
+}
 
 export interface RequestContextData {
+  traceId?: string;
+  startTime?: number;
+  ipAddress?: string;
+  userAgent?: string;
+  upstreamSpans?: UpstreamApiCallSpan[];
+  toolExecution?: ToolExecutionData;
   userEmail?: string;
   authUserId?: string;
   token?: string;
@@ -22,6 +41,7 @@ export const RequestContext = {
     const safeUserEmail = isValidUserEmail(context.userEmail) ? context.userEmail.trim().toLowerCase() : undefined;
     const enrichedContext: RequestContextData = {
       ...context,
+      upstreamSpans: context.upstreamSpans || [],
       userEmail: safeUserEmail,
       isHumanUser: Boolean(safeUserEmail),
     };
@@ -71,6 +91,58 @@ export const RequestContext = {
       throw new Error('Authenticated corporate user email context is required for this operation.');
     }
     return email;
+  },
+
+  /**
+   * Retrieves the active trace ID, if running within an instrumented request context.
+   */
+  getTraceId(): string | undefined {
+    return asyncLocalStorage.getStore()?.traceId;
+  },
+
+  /**
+   * Retrieves the timestamp when the active request was initiated.
+   */
+  getStartTime(): number | undefined {
+    return asyncLocalStorage.getStore()?.startTime;
+  },
+
+  /**
+   * Records an upstream SaaS API span into the active request context.
+   */
+  recordSpan(span: UpstreamApiCallSpan): void {
+    const store = asyncLocalStorage.getStore();
+    if (store) {
+      if (!store.upstreamSpans) {
+        store.upstreamSpans = [];
+      }
+      store.upstreamSpans.push(span);
+    }
+  },
+
+  /**
+   * Returns all recorded upstream SaaS API spans for the current request.
+   */
+  getSpans(): UpstreamApiCallSpan[] {
+    const store = asyncLocalStorage.getStore();
+    return store?.upstreamSpans ? [...store.upstreamSpans] : [];
+  },
+
+  /**
+   * Records tool execution outcomes (name, status, duration, response) into the active request context.
+   */
+  setToolExecution(data: ToolExecutionData): void {
+    const store = asyncLocalStorage.getStore();
+    if (store) {
+      store.toolExecution = data;
+    }
+  },
+
+  /**
+   * Retrieves the tool execution details recorded during the request.
+   */
+  getToolExecution(): ToolExecutionData | undefined {
+    return asyncLocalStorage.getStore()?.toolExecution;
   },
 };
 

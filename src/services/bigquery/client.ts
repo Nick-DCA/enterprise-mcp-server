@@ -2,6 +2,7 @@ import { BigQuery } from '@google-cloud/bigquery';
 import { getBigQueryConfig, BigQueryConfig } from './config.js';
 import { BigQueryApiError, BigQueryCostLimitError, BigQuerySyntaxError } from './errors.js';
 import { logger } from '../../utils/logger.js';
+import { RequestContext } from '../../server/context.js';
 
 export interface TableSummary {
   id: string;
@@ -384,6 +385,7 @@ export class BigQueryService {
    * Validate SQL and perform a dry run to check syntax and estimated bytes scanned.
    */
   public async dryRunQuery(query: string, datasetId?: string): Promise<QueryDryRunResult> {
+    const dryRunStartTime = Date.now();
     const { client, config } = await this.getClient();
     this.validateQuery(query, config);
     const defaultDataset = datasetId || config.defaultDataset;
@@ -399,6 +401,17 @@ export class BigQueryService {
       const totalBytesProcessed = parseInt(job.metadata.statistics?.totalBytesProcessed || '0', 10);
       const estimatedCostMb = Math.round((totalBytesProcessed / (1024 * 1024)) * 100) / 100;
       const statementType = job.metadata.statistics?.query?.statementType;
+
+      RequestContext.recordSpan({
+        spanId: `span_bq_dry_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+        serviceId: 'bigquery',
+        endpoint: `DRY RUN GoogleSQL`,
+        httpMethod: 'POST',
+        httpStatus: 200,
+        durationMs: Date.now() - dryRunStartTime,
+        quotaInfo: `Est. Scanned: ${estimatedCostMb} MB`,
+        timestamp: new Date().toISOString(),
+      });
 
       return {
         valid: true,
@@ -602,11 +615,23 @@ export class BigQueryService {
       const duration = Date.now() - startTime;
       const totalBytesProcessed = parseInt(job.metadata?.statistics?.totalBytesProcessed || '0', 10);
       const totalRows = parseInt(job.metadata?.statistics?.query?.totalRows || String(rows.length), 10);
+      const mbBilled = Math.round((totalBytesProcessed / (1024 * 1024)) * 100) / 100;
 
       logger.info(
         { rowCount: rows.length, totalRows, duration, bytes: totalBytesProcessed },
         'BigQuery query executed successfully'
       );
+
+      RequestContext.recordSpan({
+        spanId: `span_bq_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+        serviceId: 'bigquery',
+        endpoint: `GoogleSQL [job: ${job.id || 'unknown'}]`,
+        httpMethod: 'POST',
+        httpStatus: 200,
+        durationMs: duration,
+        quotaInfo: `Scanned: ${mbBilled} MB (Rows: ${rows.length})`,
+        timestamp: new Date().toISOString(),
+      });
 
       return {
         rows,

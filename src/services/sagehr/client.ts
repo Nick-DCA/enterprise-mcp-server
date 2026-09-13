@@ -7,6 +7,7 @@ import {
 } from './errors.js';
 import { AttributePrivacyEngine } from './privacy.js';
 import { logger } from '../../utils/logger.js';
+import { RequestContext } from '../../server/context.js';
 
 export class SageHrService {
   /**
@@ -55,6 +56,7 @@ export class SageHrService {
       }
     }
 
+    const callStartTime = Date.now();
     try {
       logger.debug({ method, endpoint, params }, 'Calling Sage HR REST API');
 
@@ -69,6 +71,8 @@ export class SageHrService {
         body: data ? JSON.stringify(data) : undefined,
       });
 
+      const durationMs = Date.now() - callStartTime;
+
       const responseText = await response.text();
       let responseData: any;
       try {
@@ -76,6 +80,17 @@ export class SageHrService {
       } catch {
         responseData = { message: responseText };
       }
+
+      RequestContext.recordSpan({
+        spanId: `span_sagehr_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+        serviceId: 'sagehr',
+        endpoint: `${method} ${endpoint}`,
+        httpMethod: method,
+        httpStatus: response.status,
+        durationMs,
+        quotaInfo: `Status: ${response.status}`,
+        timestamp: new Date().toISOString(),
+      });
 
       if (!response.ok) {
         const status = response.status;

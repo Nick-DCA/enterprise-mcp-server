@@ -7,6 +7,7 @@ import {
   FirestoreNotFoundError,
 } from './errors.js';
 import { logger } from '../../utils/logger.js';
+import { RequestContext } from '../../server/context.js';
 
 export interface FieldSchema {
   name: string;
@@ -256,6 +257,7 @@ export class FirestoreService {
       );
     }
 
+    const getStartTime = Date.now();
     try {
       const docRef = client.doc(documentPath);
       const docSnap = await docRef.get();
@@ -265,6 +267,17 @@ export class FirestoreService {
       }
 
       const data = this.sanitizeDocumentData(docSnap.data(), config.excludedFields);
+
+      RequestContext.recordSpan({
+        spanId: `span_fs_get_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+        serviceId: 'firestore',
+        endpoint: `getDoc ${documentPath}`,
+        httpMethod: 'GET',
+        httpStatus: 200,
+        durationMs: Date.now() - getStartTime,
+        quotaInfo: `Doc found`,
+        timestamp: new Date().toISOString(),
+      });
 
       return {
         id: docSnap.id,
@@ -298,6 +311,7 @@ export class FirestoreService {
 
     const limit = Math.min(options?.limit || config.maxDocuments, 500);
 
+    const queryStartTime = Date.now();
     try {
       let query: FirebaseFirestore.Query = client.collection(collectionPath);
 
@@ -321,6 +335,17 @@ export class FirestoreService {
         createTime: d.createTime?.toDate().toISOString(),
         updateTime: d.updateTime?.toDate().toISOString(),
       }));
+
+      RequestContext.recordSpan({
+        spanId: `span_fs_query_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+        serviceId: 'firestore',
+        endpoint: `query ${collectionPath}`,
+        httpMethod: 'POST',
+        httpStatus: 200,
+        durationMs: Date.now() - queryStartTime,
+        quotaInfo: `Docs: ${documents.length}`,
+        timestamp: new Date().toISOString(),
+      });
 
       return {
         documents,

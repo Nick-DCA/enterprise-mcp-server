@@ -1,5 +1,6 @@
 import { runtimeConfig } from '../../config/runtimeConfig.js';
 import { logger } from '../../utils/logger.js';
+import { RequestContext } from '../../server/context.js';
 import { slackTokenManager, SlackTokenRevokedError } from './tokenManager.js';
 import {
   SlackSearchOptions,
@@ -178,6 +179,7 @@ export class SlackService {
     });
 
     const slackApiUrl = `https://slack.com/api/search.messages?${params.toString()}`;
+    const callStartTime = Date.now();
     const response = await fetch(slackApiUrl, {
       method: 'GET',
       headers: {
@@ -185,6 +187,7 @@ export class SlackService {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
+    const durationMs = Date.now() - callStartTime;
 
     const data: any = await response.json();
 
@@ -193,6 +196,17 @@ export class SlackService {
     }
 
     const rawMatches = data.messages?.matches || [];
+
+    RequestContext.recordSpan({
+      spanId: `span_slack_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+      serviceId: 'slack',
+      endpoint: 'GET https://slack.com/api/search.messages',
+      httpMethod: 'GET',
+      httpStatus: response.status,
+      durationMs,
+      quotaInfo: `Matches: ${rawMatches.length}`,
+      timestamp: new Date().toISOString(),
+    });
     const results: SlackSearchMatch[] = rawMatches.slice(0, count).map((m: any) => {
       const channelName = m.channel?.name || 'unknown-channel';
       const channelId = m.channel?.id || '';

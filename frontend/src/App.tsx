@@ -16,6 +16,7 @@ import { SecretsPage } from './pages/SecretsPage.js';
 import { UsersPage } from './pages/UsersPage.js';
 import { GeminiConfigPage } from './pages/GeminiConfigPage.js';
 import { AuditPage } from './pages/AuditPage.js';
+import { UserLogsPage } from './pages/UserLogsPage.js';
 import { DevPage } from './pages/DevPage.js';
 import { LoginPage } from './pages/LoginPage.js';
 import { UpdateSecretModal } from './components/UpdateSecretModal.js';
@@ -27,7 +28,7 @@ import { SlackOnboardingModal } from './components/SlackOnboardingModal.js';
 import { Toast, ToastMessage } from './components/Toast.js';
 import { useTheme, ThemeIcon } from './theme/ThemeContext.js';
 
-export type TabKey = 'overview' | 'services' | 'secrets' | 'users' | 'gemini' | 'audit' | 'dev';
+export type TabKey = 'overview' | 'services' | 'secrets' | 'users' | 'gemini' | 'audit' | 'user-logs' | 'dev';
 
 export const App: React.FC = () => {
   const { theme } = useTheme();
@@ -570,6 +571,8 @@ export const App: React.FC = () => {
         );
       case 'audit':
         return <AuditPage onShowToast={(msg, type) => addToast(type || 'info', msg)} />;
+      case 'user-logs':
+        return <UserLogsPage onShowToast={(msg, type) => addToast(type || 'info', msg)} />;
       case 'dev':
         return <DevPage onShowToast={(msg, type) => addToast(type, msg)} />;
       default:
@@ -704,7 +707,19 @@ export const App: React.FC = () => {
                   >
                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <ThemeIcon name="audit" size={14} />
-                      <span>Audit Trail</span>
+                      <span>Admin Audit Logs</span>
+                    </span>
+                  </button>
+                  <button
+                    className={`mono-nav-link ${activeTab === 'user-logs' ? 'active' : ''}`}
+                    onClick={() => {
+                      setActiveTab('user-logs');
+                      setIsMobileSidebarOpen(false);
+                    }}
+                  >
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <ThemeIcon name="code" size={14} />
+                      <span>User Logs</span>
                     </span>
                   </button>
                 </div>

@@ -30,6 +30,7 @@ const TEST_SUITES: TestSuite[] = [
   { name: '21. Access Guard Machine Identity Lockdown', file: 'tests/server/test-access-guard-security.ts' },
   { name: '22. Slack Connector Route & State Hardening', file: 'tests/connectors/test-slack-security.ts' },
   { name: '23. Slack PDF Extraction & Binary Guard', file: 'tests/connectors/test-slack-file-extract.ts' },
+  { name: '24. User Logs Telemetry & Tracing Engine', file: 'tests/server/test-user-logs.ts' },
 ];
 
 async function runCommand(cmd: string, args: string[], env: Record<string, string>): Promise<{ code: number; stdout: string; stderr: string }> {
